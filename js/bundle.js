@@ -47,7 +47,7 @@
   \********************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -79,7 +79,13 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // use to init number formatter component
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	__webpack_require__(/*! ../public/css/global.css */ 489);
+	__webpack_require__(/*! ../public/css/font-awesome.css */ 494);
+	__webpack_require__(/*! ../public/css/slick.css */ 502);
+	__webpack_require__(/*! ../public/css/react-toggle.css */ 509);
+	__webpack_require__(/*! ../public/css/balloon.css */ 511); // use to init number formatter component
 	
 	var App = function (_React$Component) {
 	    _inherits(App, _React$Component);
@@ -91,14 +97,14 @@
 	    }
 	
 	    _createClass(App, [{
-	        key: 'render',
+	        key: "render",
 	        value: function render() {
 	            return _react2.default.createElement(
 	                _reactHotkeys.HotKeys,
 	                { keyMap: Config.HotKeys.KEY_MAP },
 	                _react2.default.createElement(
 	                    _reactIntl.IntlProvider,
-	                    { locale: 'en' },
+	                    { locale: "en" },
 	                    _react2.default.createElement(_app2.default, null)
 	                )
 	            );
@@ -29719,7 +29725,7 @@
   \*****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(setImmediate) {"use strict";
+	/* WEBPACK VAR INJECTION */(function(setImmediate) {'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -29875,12 +29881,6 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	__webpack_require__(/*! ../../public/css/global.css */ 489);
-	__webpack_require__(/*! ../../public/css/font-awesome.css */ 494);
-	__webpack_require__(/*! ../../public/css/slick.css */ 502);
-	__webpack_require__(/*! ../../public/css/react-toggle.css */ 509);
-	__webpack_require__(/*! ../../public/css/balloon.css */ 511);
-	
 	var AppContainer = function (_React$Component) {
 	    _inherits(AppContainer, _React$Component);
 	
@@ -29926,7 +29926,7 @@
 	    }
 	
 	    _createClass(AppContainer, [{
-	        key: "init",
+	        key: 'init',
 	        value: function init() {
 	
 	            var token = this.tokenService.getToken();
@@ -29980,7 +29980,7 @@
 	            }
 	        }
 	    }, {
-	        key: "registerEmitterEvent",
+	        key: 'registerEmitterEvent',
 	        value: function registerEmitterEvent() {
 	            var _this3 = this;
 	
@@ -30057,20 +30057,20 @@
 	            });
 	        }
 	    }, {
-	        key: "componentDidMount",
+	        key: 'componentDidMount',
 	        value: function componentDidMount() {}
 	    }, {
-	        key: "showErrorMessage",
+	        key: 'showErrorMessage',
 	        value: function showErrorMessage(errMsg) {
 	            this.setState({ errMsg: errMsg });
 	        }
 	    }, {
-	        key: "clearErrorMessage",
+	        key: 'clearErrorMessage',
 	        value: function clearErrorMessage() {
 	            this.setState({ errMsg: '' });
 	        }
 	    }, {
-	        key: "handleLogin",
+	        key: 'handleLogin',
 	        value: function handleLogin(username, password) {
 	            var _this = this;
 	
@@ -30084,14 +30084,14 @@
 	            });
 	        }
 	    }, {
-	        key: "handleLogout",
+	        key: 'handleLogout',
 	        value: function handleLogout() {
 	            this.tokenService.saveToken(''); // clear current token.
 	            this.stockConsumer.stopAll();
 	            this.setState({ is2fa: false, isLogon: false, token: '' });
 	        }
 	    }, {
-	        key: "loadCustomerProfile",
+	        key: 'loadCustomerProfile',
 	        value: function loadCustomerProfile() {
 	            var _this = this;
 	
@@ -30105,7 +30105,7 @@
 	            });
 	        }
 	    }, {
-	        key: "handleGetOtp",
+	        key: 'handleGetOtp',
 	        value: function handleGetOtp() {
 	            var _this = this;
 	
@@ -30119,7 +30119,7 @@
 	            });
 	        }
 	    }, {
-	        key: "handleVerifyOtp",
+	        key: 'handleVerifyOtp',
 	        value: function handleVerifyOtp(otp) {
 	            var _this = this;
 	
@@ -30134,7 +30134,7 @@
 	            });
 	        }
 	    }, {
-	        key: "loadStrategies",
+	        key: 'loadStrategies',
 	        value: function loadStrategies() {
 	            var _this = this;
 	
@@ -30167,7 +30167,7 @@
 	        // then load customer'stock and fake strategy for them.
 	
 	    }, {
-	        key: "onloadStrategies",
+	        key: 'onloadStrategies',
 	        value: function onloadStrategies() {
 	            var _this = this;
 	
@@ -30210,7 +30210,7 @@
 	            });
 	        }
 	    }, {
-	        key: "loadAccounts",
+	        key: 'loadAccounts',
 	        value: function loadAccounts() {
 	            var _this = this;
 	
@@ -30226,14 +30226,14 @@
 	            });
 	        }
 	    }, {
-	        key: "clearViewChartSymbol",
+	        key: 'clearViewChartSymbol',
 	        value: function clearViewChartSymbol() {
 	            this.setState({
 	                viewChartSymbol: ''
 	            });
 	        }
 	    }, {
-	        key: "handleUpdateStrategyStatus",
+	        key: 'handleUpdateStrategyStatus',
 	        value: function handleUpdateStrategyStatus(id) {
 	            var _this = this;
 	
@@ -30250,7 +30250,7 @@
 	            });
 	        }
 	    }, {
-	        key: "handleReOpenStrategy",
+	        key: 'handleReOpenStrategy',
 	        value: function handleReOpenStrategy(id) {
 	            var _this = this;
 	
@@ -30264,7 +30264,7 @@
 	            });
 	        }
 	    }, {
-	        key: "handleRemoveStrategy",
+	        key: 'handleRemoveStrategy',
 	        value: function handleRemoveStrategy(id) {
 	            var _this = this;
 	            this.strategyService.get(id).then(function (doc) {
@@ -30274,7 +30274,7 @@
 	            });
 	        }
 	    }, {
-	        key: "handleCopyStrategy",
+	        key: 'handleCopyStrategy',
 	        value: function handleCopyStrategy(id) {
 	            var _this = this;
 	            this.strategyService.get(id).then(function (doc) {
@@ -30288,7 +30288,7 @@
 	            });
 	        }
 	    }, {
-	        key: "handleEditStrategy",
+	        key: 'handleEditStrategy',
 	        value: function handleEditStrategy(strategy) {
 	            var _this = this;
 	
@@ -30304,14 +30304,14 @@
 	            }
 	        }
 	    }, {
-	        key: "handleChangePage",
+	        key: 'handleChangePage',
 	        value: function handleChangePage(page) {
 	            console.log('change to ', page);
 	            this.clearErrorMessage();
 	            this.setState({ nav: page });
 	        }
 	    }, {
-	        key: "handleAddNewStrategy",
+	        key: 'handleAddNewStrategy',
 	        value: function handleAddNewStrategy(strategy) {
 	            var _this = this;
 	            try {
@@ -30323,7 +30323,7 @@
 	            }
 	        }
 	    }, {
-	        key: "handleLoadCi",
+	        key: 'handleLoadCi',
 	        value: function handleLoadCi(accountNo) {
 	            var _this = this;
 	            this.customerService.getCi(accountNo).then(function (res) {
@@ -30333,17 +30333,17 @@
 	            });
 	        }
 	    }, {
-	        key: "handleLoadCiFromBoApi",
+	        key: 'handleLoadCiFromBoApi',
 	        value: function handleLoadCiFromBoApi(accountNo) {
 	            return this.customerService.getCiFromBoApi(accountNo);
 	        }
 	    }, {
-	        key: "handleLoadSeFromBoApi",
+	        key: 'handleLoadSeFromBoApi',
 	        value: function handleLoadSeFromBoApi(accountNo) {
 	            return this.customerService.getSeFromBoApi(accountNo);
 	        }
 	    }, {
-	        key: "loadOrderbook",
+	        key: 'loadOrderbook',
 	        value: function loadOrderbook(accountNumber) {
 	            var _this = this;
 	
@@ -30359,7 +30359,7 @@
 	            });
 	        }
 	    }, {
-	        key: "loadPortfolio",
+	        key: 'loadPortfolio',
 	        value: function loadPortfolio(accountNumber) {
 	            var _this4 = this;
 	
@@ -30371,12 +30371,31 @@
 	
 	            _this.customerService.getPortfolio(accountNumber).then(function (res) {
 	                _this4.setState({ portfolio: res.data });
+	                res.data.stocks.forEach(function (s) {
+	                    if (s.symbol.indexOf("CT_TM") > 0) {
+	                        s.gainLoss = s.quantity;
+	                        s.currentValue = s.gainLoss;
+	                        res.data.profit += s.gainLoss;
+	                        _this4.setState({ portfolio: res.data });
+	                    } else if (s.symbol.indexOf("CT_CP") > 0) {
+	                        s.gainLoss = s.quantity * s.currentPrice;
+	                        var code = s.symbol.replace("_CT_CP", "");
+	                        _this4.priceService.getSecInfo([code]).then(function (r) {
+	                            var secinfo = r.data[0];
+	                            var price = secinfo.matchPrice > 0 ? secinfo.matchPrice : secinfo.closePrice;
+	                            s.gainLoss = Math.round(s.quantity * price * 1000);
+	                            s.currentValue = s.gainLoss;
+	                            res.data.profit += s.gainLoss;
+	                            _this4.setState({ portfolio: res.data });
+	                        });
+	                    }
+	                });
 	            }).catch(function (e) {
 	                console.log(e);
 	            });
 	        }
 	    }, {
-	        key: "loadWatchList",
+	        key: 'loadWatchList',
 	        value: function loadWatchList() {
 	            var _this = this;
 	            this.watchListService.get().then(function (res) {
@@ -30392,18 +30411,18 @@
 	            });
 	        }
 	    }, {
-	        key: "loadSecInfo",
+	        key: 'loadSecInfo',
 	        value: function loadSecInfo(code) {
 	            return this.priceService.getSecInfo([code]);
 	        }
 	    }, {
-	        key: "handleRemoveCodeFromWatchList",
+	        key: 'handleRemoveCodeFromWatchList',
 	        value: function handleRemoveCodeFromWatchList(code) {
 	            this.watchListService.remove(code);
 	            this.stockConsumer.stop(code);
 	        }
 	    }, {
-	        key: "handleAddCodeToWatchList",
+	        key: 'handleAddCodeToWatchList',
 	        value: function handleAddCodeToWatchList(code) {
 	            console.log('adding code', code);
 	            if (this.companyService.isExisted(code)) {
@@ -30413,59 +30432,59 @@
 	            }
 	        }
 	    }, {
-	        key: "postTransactionOnMiniboard",
+	        key: 'postTransactionOnMiniboard',
 	        value: function postTransactionOnMiniboard(code) {
 	            this.stockConsumer.postData("TRANSACTION", code);
 	        }
 	    }, {
-	        key: "getCompany",
+	        key: 'getCompany',
 	        value: function getCompany(symbol) {
 	            return this.companyService.getCompany(symbol);
 	        }
 	    }, {
-	        key: "getCompanies",
+	        key: 'getCompanies',
 	        value: function getCompanies() {
 	            return this.companyService.getCompanies();
 	        }
 	    }, {
-	        key: "handleGetLoan",
+	        key: 'handleGetLoan',
 	        value: function handleGetLoan(accountNo) {
 	            return this.customerService.getLoan(accountNo);
 	        }
 	    }, {
-	        key: "handleHotKeyAddNewStrategy",
+	        key: 'handleHotKeyAddNewStrategy',
 	        value: function handleHotKeyAddNewStrategy() {
 	            this.emitter.emit(Config.Event.HotKeys.ADD_NEW_STRATEGY);
 	        }
 	    }, {
-	        key: "handleHotKeyGotoPlaceBuyOrder",
+	        key: 'handleHotKeyGotoPlaceBuyOrder',
 	        value: function handleHotKeyGotoPlaceBuyOrder() {
 	            this.emitter.emit(Config.Event.HotKeys.GOTO_PLACE_BUY_ORDER);
 	        }
 	    }, {
-	        key: "handleHotKeyGotoPlaceSellOrder",
+	        key: 'handleHotKeyGotoPlaceSellOrder',
 	        value: function handleHotKeyGotoPlaceSellOrder() {
 	            this.emitter.emit(Config.Event.HotKeys.GOTO_PLACE_SELL_ORDER);
 	        }
 	    }, {
-	        key: "handleHotKeyFocusOnAddSymbolToMiniboard",
+	        key: 'handleHotKeyFocusOnAddSymbolToMiniboard',
 	        value: function handleHotKeyFocusOnAddSymbolToMiniboard() {
 	            this.emitter.emit(Config.Event.HotKeys.FOCUS_ON_ADD_NEW_SYMBOL_TO_MINIBOARD);
 	        }
 	    }, {
-	        key: "handleHotKeyPlaceOrder",
+	        key: 'handleHotKeyPlaceOrder',
 	        value: function handleHotKeyPlaceOrder() {
 	            this.emitter.emit(Config.Event.HotKeys.DO_PLACE_ORDER);
 	        }
 	    }, {
-	        key: "handleHotKeyRefreshAccountInfo",
+	        key: 'handleHotKeyRefreshAccountInfo',
 	        value: function handleHotKeyRefreshAccountInfo() {
 	            this.setState({ accounts: [] });
 	            // refresh accounts, pp0, orderbook, portfolio
 	            this.loadAccounts();
 	        }
 	    }, {
-	        key: "handleHotKeyRefreshMiniBoard",
+	        key: 'handleHotKeyRefreshMiniBoard',
 	        value: function handleHotKeyRefreshMiniBoard() {
 	            this.setState({
 	                watchListStock: []
@@ -30473,67 +30492,67 @@
 	            this.loadWatchList();
 	        }
 	    }, {
-	        key: "handleHotKeyRefreshAll",
+	        key: 'handleHotKeyRefreshAll',
 	        value: function handleHotKeyRefreshAll() {
 	            location.reload();
 	        }
 	    }, {
-	        key: "handleHotKeyOpenSpyPage",
+	        key: 'handleHotKeyOpenSpyPage',
 	        value: function handleHotKeyOpenSpyPage() {
 	            this.handleChangePage('spy');
 	        }
 	    }, {
-	        key: "handleHotKeyOpenTaskPage",
+	        key: 'handleHotKeyOpenTaskPage',
 	        value: function handleHotKeyOpenTaskPage() {
 	            this.handleChangePage('strategy');
 	        }
 	    }, {
-	        key: "handleHotkeySeeMoreNotiHistory",
+	        key: 'handleHotkeySeeMoreNotiHistory',
 	        value: function handleHotkeySeeMoreNotiHistory() {
 	            this.emitter.emit(Config.Event.HotKeys.SEE_MORE_NOTI_HISTORY);
 	        }
 	    }, {
-	        key: "getStockIndicator",
+	        key: 'getStockIndicator',
 	        value: function getStockIndicator(code) {
 	            return this.finfoService.getStocksIndicators([code]);
 	        }
 	    }, {
-	        key: "placeOrder",
+	        key: 'placeOrder',
 	        value: function placeOrder(order) {
 	            return this.tradeService.placeOrder(order);
 	        }
 	    }, {
-	        key: "cancelOrder",
+	        key: 'cancelOrder',
 	        value: function cancelOrder(order) {
 	            return this.tradeService.cancelOrder(order);
 	        }
 	    }, {
-	        key: "getStatusKey",
+	        key: 'getStatusKey',
 	        value: function getStatusKey(floorCode) {
 	            return this.marketinfoService.getStatusKey(floorCode);
 	        }
 	    }, {
-	        key: "isATO",
+	        key: 'isATO',
 	        value: function isATO(floorCode) {
 	            return this.marketinfoService.isATO(floorCode);
 	        }
 	    }, {
-	        key: "isATC",
+	        key: 'isATC',
 	        value: function isATC(floorCode) {
 	            return this.marketinfoService.isATC(floorCode);
 	        }
 	    }, {
-	        key: "getPpse",
+	        key: 'getPpse',
 	        value: function getPpse(request) {
 	            return this.tradeService.ppse(request);
 	        }
 	    }, {
-	        key: "loadNotiHistory",
+	        key: 'loadNotiHistory',
 	        value: function loadNotiHistory(request) {
 	            return this.notificationService.getHistory(request);
 	        }
 	    }, {
-	        key: "render",
+	        key: 'render',
 	        value: function render() {
 	
 	            var handlers = {};
@@ -30551,9 +30570,9 @@
 	
 	            return _react2.default.createElement(
 	                _reactHotkeys.HotKeys,
-	                { handlers: handlers, className: "outlinenone" },
+	                { handlers: handlers, className: 'outlinenone' },
 	                _react2.default.createElement(
-	                    "div",
+	                    'div',
 	                    null,
 	                    this.state.isLogon ? _react2.default.createElement(_profile2.default, {
 	                        handleChangePage: this.handleChangePage.bind(this),
@@ -65729,7 +65748,7 @@
 	                        onClick: this.viewLoan.bind(this) },
 	                    _react2.default.createElement('i', { className: 'fa fa-diamond', 'aria-hidden': 'true', title: 'Báo cáo nợ' })
 	                ),
-	                this.props.customerId == '0001729626' || this.props.customerId == '0001780697' ? _react2.default.createElement(
+	                this.props.customerId == '0001729626' || this.props.customerId == '0001715092' ? _react2.default.createElement(
 	                    'a',
 	                    { href: '#',
 	                        className: this.props.currentNav == 'spy' ? 'active' : '',
@@ -99125,9 +99144,8 @@
 									),
 									_react2.default.createElement(
 										'td',
-										{ className: (this.props.portfolio.profit > 0 ? 'up' : this.props.portfolio.profit < 0 ? 'down' : 'nochange') + ' tr' },
-										_react2.default.createElement(_formatNumberWithCommas2.default, { value: this.props.portfolio.profitPercent }),
-										'%'
+										null,
+										' '
 									)
 								)
 							) : null
@@ -99193,7 +99211,8 @@
 				currentPrice: null,
 				currentValue: null,
 				gainLoss: null,
-				gainLossPercent: null
+				gainLossPercent: null,
+				changingStyle: {}
 			};
 			return _this;
 		}
@@ -99237,6 +99256,8 @@
 		}, {
 			key: 'updatePortfolioData',
 			value: function updatePortfolioData(stock) {
+				var _this3 = this;
+	
 				var price = this._getDisplayMatchPrice(stock);
 				if (!price || price === 0) {
 					return;
@@ -99247,6 +99268,19 @@
 				var gainLossPercent = (gainLoss / this.props.stock.cost).toFixed(2);
 	
 				// console.log('udpate', this.props.stock.symbol, price, value);
+	
+				if (price != this.state.currentPrice) {
+					this._setState({
+						changingStyle: {
+							backgroundColor: '#E88A2B'
+						}
+					});
+					setTimeout(function () {
+						_this3._setState({
+							changingStyle: {}
+						});
+					}, 500);
+				}
 	
 				this._setState({
 					currentPrice: Math.round(price * 1000),
@@ -99315,7 +99349,7 @@
 					),
 					_react2.default.createElement(
 						'td',
-						{ className: 'tr' },
+						{ className: 'tr', style: this.state.changingStyle },
 						this.state.currentPrice ? _react2.default.createElement(_formatNumberWithCommas2.default, { value: this.state.currentPrice }) : _react2.default.createElement(_formatNumberWithCommas2.default, { value: this.props.stock.currentPrice })
 					),
 					_react2.default.createElement(
@@ -99325,7 +99359,7 @@
 					),
 					_react2.default.createElement(
 						'td',
-						{ className: 'tr' },
+						{ className: 'tr', style: this.state.changingStyle },
 						this.state.currentValue ? _react2.default.createElement(_formatNumberWithCommas2.default, { value: this.state.currentValue }) : _react2.default.createElement(_formatNumberWithCommas2.default, { value: this.props.stock.currentValue })
 					),
 					_react2.default.createElement(
@@ -99335,12 +99369,12 @@
 					),
 					_react2.default.createElement(
 						'td',
-						{ className: gainLossClazz + ' tr' },
+						{ className: gainLossClazz + ' tr', style: this.state.changingStyle },
 						this.state.gainLoss ? _react2.default.createElement(_formatNumberWithCommas2.default, { value: this.state.gainLoss }) : _react2.default.createElement(_formatNumberWithCommas2.default, { value: this.props.stock.gainLoss })
 					),
 					_react2.default.createElement(
 						'td',
-						{ className: gainLossClazz + ' tr' },
+						{ className: gainLossClazz + ' tr', style: this.state.changingStyle },
 						this.state.gainLossPercent ? _react2.default.createElement(_formatNumberWithCommas2.default, { value: this.state.gainLossPercent }) : _react2.default.createElement(_formatNumberWithCommas2.default, { value: this.props.stock.gainLossPercent }),
 						'%'
 					)
@@ -100118,7 +100152,8 @@
 			_this.state = {
 				loadedLoan: false,
 				data: {},
-				activeAccountNumber: ''
+				activeAccountNumber: '',
+				notFound: false
 			};
 			return _this;
 		}
@@ -100144,6 +100179,7 @@
 	
 				this.setState({
 					data: {},
+					notFound: false,
 					loadedLoan: false
 				});
 				this.props.getLoan(accountNo).then(function (res) {
@@ -100154,6 +100190,13 @@
 					});
 				}).catch(function (e) {
 					console.log(e);
+					if (e.status === 404) {
+						// tk k co no
+						_this3._setState({
+							notFound: true,
+							loadedLoan: true
+						});
+					}
 				});
 			}
 		}, {
@@ -100174,13 +100217,19 @@
 				return _react2.default.createElement(
 					'div',
 					{ className: 'loan' },
-					this.state.loadedLoan ? _react2.default.createElement(
+					this.state.loadedLoan && this.state.notFound ? _react2.default.createElement(
+						'div',
+						null,
+						'Tài khoản không có nợ'
+					) : null,
+					this.state.loadedLoan && !this.state.notFound ? _react2.default.createElement(
 						'div',
 						null,
 						_react2.default.createElement(_loanOverview2.default, { activeAccountNumber: this.state.activeAccountNumber,
 							accounts: this.props.accounts, getLoan: this.loadLoan.bind(this), data: this.state.data }),
 						_react2.default.createElement(_loanDetail2.default, { data: this.state.data })
-					) : _react2.default.createElement('i', { className: 'fa fa-spin fa-spinner loanLoandingIcon', 'aria-hidden': 'true' })
+					) : null,
+					!this.state.loadedLoan ? _react2.default.createElement('i', { className: 'fa fa-spin fa-spinner loanLoandingIcon', 'aria-hidden': 'true' }) : null
 				);
 			}
 		}]);
@@ -102195,9 +102244,6 @@
 		account: '0001010355',
 		nickname: 'Dũng Trần'
 	}, {
-		account: '0001111987',
-		nickname: 'VietPhung 1'
-	}, {
 		account: '0001019890',
 		nickname: 'VietPhung 2'
 	}, {
@@ -102209,9 +102255,6 @@
 	}, {
 		'account': '0001001767',
 		'nickname': 'Bach1'
-	}, {
-		'account': '0001020998',
-		'nickname': 'Bach2'
 	}, {
 		account: '0001028288',
 		nickname: 'Tùng IPAM'
@@ -102269,6 +102312,12 @@
 	}, {
 		account: '0001009210',
 		nickname: 'Giang'
+	}, {
+		account: '0001111987',
+		nickname: 'VietPhung 1'
+	}, {
+		'account': '0001020998',
+		'nickname': 'Bach2'
 	}];
 	
 	var ListOther = exports.ListOther = [{
