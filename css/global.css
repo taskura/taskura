@@ -455,7 +455,7 @@ label:before {
 
 
 .orderbook-wrapper {
-    width: 40%;
+    width: 41%;
     float: right;
     margin-left: 20px;
     overflow: auto;
@@ -463,6 +463,7 @@ label:before {
     border-radius: 5px;
     border: 1px solid #5a5a5a;
     margin-top: 20px;
+    font-size: 12px;
 }
 .orderbook {
     width: 100%;
@@ -585,12 +586,13 @@ label:before {
 
 .portfolio-wrapper {
     float: left;
-    width: 58%;
+    width: 57%;
     overflow: auto;
     margin-top: 20px;
     padding: 15px;
     border-radius: 5px;
     border: 1px solid #5A5A5A;
+    font-size: 12px;
 }
 .portfolio {
     width: 100%;
