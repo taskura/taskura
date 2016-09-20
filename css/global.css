@@ -251,7 +251,10 @@ label:before {
     width: 238px;
     height: 65px;
 }
-
+.login-error {
+    color: #f39200;
+    margin: auto;
+}
 .login {
     width: 350px;
     margin: 10px auto;
@@ -293,6 +296,9 @@ label:before {
 }
 .login .loginBtn:hover {
     background-color: #61d1c6;
+}
+.login .loginBtn:focus {
+    outline: none;
 }
 .login .username, .login .password {
     position: relative;
