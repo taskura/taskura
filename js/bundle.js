@@ -81,11 +81,11 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	__webpack_require__(/*! ../public/css/global.css */ 489);
-	__webpack_require__(/*! ../public/css/font-awesome.css */ 494);
-	__webpack_require__(/*! ../public/css/slick.css */ 502);
-	__webpack_require__(/*! ../public/css/react-toggle.css */ 509);
-	__webpack_require__(/*! ../public/css/balloon.css */ 511); // use to init number formatter component
+	__webpack_require__(/*! ../public/css/global.css */ 488);
+	__webpack_require__(/*! ../public/css/font-awesome.css */ 493);
+	__webpack_require__(/*! ../public/css/slick.css */ 501);
+	__webpack_require__(/*! ../public/css/react-toggle.css */ 508);
+	__webpack_require__(/*! ../public/css/balloon.css */ 510); // use to init number formatter component
 	
 	var App = function (_React$Component) {
 	    _inherits(App, _React$Component);
@@ -25352,6 +25352,9 @@
 	        GOTO_PLACE_SELL_ORDER: 'HotKeys.GOTO_PLACE_SELL_ORDER',
 	        REFRESH_ACCOUNT_INFO: 'HotKeys.REFRESH_ACCOUNT_INFO',
 	        SEE_MORE_NOTI_HISTORY: 'HotKeys.SEE_MORE_NOTI_HISTORY'
+	    },
+	    ViewPage: {
+	        LOAN: 'ViewPage.LOAN'
 	    }
 	};
 	
@@ -29837,37 +29840,33 @@
 	
 	var _login2 = _interopRequireDefault(_login);
 	
-	var _firstloginWelcomeComponent = __webpack_require__(/*! ../components/firstlogin-welcome.component.js */ 342);
-	
-	var _firstloginWelcomeComponent2 = _interopRequireDefault(_firstloginWelcomeComponent);
-	
-	var _secondfa = __webpack_require__(/*! ../components/secondfa.component */ 343);
+	var _secondfa = __webpack_require__(/*! ../components/secondfa.component */ 342);
 	
 	var _secondfa2 = _interopRequireDefault(_secondfa);
 	
-	var _footer = __webpack_require__(/*! ../components/footer.component */ 344);
+	var _footer = __webpack_require__(/*! ../components/footer.component */ 343);
 	
 	var _footer2 = _interopRequireDefault(_footer);
 	
-	var _main = __webpack_require__(/*! ../components/main.component */ 346);
+	var _main = __webpack_require__(/*! ../components/main.component */ 345);
 	
 	var _main2 = _interopRequireDefault(_main);
 	
-	var _strategy3 = __webpack_require__(/*! ../validator/strategy.validator */ 478);
+	var _strategy3 = __webpack_require__(/*! ../validator/strategy.validator */ 477);
 	
 	var _strategy4 = _interopRequireDefault(_strategy3);
 	
-	var _placeorder = __webpack_require__(/*! ../validator/placeorder.validator */ 479);
+	var _placeorder = __webpack_require__(/*! ../validator/placeorder.validator */ 478);
 	
 	var _placeorder2 = _interopRequireDefault(_placeorder);
 	
 	var _reactHotkeys = __webpack_require__(/*! react-hotkeys */ 172);
 	
-	var _noti = __webpack_require__(/*! ../module/noti.consumer */ 480);
+	var _noti = __webpack_require__(/*! ../module/noti.consumer */ 479);
 	
 	var _noti2 = _interopRequireDefault(_noti);
 	
-	var _notification = __webpack_require__(/*! ../service/notification.service */ 484);
+	var _notification = __webpack_require__(/*! ../service/notification.service */ 483);
 	
 	var _notification2 = _interopRequireDefault(_notification);
 	
@@ -30108,9 +30107,9 @@
 	            this.tokenService.saveToken(''); // clear current token.
 	            this.stockConsumer.stopAll();
 	
-	            this.setState(this._defaultState());
+	            // this.setState(this._defaultState());
 	
-	            // this.setState({is2fa: false, isLogon: false, token: ''});
+	            window.location.reload();
 	        }
 	    }, {
 	        key: 'loadCustomerProfile',
@@ -30328,9 +30327,11 @@
 	    }, {
 	        key: 'handleChangePage',
 	        value: function handleChangePage(page) {
-	            console.log('change to ', page);
 	            this.clearErrorMessage();
 	            this.setState({ nav: page });
+	            if (page === 'loan') {
+	                this.emitter.emit(Config.Event.ViewPage.LOAN);
+	            }
 	        }
 	    }, {
 	        key: 'handleAddNewStrategy',
@@ -30603,7 +30604,6 @@
 	                        customer: this.state.customer,
 	                        handleLogout: this.handleLogout.bind(this)
 	                    }) : null,
-	                    this.state.isLogon && !this.state.is2fa ? _react2.default.createElement(_firstloginWelcomeComponent2.default, null) : null,
 	                    _react2.default.createElement(_error2.default, { errMsg: this.state.errMsg }),
 	                    this.state.isLogon && !this.state.is2fa ? _react2.default.createElement(_secondfa2.default, {
 	                        handleGetOtp: this.handleGetOtp.bind(this),
@@ -65759,14 +65759,14 @@
 	                ),
 	                _react2.default.createElement(
 	                    'a',
-	                    { href: '#',
+	                    { href: '#', 'data-balloon': 'Biểu đồ kỹ thuật', 'data-balloon-pos': 'down',
 	                        className: this.props.currentNav == 'chart' ? 'active' : '',
 	                        onClick: this.viewChart.bind(this) },
 	                    _react2.default.createElement('i', { className: 'fa fa-area-chart', 'aria-hidden': 'true' })
 	                ),
 	                _react2.default.createElement(
 	                    'a',
-	                    { href: '#',
+	                    { href: '#', 'data-balloon': 'Báo cáo nợ', 'data-balloon-pos': 'down',
 	                        className: this.props.currentNav == 'loan' ? 'active' : '',
 	                        onClick: this.viewLoan.bind(this) },
 	                    _react2.default.createElement('i', { className: 'fa fa-diamond', 'aria-hidden': 'true', title: 'Báo cáo nợ' })
@@ -65977,78 +65977,6 @@
 
 /***/ },
 /* 342 */
-/*!********************************************************!*\
-  !*** ./app/components/firstlogin-welcome.component.js ***!
-  \********************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var FirstLoginWelcome = function (_React$Component) {
-	    _inherits(FirstLoginWelcome, _React$Component);
-	
-	    function FirstLoginWelcome() {
-	        _classCallCheck(this, FirstLoginWelcome);
-	
-	        return _possibleConstructorReturn(this, (FirstLoginWelcome.__proto__ || Object.getPrototypeOf(FirstLoginWelcome)).apply(this, arguments));
-	    }
-	
-	    _createClass(FirstLoginWelcome, [{
-	        key: "render",
-	        value: function render() {
-	            return _react2.default.createElement(
-	                "div",
-	                { className: "firstlogin" },
-	                _react2.default.createElement(
-	                    "h3",
-	                    { className: "green" },
-	                    "Bạn đã đăng nhập thành công."
-	                ),
-	                _react2.default.createElement(
-	                    "p",
-	                    null,
-	                    "Hiện tại bạn có thể ",
-	                    _react2.default.createElement(
-	                        "a",
-	                        { href: "#" },
-	                        "Xem sổ lệnh"
-	                    ),
-	                    " và ",
-	                    _react2.default.createElement(
-	                        "a",
-	                        { href: "#" },
-	                        "Xem tài sản."
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-	
-	    return FirstLoginWelcome;
-	}(_react2.default.Component);
-	
-	exports.default = FirstLoginWelcome;
-
-/***/ },
-/* 343 */
 /*!**********************************************!*\
   !*** ./app/components/secondfa.component.js ***!
   \**********************************************/
@@ -66077,13 +66005,30 @@
 	var SecondFa = function (_React$Component) {
 	    _inherits(SecondFa, _React$Component);
 	
-	    function SecondFa() {
+	    function SecondFa(props) {
 	        _classCallCheck(this, SecondFa);
 	
-	        return _possibleConstructorReturn(this, (SecondFa.__proto__ || Object.getPrototypeOf(SecondFa)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (SecondFa.__proto__ || Object.getPrototypeOf(SecondFa)).call(this, props));
+	
+	        _this.state = {
+	            time: null
+	        };
+	        return _this;
 	    }
 	
 	    _createClass(SecondFa, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.mounted = true;
+	            this.refs.otp.focus();
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            this.mounted = false;
+	            clearInterval(this.countdown);
+	        }
+	    }, {
 	        key: 'handleVerifyOtp',
 	        value: function handleVerifyOtp(e) {
 	            e.preventDefault();
@@ -66098,8 +66043,30 @@
 	            }
 	        }
 	    }, {
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
+	        key: 'handleGetOtp',
+	        value: function handleGetOtp(e) {
+	            var _this2 = this;
+	
+	            e.preventDefault();
+	
+	            var time = 10;
+	            this.setState({
+	                time: time--
+	            });
+	            this.countdown = setInterval(function () {
+	                if (time == 0) {
+	                    clearInterval(_this2.countdown);
+	                    _this2.setState({
+	                        time: null
+	                    });
+	                }
+	                if (_this2.mounted) {
+	                    _this2.setState({
+	                        time: time--
+	                    });
+	                }
+	            }, 1000);
+	
 	            this.props.handleGetOtp();
 	            this.refs.otp.focus();
 	        }
@@ -66111,18 +66078,17 @@
 	                { className: 'secondFa' },
 	                _react2.default.createElement(
 	                    'p',
-	                    null,
-	                    'Hoặc thực hiện bước bảo mật thứ hai để sẵn sàng giao dịch!'
-	                ),
-	                _react2.default.createElement(
-	                    'p',
-	                    null,
+	                    { className: 'title' },
+	                    'Vui lòng nhập mã OTP trên ứng dụng VNDIRECT Stock Trading ',
+	                    _react2.default.createElement('br', null),
+	                    'hoặc bấm ',
 	                    _react2.default.createElement(
-	                        'button',
-	                        { className: 'button',
-	                            onClick: this.props.handleGetOtp },
-	                        'Nhận mã OTP qua tin nhắn'
-	                    )
+	                        'a',
+	                        { href: '#', className: this.state.time ? 'disable' : '', onClick: this.handleGetOtp.bind(this) },
+	                        ' vào đây'
+	                    ),
+	                    this.state.time ? _react2.default.createElement(CountDown, { time: this.state.time }) : null,
+	                    ' để nhận mã OTP qua SMS'
 	                ),
 	                _react2.default.createElement('input', { className: 'input', type: 'text',
 	                    onKeyPress: this.handleKeyPress.bind(this),
@@ -66131,9 +66097,10 @@
 	                '  ',
 	                _react2.default.createElement(
 	                    'button',
-	                    { className: 'button',
+	                    { className: 'loginOtpBtn',
 	                        onClick: this.handleVerifyOtp.bind(this) },
-	                    'Xác nhận'
+	                    'Xác nhận   ',
+	                    _react2.default.createElement('i', { className: 'fa fa-shield', 'aria-hidden': 'true' })
 	                )
 	            );
 	        }
@@ -66143,9 +66110,34 @@
 	}(_react2.default.Component);
 	
 	exports.default = SecondFa;
+	
+	var CountDown = function (_React$Component2) {
+	    _inherits(CountDown, _React$Component2);
+	
+	    function CountDown() {
+	        _classCallCheck(this, CountDown);
+	
+	        return _possibleConstructorReturn(this, (CountDown.__proto__ || Object.getPrototypeOf(CountDown)).apply(this, arguments));
+	    }
+	
+	    _createClass(CountDown, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'span',
+	                null,
+	                ' (',
+	                this.props.time,
+	                ') '
+	            );
+	        }
+	    }]);
+	
+	    return CountDown;
+	}(_react2.default.Component);
 
 /***/ },
-/* 344 */
+/* 343 */
 /*!********************************************!*\
   !*** ./app/components/footer.component.js ***!
   \********************************************/
@@ -66163,7 +66155,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 345);
+	var _classnames = __webpack_require__(/*! classnames */ 344);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -66256,7 +66248,7 @@
 	exports.default = Footer;
 
 /***/ },
-/* 345 */
+/* 344 */
 /*!*******************************!*\
   !*** ./~/classnames/index.js ***!
   \*******************************/
@@ -66313,7 +66305,7 @@
 
 
 /***/ },
-/* 346 */
+/* 345 */
 /*!******************************************!*\
   !*** ./app/components/main.component.js ***!
   \******************************************/
@@ -66331,39 +66323,39 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _strategies = __webpack_require__(/*! ./strategies.component */ 347);
+	var _strategies = __webpack_require__(/*! ./strategies.component */ 346);
 	
 	var _strategies2 = _interopRequireDefault(_strategies);
 	
-	var _orderbook = __webpack_require__(/*! ./orderbook.component */ 410);
+	var _orderbook = __webpack_require__(/*! ./orderbook.component */ 409);
 	
 	var _orderbook2 = _interopRequireDefault(_orderbook);
 	
-	var _boardMini = __webpack_require__(/*! ./board.mini.component */ 413);
+	var _boardMini = __webpack_require__(/*! ./board.mini.component */ 412);
 	
 	var _boardMini2 = _interopRequireDefault(_boardMini);
 	
-	var _portfolio = __webpack_require__(/*! ./portfolio.component */ 455);
+	var _portfolio = __webpack_require__(/*! ./portfolio.component */ 454);
 	
 	var _portfolio2 = _interopRequireDefault(_portfolio);
 	
-	var _placeorder = __webpack_require__(/*! ./placeorder.component */ 457);
+	var _placeorder = __webpack_require__(/*! ./placeorder.component */ 456);
 	
 	var _placeorder2 = _interopRequireDefault(_placeorder);
 	
-	var _loan = __webpack_require__(/*! ./loan.component */ 460);
+	var _loan = __webpack_require__(/*! ./loan.component */ 459);
 	
 	var _loan2 = _interopRequireDefault(_loan);
 	
-	var _chart = __webpack_require__(/*! ./chart.component */ 465);
+	var _chart = __webpack_require__(/*! ./chart.component */ 464);
 	
 	var _chart2 = _interopRequireDefault(_chart);
 	
-	var _marketwatch = __webpack_require__(/*! ./marketwatch.component */ 466);
+	var _marketwatch = __webpack_require__(/*! ./marketwatch.component */ 465);
 	
 	var _marketwatch2 = _interopRequireDefault(_marketwatch);
 	
-	var _spy = __webpack_require__(/*! ./spy.component */ 467);
+	var _spy = __webpack_require__(/*! ./spy.component */ 466);
 	
 	var _spy2 = _interopRequireDefault(_spy);
 	
@@ -66587,7 +66579,8 @@
 	                    { className: isLoan ? 'section3' : 'hidden' },
 	                    _react2.default.createElement(_loan2.default, {
 	                        accounts: this.props.accounts,
-	                        getLoan: this.props.getLoan
+	                        getLoan: this.props.getLoan,
+	                        emitter: this.props.emitter
 	                    })
 	                ),
 	                _react2.default.createElement(
@@ -66619,7 +66612,7 @@
 	exports.default = Main;
 
 /***/ },
-/* 347 */
+/* 346 */
 /*!************************************************!*\
   !*** ./app/components/strategies.component.js ***!
   \************************************************/
@@ -66639,15 +66632,15 @@
 	
 	var _reactHotkeys = __webpack_require__(/*! react-hotkeys */ 172);
 	
-	var _tablesort = __webpack_require__(/*! ../libs/tablesort.number */ 348);
+	var _tablesort = __webpack_require__(/*! ../libs/tablesort.number */ 347);
 	
 	var _tablesort2 = _interopRequireDefault(_tablesort);
 	
-	var _strategy = __webpack_require__(/*! ./strategy.component */ 350);
+	var _strategy = __webpack_require__(/*! ./strategy.component */ 349);
 	
 	var _strategy2 = _interopRequireDefault(_strategy);
 	
-	var _newStrategy = __webpack_require__(/*! ./new.strategy.component */ 409);
+	var _newStrategy = __webpack_require__(/*! ./new.strategy.component */ 408);
 	
 	var _newStrategy2 = _interopRequireDefault(_newStrategy);
 	
@@ -66825,7 +66818,7 @@
 	exports.default = Strategies;
 
 /***/ },
-/* 348 */
+/* 347 */
 /*!**************************************!*\
   !*** ./app/libs/tablesort.number.js ***!
   \**************************************/
@@ -66833,7 +66826,7 @@
 
 	'use strict';
 	
-	var _tablesort = __webpack_require__(/*! tablesort */ 349);
+	var _tablesort = __webpack_require__(/*! tablesort */ 348);
 	
 	var _tablesort2 = _interopRequireDefault(_tablesort);
 	
@@ -66868,7 +66861,7 @@
 	})();
 
 /***/ },
-/* 349 */
+/* 348 */
 /*!**************************************!*\
   !*** ./~/tablesort/src/tablesort.js ***!
   \**************************************/
@@ -67140,7 +67133,7 @@
 
 
 /***/ },
-/* 350 */
+/* 349 */
 /*!**********************************************!*\
   !*** ./app/components/strategy.component.js ***!
   \**********************************************/
@@ -67158,19 +67151,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactToggle = __webpack_require__(/*! react-toggle */ 351);
+	var _reactToggle = __webpack_require__(/*! react-toggle */ 350);
 	
 	var _reactToggle2 = _interopRequireDefault(_reactToggle);
 	
-	var _editStrategy = __webpack_require__(/*! ./edit.strategy.component */ 357);
+	var _editStrategy = __webpack_require__(/*! ./edit.strategy.component */ 356);
 	
 	var _editStrategy2 = _interopRequireDefault(_editStrategy);
 	
-	var _removeStrategy = __webpack_require__(/*! ./remove.strategy.component */ 407);
+	var _removeStrategy = __webpack_require__(/*! ./remove.strategy.component */ 406);
 	
 	var _removeStrategy2 = _interopRequireDefault(_removeStrategy);
 	
-	var _copyStrategy = __webpack_require__(/*! ./copy.strategy.component */ 408);
+	var _copyStrategy = __webpack_require__(/*! ./copy.strategy.component */ 407);
 	
 	var _copyStrategy2 = _interopRequireDefault(_copyStrategy);
 	
@@ -67330,7 +67323,7 @@
 	exports.default = Strategy;
 
 /***/ },
-/* 351 */
+/* 350 */
 /*!*********************************!*\
   !*** ./~/react-toggle/index.js ***!
   \*********************************/
@@ -67344,13 +67337,13 @@
 	
 	var React = _interopRequire(__webpack_require__(/*! react */ 1));
 	
-	var classNames = _interopRequire(__webpack_require__(/*! classnames */ 345));
+	var classNames = _interopRequire(__webpack_require__(/*! classnames */ 344));
 	
-	var Check = _interopRequire(__webpack_require__(/*! ./check */ 352));
+	var Check = _interopRequire(__webpack_require__(/*! ./check */ 351));
 	
-	var X = _interopRequire(__webpack_require__(/*! ./x */ 353));
+	var X = _interopRequire(__webpack_require__(/*! ./x */ 352));
 	
-	var PureRenderMixin = _interopRequire(__webpack_require__(/*! react-addons-pure-render-mixin */ 354));
+	var PureRenderMixin = _interopRequire(__webpack_require__(/*! react-addons-pure-render-mixin */ 353));
 	
 	module.exports = React.createClass({
 	  mixins: [PureRenderMixin],
@@ -67447,7 +67440,7 @@
 
 
 /***/ },
-/* 352 */
+/* 351 */
 /*!*********************************!*\
   !*** ./~/react-toggle/check.js ***!
   \*********************************/
@@ -67478,7 +67471,7 @@
 
 
 /***/ },
-/* 353 */
+/* 352 */
 /*!*****************************!*\
   !*** ./~/react-toggle/x.js ***!
   \*****************************/
@@ -67509,16 +67502,16 @@
 
 
 /***/ },
-/* 354 */
+/* 353 */
 /*!***************************************************!*\
   !*** ./~/react-addons-pure-render-mixin/index.js ***!
   \***************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(/*! react/lib/ReactComponentWithPureRenderMixin */ 355);
+	module.exports = __webpack_require__(/*! react/lib/ReactComponentWithPureRenderMixin */ 354);
 
 /***/ },
-/* 355 */
+/* 354 */
 /*!**********************************************************!*\
   !*** ./~/react/lib/ReactComponentWithPureRenderMixin.js ***!
   \**********************************************************/
@@ -67537,7 +67530,7 @@
 	
 	'use strict';
 	
-	var shallowCompare = __webpack_require__(/*! ./shallowCompare */ 356);
+	var shallowCompare = __webpack_require__(/*! ./shallowCompare */ 355);
 	
 	/**
 	 * If your React component's render function is "pure", e.g. it will render the
@@ -67574,7 +67567,7 @@
 	module.exports = ReactComponentWithPureRenderMixin;
 
 /***/ },
-/* 356 */
+/* 355 */
 /*!***************************************!*\
   !*** ./~/react/lib/shallowCompare.js ***!
   \***************************************/
@@ -67607,7 +67600,7 @@
 	module.exports = shallowCompare;
 
 /***/ },
-/* 357 */
+/* 356 */
 /*!***************************************************!*\
   !*** ./app/components/edit.strategy.component.js ***!
   \***************************************************/
@@ -67625,7 +67618,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactModalDialog = __webpack_require__(/*! react-modal-dialog */ 358);
+	var _reactModalDialog = __webpack_require__(/*! react-modal-dialog */ 357);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -67985,7 +67978,7 @@
 	exports.default = EditStrategy;
 
 /***/ },
-/* 358 */
+/* 357 */
 /*!*******************************************!*\
   !*** ./~/react-modal-dialog/lib/index.js ***!
   \*******************************************/
@@ -67999,19 +67992,19 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _ModalPortal = __webpack_require__(/*! ./ModalPortal */ 359);
+	var _ModalPortal = __webpack_require__(/*! ./ModalPortal */ 358);
 	
 	var _ModalPortal2 = _interopRequireDefault(_ModalPortal);
 	
-	var _ModalBackground = __webpack_require__(/*! ./ModalBackground */ 360);
+	var _ModalBackground = __webpack_require__(/*! ./ModalBackground */ 359);
 	
 	var _ModalBackground2 = _interopRequireDefault(_ModalBackground);
 	
-	var _ModalContainer = __webpack_require__(/*! ./ModalContainer */ 361);
+	var _ModalContainer = __webpack_require__(/*! ./ModalContainer */ 360);
 	
 	var _ModalContainer2 = _interopRequireDefault(_ModalContainer);
 	
-	var _ModalDialog = __webpack_require__(/*! ./ModalDialog */ 362);
+	var _ModalDialog = __webpack_require__(/*! ./ModalDialog */ 361);
 	
 	var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 	
@@ -68024,7 +68017,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 359 */
+/* 358 */
 /*!*************************************************!*\
   !*** ./~/react-modal-dialog/lib/ModalPortal.js ***!
   \*************************************************/
@@ -68134,7 +68127,7 @@
 	// This doesn't actually return anything to render
 
 /***/ },
-/* 360 */
+/* 359 */
 /*!*****************************************************!*\
   !*** ./~/react-modal-dialog/lib/ModalBackground.js ***!
   \*****************************************************/
@@ -68284,7 +68277,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 361 */
+/* 360 */
 /*!****************************************************!*\
   !*** ./~/react-modal-dialog/lib/ModalContainer.js ***!
   \****************************************************/
@@ -68312,11 +68305,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ModalPortal = __webpack_require__(/*! ./ModalPortal */ 359);
+	var _ModalPortal = __webpack_require__(/*! ./ModalPortal */ 358);
 	
 	var _ModalPortal2 = _interopRequireDefault(_ModalPortal);
 	
-	var _ModalBackground = __webpack_require__(/*! ./ModalBackground */ 360);
+	var _ModalBackground = __webpack_require__(/*! ./ModalBackground */ 359);
 	
 	var _ModalBackground2 = _interopRequireDefault(_ModalBackground);
 	
@@ -68370,7 +68363,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 362 */
+/* 361 */
 /*!*************************************************!*\
   !*** ./~/react-modal-dialog/lib/ModalDialog.js ***!
   \*************************************************/
@@ -68404,31 +68397,31 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 345);
+	var _classnames = __webpack_require__(/*! classnames */ 344);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _dynamicsJs = __webpack_require__(/*! dynamics.js */ 363);
+	var _dynamicsJs = __webpack_require__(/*! dynamics.js */ 362);
 	
 	var _dynamicsJs2 = _interopRequireDefault(_dynamicsJs);
 	
-	var _reactCenterComponent = __webpack_require__(/*! react-center-component */ 364);
+	var _reactCenterComponent = __webpack_require__(/*! react-center-component */ 363);
 	
 	var _reactCenterComponent2 = _interopRequireDefault(_reactCenterComponent);
 	
-	var _useSheet = __webpack_require__(/*! ./useSheet */ 373);
+	var _useSheet = __webpack_require__(/*! ./useSheet */ 372);
 	
 	var _useSheet2 = _interopRequireDefault(_useSheet);
 	
-	var _CloseCircle = __webpack_require__(/*! ./CloseCircle */ 401);
+	var _CloseCircle = __webpack_require__(/*! ./CloseCircle */ 400);
 	
 	var _CloseCircle2 = _interopRequireDefault(_CloseCircle);
 	
-	var _activeEventStack = __webpack_require__(/*! active-event-stack */ 402);
+	var _activeEventStack = __webpack_require__(/*! active-event-stack */ 401);
 	
 	var _activeEventStack2 = _interopRequireDefault(_activeEventStack);
 	
-	var _keycode = __webpack_require__(/*! keycode */ 406);
+	var _keycode = __webpack_require__(/*! keycode */ 405);
 	
 	var _keycode2 = _interopRequireDefault(_keycode);
 	
@@ -68622,7 +68615,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 363 */
+/* 362 */
 /*!***************************************!*\
   !*** ./~/dynamics.js/lib/dynamics.js ***!
   \***************************************/
@@ -70713,7 +70706,7 @@
 
 
 /***/ },
-/* 364 */
+/* 363 */
 /*!***********************************************!*\
   !*** ./~/react-center-component/lib/index.js ***!
   \***********************************************/
@@ -70749,7 +70742,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _lodashDebounce = __webpack_require__(/*! lodash/debounce */ 365);
+	var _lodashDebounce = __webpack_require__(/*! lodash/debounce */ 364);
 	
 	var _lodashDebounce2 = _interopRequireDefault(_lodashDebounce);
 	
@@ -70858,15 +70851,15 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 365 */
+/* 364 */
 /*!******************************!*\
   !*** ./~/lodash/debounce.js ***!
   \******************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(/*! ./isObject */ 366),
-	    now = __webpack_require__(/*! ./now */ 367),
-	    toNumber = __webpack_require__(/*! ./toNumber */ 370);
+	var isObject = __webpack_require__(/*! ./isObject */ 365),
+	    now = __webpack_require__(/*! ./now */ 366),
+	    toNumber = __webpack_require__(/*! ./toNumber */ 369);
 	
 	/** Used as the `TypeError` message for "Functions" methods. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -71055,7 +71048,7 @@
 
 
 /***/ },
-/* 366 */
+/* 365 */
 /*!******************************!*\
   !*** ./~/lodash/isObject.js ***!
   \******************************/
@@ -71095,13 +71088,13 @@
 
 
 /***/ },
-/* 367 */
+/* 366 */
 /*!*************************!*\
   !*** ./~/lodash/now.js ***!
   \*************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var root = __webpack_require__(/*! ./_root */ 368);
+	var root = __webpack_require__(/*! ./_root */ 367);
 	
 	/**
 	 * Gets the timestamp of the number of milliseconds that have elapsed since
@@ -71127,13 +71120,13 @@
 
 
 /***/ },
-/* 368 */
+/* 367 */
 /*!***************************!*\
   !*** ./~/lodash/_root.js ***!
   \***************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var freeGlobal = __webpack_require__(/*! ./_freeGlobal */ 369);
+	var freeGlobal = __webpack_require__(/*! ./_freeGlobal */ 368);
 	
 	/** Detect free variable `self`. */
 	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
@@ -71145,7 +71138,7 @@
 
 
 /***/ },
-/* 369 */
+/* 368 */
 /*!*********************************!*\
   !*** ./~/lodash/_freeGlobal.js ***!
   \*********************************/
@@ -71159,14 +71152,14 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 370 */
+/* 369 */
 /*!******************************!*\
   !*** ./~/lodash/toNumber.js ***!
   \******************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(/*! ./isObject */ 366),
-	    isSymbol = __webpack_require__(/*! ./isSymbol */ 371);
+	var isObject = __webpack_require__(/*! ./isObject */ 365),
+	    isSymbol = __webpack_require__(/*! ./isSymbol */ 370);
 	
 	/** Used as references for various `Number` constants. */
 	var NAN = 0 / 0;
@@ -71234,13 +71227,13 @@
 
 
 /***/ },
-/* 371 */
+/* 370 */
 /*!******************************!*\
   !*** ./~/lodash/isSymbol.js ***!
   \******************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObjectLike = __webpack_require__(/*! ./isObjectLike */ 372);
+	var isObjectLike = __webpack_require__(/*! ./isObjectLike */ 371);
 	
 	/** `Object#toString` result references. */
 	var symbolTag = '[object Symbol]';
@@ -71281,7 +71274,7 @@
 
 
 /***/ },
-/* 372 */
+/* 371 */
 /*!**********************************!*\
   !*** ./~/lodash/isObjectLike.js ***!
   \**********************************/
@@ -71319,7 +71312,7 @@
 
 
 /***/ },
-/* 373 */
+/* 372 */
 /*!**********************************************!*\
   !*** ./~/react-modal-dialog/lib/useSheet.js ***!
   \**********************************************/
@@ -71333,27 +71326,27 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _jss = __webpack_require__(/*! jss */ 374);
+	var _jss = __webpack_require__(/*! jss */ 373);
 	
 	var _jss2 = _interopRequireDefault(_jss);
 	
-	var _reactJss = __webpack_require__(/*! react-jss */ 389);
+	var _reactJss = __webpack_require__(/*! react-jss */ 388);
 	
 	var _reactJss2 = _interopRequireDefault(_reactJss);
 	
-	var _jssVendorPrefixer = __webpack_require__(/*! jss-vendor-prefixer */ 391);
+	var _jssVendorPrefixer = __webpack_require__(/*! jss-vendor-prefixer */ 390);
 	
 	var _jssVendorPrefixer2 = _interopRequireDefault(_jssVendorPrefixer);
 	
-	var _jssPx = __webpack_require__(/*! jss-px */ 398);
+	var _jssPx = __webpack_require__(/*! jss-px */ 397);
 	
 	var _jssPx2 = _interopRequireDefault(_jssPx);
 	
-	var _jssCamelCase = __webpack_require__(/*! jss-camel-case */ 399);
+	var _jssCamelCase = __webpack_require__(/*! jss-camel-case */ 398);
 	
 	var _jssCamelCase2 = _interopRequireDefault(_jssCamelCase);
 	
-	var _jssNested = __webpack_require__(/*! jss-nested */ 400);
+	var _jssNested = __webpack_require__(/*! jss-nested */ 399);
 	
 	var _jssNested2 = _interopRequireDefault(_jssNested);
 	
@@ -71367,7 +71360,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 374 */
+/* 373 */
 /*!****************************!*\
   !*** ./~/jss/lib/index.js ***!
   \****************************/
@@ -71380,15 +71373,15 @@
 	});
 	exports.Rule = exports.StyleSheet = exports.Jss = undefined;
 	
-	var _Jss = __webpack_require__(/*! ./Jss */ 375);
+	var _Jss = __webpack_require__(/*! ./Jss */ 374);
 	
 	var _Jss2 = _interopRequireDefault(_Jss);
 	
-	var _StyleSheet = __webpack_require__(/*! ./StyleSheet */ 376);
+	var _StyleSheet = __webpack_require__(/*! ./StyleSheet */ 375);
 	
 	var _StyleSheet2 = _interopRequireDefault(_StyleSheet);
 	
-	var _Rule = __webpack_require__(/*! ./rules/Rule */ 379);
+	var _Rule = __webpack_require__(/*! ./rules/Rule */ 378);
 	
 	var _Rule2 = _interopRequireDefault(_Rule);
 	
@@ -71413,7 +71406,7 @@
 	exports.default = jss;
 
 /***/ },
-/* 375 */
+/* 374 */
 /*!**************************!*\
   !*** ./~/jss/lib/Jss.js ***!
   \**************************/
@@ -71431,25 +71424,25 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _StyleSheet = __webpack_require__(/*! ./StyleSheet */ 376);
+	var _StyleSheet = __webpack_require__(/*! ./StyleSheet */ 375);
 	
 	var _StyleSheet2 = _interopRequireDefault(_StyleSheet);
 	
-	var _PluginsRegistry = __webpack_require__(/*! ./PluginsRegistry */ 387);
+	var _PluginsRegistry = __webpack_require__(/*! ./PluginsRegistry */ 386);
 	
 	var _PluginsRegistry2 = _interopRequireDefault(_PluginsRegistry);
 	
-	var _SheetsRegistry = __webpack_require__(/*! ./SheetsRegistry */ 388);
+	var _SheetsRegistry = __webpack_require__(/*! ./SheetsRegistry */ 387);
 	
 	var _SheetsRegistry2 = _interopRequireDefault(_SheetsRegistry);
 	
-	var _utils = __webpack_require__(/*! ./utils */ 377);
+	var _utils = __webpack_require__(/*! ./utils */ 376);
 	
-	var _createRule2 = __webpack_require__(/*! ./createRule */ 378);
+	var _createRule2 = __webpack_require__(/*! ./createRule */ 377);
 	
 	var _createRule3 = _interopRequireDefault(_createRule2);
 	
-	var _findRenderer = __webpack_require__(/*! ./findRenderer */ 384);
+	var _findRenderer = __webpack_require__(/*! ./findRenderer */ 383);
 	
 	var _findRenderer2 = _interopRequireDefault(_findRenderer);
 	
@@ -71555,7 +71548,7 @@
 	exports.default = Jss;
 
 /***/ },
-/* 376 */
+/* 375 */
 /*!*********************************!*\
   !*** ./~/jss/lib/StyleSheet.js ***!
   \*********************************/
@@ -71571,13 +71564,13 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _utils = __webpack_require__(/*! ./utils */ 377);
+	var _utils = __webpack_require__(/*! ./utils */ 376);
 	
-	var _createRule2 = __webpack_require__(/*! ./createRule */ 378);
+	var _createRule2 = __webpack_require__(/*! ./createRule */ 377);
 	
 	var _createRule3 = _interopRequireDefault(_createRule2);
 	
-	var _findRenderer = __webpack_require__(/*! ./findRenderer */ 384);
+	var _findRenderer = __webpack_require__(/*! ./findRenderer */ 383);
 	
 	var _findRenderer2 = _interopRequireDefault(_findRenderer);
 	
@@ -71869,7 +71862,7 @@
 	exports.default = StyleSheet;
 
 /***/ },
-/* 377 */
+/* 376 */
 /*!****************************!*\
   !*** ./~/jss/lib/utils.js ***!
   \****************************/
@@ -72024,7 +72017,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 378 */
+/* 377 */
 /*!*********************************!*\
   !*** ./~/jss/lib/createRule.js ***!
   \*********************************/
@@ -72037,23 +72030,23 @@
 	});
 	exports.default = createRule;
 	
-	var _Rule = __webpack_require__(/*! ./rules/Rule */ 379);
+	var _Rule = __webpack_require__(/*! ./rules/Rule */ 378);
 	
 	var _Rule2 = _interopRequireDefault(_Rule);
 	
-	var _SimpleRule = __webpack_require__(/*! ./rules/SimpleRule */ 380);
+	var _SimpleRule = __webpack_require__(/*! ./rules/SimpleRule */ 379);
 	
 	var _SimpleRule2 = _interopRequireDefault(_SimpleRule);
 	
-	var _KeyframeRule = __webpack_require__(/*! ./rules/KeyframeRule */ 381);
+	var _KeyframeRule = __webpack_require__(/*! ./rules/KeyframeRule */ 380);
 	
 	var _KeyframeRule2 = _interopRequireDefault(_KeyframeRule);
 	
-	var _ConditionalRule = __webpack_require__(/*! ./rules/ConditionalRule */ 382);
+	var _ConditionalRule = __webpack_require__(/*! ./rules/ConditionalRule */ 381);
 	
 	var _ConditionalRule2 = _interopRequireDefault(_ConditionalRule);
 	
-	var _FontFaceRule = __webpack_require__(/*! ./rules/FontFaceRule */ 383);
+	var _FontFaceRule = __webpack_require__(/*! ./rules/FontFaceRule */ 382);
 	
 	var _FontFaceRule2 = _interopRequireDefault(_FontFaceRule);
 	
@@ -72101,7 +72094,7 @@
 	}
 
 /***/ },
-/* 379 */
+/* 378 */
 /*!*********************************!*\
   !*** ./~/jss/lib/rules/Rule.js ***!
   \*********************************/
@@ -72117,7 +72110,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _utils = __webpack_require__(/*! ../utils */ 377);
+	var _utils = __webpack_require__(/*! ../utils */ 376);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -72301,7 +72294,7 @@
 	exports.default = Rule;
 
 /***/ },
-/* 380 */
+/* 379 */
 /*!***************************************!*\
   !*** ./~/jss/lib/rules/SimpleRule.js ***!
   \***************************************/
@@ -72315,7 +72308,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _utils = __webpack_require__(/*! ../utils */ 377);
+	var _utils = __webpack_require__(/*! ../utils */ 376);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -72366,7 +72359,7 @@
 	exports.default = SimpleRule;
 
 /***/ },
-/* 381 */
+/* 380 */
 /*!*****************************************!*\
   !*** ./~/jss/lib/rules/KeyframeRule.js ***!
   \*****************************************/
@@ -72382,7 +72375,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _utils = __webpack_require__(/*! ../utils */ 377);
+	var _utils = __webpack_require__(/*! ../utils */ 376);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -72447,7 +72440,7 @@
 	exports.default = KeyframeRule;
 
 /***/ },
-/* 382 */
+/* 381 */
 /*!********************************************!*\
   !*** ./~/jss/lib/rules/ConditionalRule.js ***!
   \********************************************/
@@ -72463,7 +72456,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _utils = __webpack_require__(/*! ../utils */ 377);
+	var _utils = __webpack_require__(/*! ../utils */ 376);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -72547,7 +72540,7 @@
 	exports.default = ConditionalRule;
 
 /***/ },
-/* 383 */
+/* 382 */
 /*!*****************************************!*\
   !*** ./~/jss/lib/rules/FontFaceRule.js ***!
   \*****************************************/
@@ -72561,7 +72554,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _utils = __webpack_require__(/*! ../utils */ 377);
+	var _utils = __webpack_require__(/*! ../utils */ 376);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -72612,7 +72605,7 @@
 	exports.default = Rule;
 
 /***/ },
-/* 384 */
+/* 383 */
 /*!***********************************!*\
   !*** ./~/jss/lib/findRenderer.js ***!
   \***********************************/
@@ -72625,11 +72618,11 @@
 	});
 	exports.default = findRenderer;
 	
-	var _DomRenderer = __webpack_require__(/*! ./backends/DomRenderer */ 385);
+	var _DomRenderer = __webpack_require__(/*! ./backends/DomRenderer */ 384);
 	
 	var _DomRenderer2 = _interopRequireDefault(_DomRenderer);
 	
-	var _VirtualRenderer = __webpack_require__(/*! ./backends/VirtualRenderer */ 386);
+	var _VirtualRenderer = __webpack_require__(/*! ./backends/VirtualRenderer */ 385);
 	
 	var _VirtualRenderer2 = _interopRequireDefault(_VirtualRenderer);
 	
@@ -72652,7 +72645,7 @@
 	}
 
 /***/ },
-/* 385 */
+/* 384 */
 /*!*******************************************!*\
   !*** ./~/jss/lib/backends/DomRenderer.js ***!
   \*******************************************/
@@ -72804,7 +72797,7 @@
 	exports.default = DomRenderer;
 
 /***/ },
-/* 386 */
+/* 385 */
 /*!***********************************************!*\
   !*** ./~/jss/lib/backends/VirtualRenderer.js ***!
   \***********************************************/
@@ -72863,7 +72856,7 @@
 	exports.default = VirtualRenderer;
 
 /***/ },
-/* 387 */
+/* 386 */
 /*!**************************************!*\
   !*** ./~/jss/lib/PluginsRegistry.js ***!
   \**************************************/
@@ -72928,7 +72921,7 @@
 	exports.default = PluginsRegistry;
 
 /***/ },
-/* 388 */
+/* 387 */
 /*!*************************************!*\
   !*** ./~/jss/lib/SheetsRegistry.js ***!
   \*************************************/
@@ -72993,7 +72986,7 @@
 	exports.default = SheetsRegistry;
 
 /***/ },
-/* 389 */
+/* 388 */
 /*!**********************************!*\
   !*** ./~/react-jss/lib/index.js ***!
   \**********************************/
@@ -73015,11 +73008,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _jss2 = __webpack_require__(/*! jss */ 374);
+	var _jss2 = __webpack_require__(/*! jss */ 373);
 	
 	var _jss3 = _interopRequireDefault(_jss2);
 	
-	var _hoistNonReactStatics = __webpack_require__(/*! hoist-non-react-statics */ 390);
+	var _hoistNonReactStatics = __webpack_require__(/*! hoist-non-react-statics */ 389);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
@@ -73145,7 +73138,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
 
 /***/ },
-/* 390 */
+/* 389 */
 /*!********************************************!*\
   !*** ./~/hoist-non-react-statics/index.js ***!
   \********************************************/
@@ -73196,7 +73189,7 @@
 
 
 /***/ },
-/* 391 */
+/* 390 */
 /*!********************************************!*\
   !*** ./~/jss-vendor-prefixer/lib/index.js ***!
   \********************************************/
@@ -73209,7 +73202,7 @@
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 	
-	var _cssVendor = __webpack_require__(/*! css-vendor */ 392);
+	var _cssVendor = __webpack_require__(/*! css-vendor */ 391);
 	
 	var vendor = _interopRequireWildcard(_cssVendor);
 	
@@ -73251,7 +73244,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 392 */
+/* 391 */
 /*!***********************************!*\
   !*** ./~/css-vendor/lib/index.js ***!
   \***********************************/
@@ -73264,15 +73257,15 @@
 	});
 	exports.supportedValue = exports.supportedProperty = exports.prefix = undefined;
 	
-	var _prefix = __webpack_require__(/*! ./prefix */ 393);
+	var _prefix = __webpack_require__(/*! ./prefix */ 392);
 	
 	var _prefix2 = _interopRequireDefault(_prefix);
 	
-	var _supportedProperty = __webpack_require__(/*! ./supported-property */ 395);
+	var _supportedProperty = __webpack_require__(/*! ./supported-property */ 394);
 	
 	var _supportedProperty2 = _interopRequireDefault(_supportedProperty);
 	
-	var _supportedValue = __webpack_require__(/*! ./supported-value */ 397);
+	var _supportedValue = __webpack_require__(/*! ./supported-value */ 396);
 	
 	var _supportedValue2 = _interopRequireDefault(_supportedValue);
 	
@@ -73295,7 +73288,7 @@
 	exports.supportedValue = _supportedValue2.default;
 
 /***/ },
-/* 393 */
+/* 392 */
 /*!************************************!*\
   !*** ./~/css-vendor/lib/prefix.js ***!
   \************************************/
@@ -73307,7 +73300,7 @@
 	  value: true
 	});
 	
-	var _isBrowser = __webpack_require__(/*! is-browser */ 394);
+	var _isBrowser = __webpack_require__(/*! is-browser */ 393);
 	
 	var _isBrowser2 = _interopRequireDefault(_isBrowser);
 	
@@ -73350,7 +73343,7 @@
 	exports.default = { js: js, css: css };
 
 /***/ },
-/* 394 */
+/* 393 */
 /*!********************************!*\
   !*** ./~/is-browser/client.js ***!
   \********************************/
@@ -73359,7 +73352,7 @@
 	module.exports = true;
 
 /***/ },
-/* 395 */
+/* 394 */
 /*!************************************************!*\
   !*** ./~/css-vendor/lib/supported-property.js ***!
   \************************************************/
@@ -73372,15 +73365,15 @@
 	});
 	exports.default = supportedProperty;
 	
-	var _isBrowser = __webpack_require__(/*! is-browser */ 394);
+	var _isBrowser = __webpack_require__(/*! is-browser */ 393);
 	
 	var _isBrowser2 = _interopRequireDefault(_isBrowser);
 	
-	var _prefix = __webpack_require__(/*! ./prefix */ 393);
+	var _prefix = __webpack_require__(/*! ./prefix */ 392);
 	
 	var _prefix2 = _interopRequireDefault(_prefix);
 	
-	var _camelize = __webpack_require__(/*! ./camelize */ 396);
+	var _camelize = __webpack_require__(/*! ./camelize */ 395);
 	
 	var _camelize2 = _interopRequireDefault(_camelize);
 	
@@ -73439,7 +73432,7 @@
 	}
 
 /***/ },
-/* 396 */
+/* 395 */
 /*!**************************************!*\
   !*** ./~/css-vendor/lib/camelize.js ***!
   \**************************************/
@@ -73468,7 +73461,7 @@
 	}
 
 /***/ },
-/* 397 */
+/* 396 */
 /*!*********************************************!*\
   !*** ./~/css-vendor/lib/supported-value.js ***!
   \*********************************************/
@@ -73481,11 +73474,11 @@
 	});
 	exports.default = supportedValue;
 	
-	var _isBrowser = __webpack_require__(/*! is-browser */ 394);
+	var _isBrowser = __webpack_require__(/*! is-browser */ 393);
 	
 	var _isBrowser2 = _interopRequireDefault(_isBrowser);
 	
-	var _prefix = __webpack_require__(/*! ./prefix */ 393);
+	var _prefix = __webpack_require__(/*! ./prefix */ 392);
 	
 	var _prefix2 = _interopRequireDefault(_prefix);
 	
@@ -73547,7 +73540,7 @@
 	}
 
 /***/ },
-/* 398 */
+/* 397 */
 /*!*******************************!*\
   !*** ./~/jss-px/lib/index.js ***!
   \*******************************/
@@ -73603,7 +73596,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 399 */
+/* 398 */
 /*!***************************************!*\
   !*** ./~/jss-camel-case/lib/index.js ***!
   \***************************************/
@@ -73664,7 +73657,7 @@
 	};
 
 /***/ },
-/* 400 */
+/* 399 */
 /*!***********************************!*\
   !*** ./~/jss-nested/lib/index.js ***!
   \***********************************/
@@ -73714,7 +73707,7 @@
 	}
 
 /***/ },
-/* 401 */
+/* 400 */
 /*!*************************************************!*\
   !*** ./~/react-modal-dialog/lib/CloseCircle.js ***!
   \*************************************************/
@@ -73774,7 +73767,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 402 */
+/* 401 */
 /*!*******************************************!*\
   !*** ./~/active-event-stack/lib/index.js ***!
   \*******************************************/
@@ -73786,9 +73779,9 @@
 	  value: true
 	});
 	
-	var _immutable = __webpack_require__(/*! immutable */ 403);
+	var _immutable = __webpack_require__(/*! immutable */ 402);
 	
-	var _lodash = __webpack_require__(/*! lodash */ 404);
+	var _lodash = __webpack_require__(/*! lodash */ 403);
 	
 	var uniqueEventId = _lodash.uniqueId.bind(null, 'active_event_');
 	
@@ -73827,7 +73820,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 403 */
+/* 402 */
 /*!***************************************!*\
   !*** ./~/immutable/dist/immutable.js ***!
   \***************************************/
@@ -78814,7 +78807,7 @@
 	}));
 
 /***/ },
-/* 404 */
+/* 403 */
 /*!************************************************!*\
   !*** ./~/active-event-stack/~/lodash/index.js ***!
   \************************************************/
@@ -91172,10 +91165,10 @@
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../webpack/buildin/module.js */ 405)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../webpack/buildin/module.js */ 404)(module), (function() { return this; }())))
 
 /***/ },
-/* 405 */
+/* 404 */
 /*!***********************************!*\
   !*** (webpack)/buildin/module.js ***!
   \***********************************/
@@ -91194,7 +91187,7 @@
 
 
 /***/ },
-/* 406 */
+/* 405 */
 /*!****************************!*\
   !*** ./~/keycode/index.js ***!
   \****************************/
@@ -91349,7 +91342,7 @@
 
 
 /***/ },
-/* 407 */
+/* 406 */
 /*!*****************************************************!*\
   !*** ./app/components/remove.strategy.component.js ***!
   \*****************************************************/
@@ -91367,7 +91360,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactModalDialog = __webpack_require__(/*! react-modal-dialog */ 358);
+	var _reactModalDialog = __webpack_require__(/*! react-modal-dialog */ 357);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -91482,7 +91475,7 @@
 	exports.default = RemoveStrategy;
 
 /***/ },
-/* 408 */
+/* 407 */
 /*!***************************************************!*\
   !*** ./app/components/copy.strategy.component.js ***!
   \***************************************************/
@@ -91536,7 +91529,7 @@
 	exports.default = CopyStrategy;
 
 /***/ },
-/* 409 */
+/* 408 */
 /*!**************************************************!*\
   !*** ./app/components/new.strategy.component.js ***!
   \**************************************************/
@@ -91554,7 +91547,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactModalDialog = __webpack_require__(/*! react-modal-dialog */ 358);
+	var _reactModalDialog = __webpack_require__(/*! react-modal-dialog */ 357);
 	
 	var _config = __webpack_require__(/*! ../config */ 219);
 	
@@ -91941,7 +91934,7 @@
 	}
 
 /***/ },
-/* 410 */
+/* 409 */
 /*!***********************************************!*\
   !*** ./app/components/orderbook.component.js ***!
   \***********************************************/
@@ -91959,11 +91952,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _orderbookRow = __webpack_require__(/*! ./orderbook.row.component */ 411);
+	var _orderbookRow = __webpack_require__(/*! ./orderbook.row.component */ 410);
 	
 	var _orderbookRow2 = _interopRequireDefault(_orderbookRow);
 	
-	var _orderbookRowDetail = __webpack_require__(/*! ./orderbook.row.detail.component */ 412);
+	var _orderbookRowDetail = __webpack_require__(/*! ./orderbook.row.detail.component */ 411);
 	
 	var _orderbookRowDetail2 = _interopRequireDefault(_orderbookRowDetail);
 	
@@ -92130,7 +92123,7 @@
 	exports.default = Orderbook;
 
 /***/ },
-/* 411 */
+/* 410 */
 /*!***************************************************!*\
   !*** ./app/components/orderbook.row.component.js ***!
   \***************************************************/
@@ -92232,7 +92225,7 @@
 	exports.default = OrderbookRow;
 
 /***/ },
-/* 412 */
+/* 411 */
 /*!**********************************************************!*\
   !*** ./app/components/orderbook.row.detail.component.js ***!
   \**********************************************************/
@@ -92250,7 +92243,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactModalDialog = __webpack_require__(/*! react-modal-dialog */ 358);
+	var _reactModalDialog = __webpack_require__(/*! react-modal-dialog */ 357);
 	
 	var _config = __webpack_require__(/*! ../config */ 219);
 	
@@ -92454,7 +92447,7 @@
 	exports.default = OrderbookRowDetail;
 
 /***/ },
-/* 413 */
+/* 412 */
 /*!************************************************!*\
   !*** ./app/components/board.mini.component.js ***!
   \************************************************/
@@ -92472,27 +92465,27 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _boardMiniRow = __webpack_require__(/*! ./board.mini.row.component */ 414);
+	var _boardMiniRow = __webpack_require__(/*! ./board.mini.row.component */ 413);
 	
 	var _boardMiniRow2 = _interopRequireDefault(_boardMiniRow);
 	
-	var _boardMiniConfig = __webpack_require__(/*! ./board.mini.config.component */ 417);
+	var _boardMiniConfig = __webpack_require__(/*! ./board.mini.config.component */ 416);
 	
 	var _boardMiniConfig2 = _interopRequireDefault(_boardMiniConfig);
 	
-	var _board = __webpack_require__(/*! ./board.marketinfo */ 425);
+	var _board = __webpack_require__(/*! ./board.marketinfo */ 424);
 	
 	var _board2 = _interopRequireDefault(_board);
 	
-	var _boardMiniStockDetail = __webpack_require__(/*! ./board.mini.stock.detail.component */ 443);
+	var _boardMiniStockDetail = __webpack_require__(/*! ./board.mini.stock.detail.component */ 442);
 	
 	var _boardMiniStockDetail2 = _interopRequireDefault(_boardMiniStockDetail);
 	
-	var _tablesort = __webpack_require__(/*! ../libs/tablesort.number */ 348);
+	var _tablesort = __webpack_require__(/*! ../libs/tablesort.number */ 347);
 	
 	var _tablesort2 = _interopRequireDefault(_tablesort);
 	
-	var _reactTooltip = __webpack_require__(/*! react-tooltip */ 445);
+	var _reactTooltip = __webpack_require__(/*! react-tooltip */ 444);
 	
 	var _reactTooltip2 = _interopRequireDefault(_reactTooltip);
 	
@@ -92818,7 +92811,7 @@
 	exports.default = BoardMini;
 
 /***/ },
-/* 414 */
+/* 413 */
 /*!****************************************************!*\
   !*** ./app/components/board.mini.row.component.js ***!
   \****************************************************/
@@ -92836,7 +92829,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 345);
+	var _classnames = __webpack_require__(/*! classnames */ 344);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -92844,11 +92837,11 @@
 	
 	var Config = _interopRequireWildcard(_config);
 	
-	var _formatBoardQtty = __webpack_require__(/*! ./builtin/format.board.qtty.component */ 415);
+	var _formatBoardQtty = __webpack_require__(/*! ./builtin/format.board.qtty.component */ 414);
 	
 	var _formatBoardQtty2 = _interopRequireDefault(_formatBoardQtty);
 	
-	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 416);
+	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 415);
 	
 	var _formatNumberWithCommas2 = _interopRequireDefault(_formatNumberWithCommas);
 	
@@ -93812,7 +93805,7 @@
 	exports.default = BoardMiniRow;
 
 /***/ },
-/* 415 */
+/* 414 */
 /*!***************************************************************!*\
   !*** ./app/components/builtin/format.board.qtty.component.js ***!
   \***************************************************************/
@@ -93871,7 +93864,7 @@
 	exports.default = FormatBoardQtty;
 
 /***/ },
-/* 416 */
+/* 415 */
 /*!***********************************************************************!*\
   !*** ./app/components/builtin/format.number.with.commas.component.js ***!
   \***********************************************************************/
@@ -93918,7 +93911,7 @@
 				return _react2.default.createElement(
 					'span',
 					null,
-					result
+					result && result !== 'undefined' ? result : '-'
 				);
 			}
 		}]);
@@ -93929,7 +93922,7 @@
 	exports.default = FormatNumberWithCommas;
 
 /***/ },
-/* 417 */
+/* 416 */
 /*!*******************************************************!*\
   !*** ./app/components/board.mini.config.component.js ***!
   \*******************************************************/
@@ -93947,11 +93940,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 345);
+	var _classnames = __webpack_require__(/*! classnames */ 344);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _boardMiniAddcode = __webpack_require__(/*! ./board.mini.addcode.component */ 418);
+	var _boardMiniAddcode = __webpack_require__(/*! ./board.mini.addcode.component */ 417);
 	
 	var _boardMiniAddcode2 = _interopRequireDefault(_boardMiniAddcode);
 	
@@ -93963,11 +93956,11 @@
 	
 	var Config = _interopRequireWildcard(_config);
 	
-	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 416);
+	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 415);
 	
 	var _formatNumberWithCommas2 = _interopRequireDefault(_formatNumberWithCommas);
 	
-	var _accountSelectBox = __webpack_require__(/*! ./builtin/account.select.box.component */ 424);
+	var _accountSelectBox = __webpack_require__(/*! ./builtin/account.select.box.component */ 423);
 	
 	var _accountSelectBox2 = _interopRequireDefault(_accountSelectBox);
 	
@@ -94239,7 +94232,7 @@
 	}(_react2.default.Component);
 
 /***/ },
-/* 418 */
+/* 417 */
 /*!********************************************************!*\
   !*** ./app/components/board.mini.addcode.component.js ***!
   \********************************************************/
@@ -94257,7 +94250,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactAutocomplete = __webpack_require__(/*! react-autocomplete */ 419);
+	var _reactAutocomplete = __webpack_require__(/*! react-autocomplete */ 418);
 	
 	var _reactAutocomplete2 = _interopRequireDefault(_reactAutocomplete);
 	
@@ -94411,7 +94404,7 @@
 	exports.default = BoardMiniAddCode;
 
 /***/ },
-/* 419 */
+/* 418 */
 /*!*************************************************!*\
   !*** ./~/react-autocomplete/build/lib/index.js ***!
   \*************************************************/
@@ -94419,10 +94412,10 @@
 
 	'use strict';
 	
-	module.exports = __webpack_require__(/*! ./Autocomplete */ 420);
+	module.exports = __webpack_require__(/*! ./Autocomplete */ 419);
 
 /***/ },
-/* 420 */
+/* 419 */
 /*!********************************************************!*\
   !*** ./~/react-autocomplete/build/lib/Autocomplete.js ***!
   \********************************************************/
@@ -94438,7 +94431,7 @@
 	
 	var findDOMNode = _require.findDOMNode;
 	
-	var scrollIntoView = __webpack_require__(/*! dom-scroll-into-view */ 421);
+	var scrollIntoView = __webpack_require__(/*! dom-scroll-into-view */ 420);
 	
 	var _debugStates = [];
 	
@@ -94797,23 +94790,23 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 421 */
+/* 420 */
 /*!*****************************************!*\
   !*** ./~/dom-scroll-into-view/index.js ***!
   \*****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(/*! ./lib/dom-scroll-into-view */ 422);
+	module.exports = __webpack_require__(/*! ./lib/dom-scroll-into-view */ 421);
 
 
 /***/ },
-/* 422 */
+/* 421 */
 /*!************************************************************!*\
   !*** ./~/dom-scroll-into-view/lib/dom-scroll-into-view.js ***!
   \************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var util = __webpack_require__(/*! ./util */ 423);
+	var util = __webpack_require__(/*! ./util */ 422);
 	
 	function scrollIntoView(elem, container, config) {
 	  config = config || {};
@@ -94938,7 +94931,7 @@
 
 
 /***/ },
-/* 423 */
+/* 422 */
 /*!********************************************!*\
   !*** ./~/dom-scroll-into-view/lib/util.js ***!
   \********************************************/
@@ -95378,7 +95371,7 @@
 
 
 /***/ },
-/* 424 */
+/* 423 */
 /*!****************************************************************!*\
   !*** ./app/components/builtin/account.select.box.component.js ***!
   \****************************************************************/
@@ -95451,7 +95444,7 @@
 	exports.default = AccountSelectBoxComponent;
 
 /***/ },
-/* 425 */
+/* 424 */
 /*!********************************************!*\
   !*** ./app/components/board.marketinfo.js ***!
   \********************************************/
@@ -95469,7 +95462,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactSlick = __webpack_require__(/*! react-slick */ 426);
+	var _reactSlick = __webpack_require__(/*! react-slick */ 425);
 	
 	var _reactSlick2 = _interopRequireDefault(_reactSlick);
 	
@@ -95551,7 +95544,7 @@
 	exports.default = BoardMarketInfo;
 
 /***/ },
-/* 426 */
+/* 425 */
 /*!************************************!*\
   !*** ./~/react-slick/lib/index.js ***!
   \************************************/
@@ -95559,10 +95552,10 @@
 
 	'use strict';
 	
-	module.exports = __webpack_require__(/*! ./slider */ 427);
+	module.exports = __webpack_require__(/*! ./slider */ 426);
 
 /***/ },
-/* 427 */
+/* 426 */
 /*!*************************************!*\
   !*** ./~/react-slick/lib/slider.js ***!
   \*************************************/
@@ -95574,21 +95567,21 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _innerSlider = __webpack_require__(/*! ./inner-slider */ 428);
+	var _innerSlider = __webpack_require__(/*! ./inner-slider */ 427);
 	
 	var _objectAssign = __webpack_require__(/*! object-assign */ 4);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _json2mq = __webpack_require__(/*! json2mq */ 438);
+	var _json2mq = __webpack_require__(/*! json2mq */ 437);
 	
 	var _json2mq2 = _interopRequireDefault(_json2mq);
 	
-	var _reactResponsiveMixin = __webpack_require__(/*! react-responsive-mixin */ 440);
+	var _reactResponsiveMixin = __webpack_require__(/*! react-responsive-mixin */ 439);
 	
 	var _reactResponsiveMixin2 = _interopRequireDefault(_reactResponsiveMixin);
 	
-	var _defaultProps = __webpack_require__(/*! ./default-props */ 434);
+	var _defaultProps = __webpack_require__(/*! ./default-props */ 433);
 	
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 	
@@ -95678,7 +95671,7 @@
 	module.exports = Slider;
 
 /***/ },
-/* 428 */
+/* 427 */
 /*!*******************************************!*\
   !*** ./~/react-slick/lib/inner-slider.js ***!
   \*******************************************/
@@ -95695,31 +95688,31 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _eventHandlers = __webpack_require__(/*! ./mixins/event-handlers */ 429);
+	var _eventHandlers = __webpack_require__(/*! ./mixins/event-handlers */ 428);
 	
 	var _eventHandlers2 = _interopRequireDefault(_eventHandlers);
 	
-	var _helpers = __webpack_require__(/*! ./mixins/helpers */ 431);
+	var _helpers = __webpack_require__(/*! ./mixins/helpers */ 430);
 	
 	var _helpers2 = _interopRequireDefault(_helpers);
 	
-	var _initialState = __webpack_require__(/*! ./initial-state */ 433);
+	var _initialState = __webpack_require__(/*! ./initial-state */ 432);
 	
 	var _initialState2 = _interopRequireDefault(_initialState);
 	
-	var _defaultProps = __webpack_require__(/*! ./default-props */ 434);
+	var _defaultProps = __webpack_require__(/*! ./default-props */ 433);
 	
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 345);
+	var _classnames = __webpack_require__(/*! classnames */ 344);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _track = __webpack_require__(/*! ./track */ 435);
+	var _track = __webpack_require__(/*! ./track */ 434);
 	
-	var _dots = __webpack_require__(/*! ./dots */ 436);
+	var _dots = __webpack_require__(/*! ./dots */ 435);
 	
-	var _arrows = __webpack_require__(/*! ./arrows */ 437);
+	var _arrows = __webpack_require__(/*! ./arrows */ 436);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -95896,7 +95889,7 @@
 	});
 
 /***/ },
-/* 429 */
+/* 428 */
 /*!****************************************************!*\
   !*** ./~/react-slick/lib/mixins/event-handlers.js ***!
   \****************************************************/
@@ -95906,9 +95899,9 @@
 	
 	exports.__esModule = true;
 	
-	var _trackHelper = __webpack_require__(/*! ./trackHelper */ 430);
+	var _trackHelper = __webpack_require__(/*! ./trackHelper */ 429);
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 431);
+	var _helpers = __webpack_require__(/*! ./helpers */ 430);
 	
 	var _helpers2 = _interopRequireDefault(_helpers);
 	
@@ -96098,7 +96091,7 @@
 	exports.default = EventHandlers;
 
 /***/ },
-/* 430 */
+/* 429 */
 /*!*************************************************!*\
   !*** ./~/react-slick/lib/mixins/trackHelper.js ***!
   \*************************************************/
@@ -96224,7 +96217,7 @@
 	};
 
 /***/ },
-/* 431 */
+/* 430 */
 /*!*********************************************!*\
   !*** ./~/react-slick/lib/mixins/helpers.js ***!
   \*********************************************/
@@ -96242,11 +96235,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _ReactTransitionEvents = __webpack_require__(/*! react/lib/ReactTransitionEvents */ 432);
+	var _ReactTransitionEvents = __webpack_require__(/*! react/lib/ReactTransitionEvents */ 431);
 	
 	var _ReactTransitionEvents2 = _interopRequireDefault(_ReactTransitionEvents);
 	
-	var _trackHelper = __webpack_require__(/*! ./trackHelper */ 430);
+	var _trackHelper = __webpack_require__(/*! ./trackHelper */ 429);
 	
 	var _objectAssign = __webpack_require__(/*! object-assign */ 4);
 	
@@ -96528,7 +96521,7 @@
 	exports.default = helpers;
 
 /***/ },
-/* 432 */
+/* 431 */
 /*!**********************************************!*\
   !*** ./~/react/lib/ReactTransitionEvents.js ***!
   \**********************************************/
@@ -96609,7 +96602,7 @@
 	module.exports = ReactTransitionEvents;
 
 /***/ },
-/* 433 */
+/* 432 */
 /*!********************************************!*\
   !*** ./~/react-slick/lib/initial-state.js ***!
   \********************************************/
@@ -96662,7 +96655,7 @@
 	module.exports = initialState;
 
 /***/ },
-/* 434 */
+/* 433 */
 /*!********************************************!*\
   !*** ./~/react-slick/lib/default-props.js ***!
   \********************************************/
@@ -96718,7 +96711,7 @@
 	module.exports = defaultProps;
 
 /***/ },
-/* 435 */
+/* 434 */
 /*!************************************!*\
   !*** ./~/react-slick/lib/track.js ***!
   \************************************/
@@ -96737,7 +96730,7 @@
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 345);
+	var _classnames = __webpack_require__(/*! classnames */ 344);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -96872,7 +96865,7 @@
 	});
 
 /***/ },
-/* 436 */
+/* 435 */
 /*!***********************************!*\
   !*** ./~/react-slick/lib/dots.js ***!
   \***********************************/
@@ -96887,7 +96880,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 345);
+	var _classnames = __webpack_require__(/*! classnames */ 344);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -96955,7 +96948,7 @@
 	});
 
 /***/ },
-/* 437 */
+/* 436 */
 /*!*************************************!*\
   !*** ./~/react-slick/lib/arrows.js ***!
   \*************************************/
@@ -96972,7 +96965,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 345);
+	var _classnames = __webpack_require__(/*! classnames */ 344);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -97075,13 +97068,13 @@
 	});
 
 /***/ },
-/* 438 */
+/* 437 */
 /*!****************************!*\
   !*** ./~/json2mq/index.js ***!
   \****************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var camel2hyphen = __webpack_require__(/*! string-convert/camel2hyphen */ 439);
+	var camel2hyphen = __webpack_require__(/*! string-convert/camel2hyphen */ 438);
 	
 	var isDimension = function (feature) {
 	  var re = /[height|width]$/;
@@ -97134,7 +97127,7 @@
 	module.exports = json2mq;
 
 /***/ },
-/* 439 */
+/* 438 */
 /*!******************************************!*\
   !*** ./~/string-convert/camel2hyphen.js ***!
   \******************************************/
@@ -97151,15 +97144,15 @@
 	module.exports = camel2hyphen;
 
 /***/ },
-/* 440 */
+/* 439 */
 /*!*******************************************!*\
   !*** ./~/react-responsive-mixin/index.js ***!
   \*******************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var canUseDOM = __webpack_require__(/*! can-use-dom */ 441);
-	var enquire = canUseDOM && __webpack_require__(/*! enquire.js */ 442);
-	var json2mq = __webpack_require__(/*! json2mq */ 438);
+	var canUseDOM = __webpack_require__(/*! can-use-dom */ 440);
+	var enquire = canUseDOM && __webpack_require__(/*! enquire.js */ 441);
+	var json2mq = __webpack_require__(/*! json2mq */ 437);
 	
 	var ResponsiveMixin = {
 	  media: function (query, handler) {
@@ -97189,7 +97182,7 @@
 	module.exports = ResponsiveMixin;
 
 /***/ },
-/* 441 */
+/* 440 */
 /*!********************************!*\
   !*** ./~/can-use-dom/index.js ***!
   \********************************/
@@ -97204,7 +97197,7 @@
 	module.exports = canUseDOM;
 
 /***/ },
-/* 442 */
+/* 441 */
 /*!**************************************!*\
   !*** ./~/enquire.js/dist/enquire.js ***!
   \**************************************/
@@ -97505,7 +97498,7 @@
 	}));
 
 /***/ },
-/* 443 */
+/* 442 */
 /*!*************************************************************!*\
   !*** ./app/components/board.mini.stock.detail.component.js ***!
   \*************************************************************/
@@ -97523,13 +97516,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactModalDialog = __webpack_require__(/*! react-modal-dialog */ 358);
+	var _reactModalDialog = __webpack_require__(/*! react-modal-dialog */ 357);
 	
 	var _config = __webpack_require__(/*! ../config */ 219);
 	
 	var Config = _interopRequireWildcard(_config);
 	
-	var _boardMiniStockDetailRow = __webpack_require__(/*! ./board.mini.stock.detail.row.component */ 444);
+	var _boardMiniStockDetailRow = __webpack_require__(/*! ./board.mini.stock.detail.row.component */ 443);
 	
 	var _boardMiniStockDetailRow2 = _interopRequireDefault(_boardMiniStockDetailRow);
 	
@@ -97678,7 +97671,7 @@
 	exports.default = StockDetailModal;
 
 /***/ },
-/* 444 */
+/* 443 */
 /*!*****************************************************************!*\
   !*** ./app/components/board.mini.stock.detail.row.component.js ***!
   \*****************************************************************/
@@ -97696,7 +97689,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _formatBoardQtty = __webpack_require__(/*! ./builtin/format.board.qtty.component */ 415);
+	var _formatBoardQtty = __webpack_require__(/*! ./builtin/format.board.qtty.component */ 414);
 	
 	var _formatBoardQtty2 = _interopRequireDefault(_formatBoardQtty);
 	
@@ -97757,7 +97750,7 @@
 	exports.default = StockDetailModalRow;
 
 /***/ },
-/* 445 */
+/* 444 */
 /*!***************************************!*\
   !*** ./~/react-tooltip/dist/index.js ***!
   \***************************************/
@@ -97788,37 +97781,37 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 345);
+	var _classnames = __webpack_require__(/*! classnames */ 344);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _staticMethods = __webpack_require__(/*! ./decorators/staticMethods */ 446);
+	var _staticMethods = __webpack_require__(/*! ./decorators/staticMethods */ 445);
 	
 	var _staticMethods2 = _interopRequireDefault(_staticMethods);
 	
-	var _windowListener = __webpack_require__(/*! ./decorators/windowListener */ 448);
+	var _windowListener = __webpack_require__(/*! ./decorators/windowListener */ 447);
 	
 	var _windowListener2 = _interopRequireDefault(_windowListener);
 	
-	var _customEvent = __webpack_require__(/*! ./decorators/customEvent */ 449);
+	var _customEvent = __webpack_require__(/*! ./decorators/customEvent */ 448);
 	
 	var _customEvent2 = _interopRequireDefault(_customEvent);
 	
-	var _isCapture = __webpack_require__(/*! ./decorators/isCapture */ 450);
+	var _isCapture = __webpack_require__(/*! ./decorators/isCapture */ 449);
 	
 	var _isCapture2 = _interopRequireDefault(_isCapture);
 	
-	var _getPosition = __webpack_require__(/*! ./utils/getPosition */ 451);
+	var _getPosition = __webpack_require__(/*! ./utils/getPosition */ 450);
 	
 	var _getPosition2 = _interopRequireDefault(_getPosition);
 	
-	var _getTipContent = __webpack_require__(/*! ./utils/getTipContent */ 452);
+	var _getTipContent = __webpack_require__(/*! ./utils/getTipContent */ 451);
 	
 	var _getTipContent2 = _interopRequireDefault(_getTipContent);
 	
-	var _aria = __webpack_require__(/*! ./utils/aria */ 453);
+	var _aria = __webpack_require__(/*! ./utils/aria */ 452);
 	
-	var _style = __webpack_require__(/*! ./style */ 454);
+	var _style = __webpack_require__(/*! ./style */ 453);
 	
 	var _style2 = _interopRequireDefault(_style);
 	
@@ -98295,7 +98288,7 @@
 	module.exports = ReactTooltip;
 
 /***/ },
-/* 446 */
+/* 445 */
 /*!**********************************************************!*\
   !*** ./~/react-tooltip/dist/decorators/staticMethods.js ***!
   \**********************************************************/
@@ -98349,7 +98342,7 @@
 	  };
 	};
 	
-	var _constant = __webpack_require__(/*! ../constant */ 447);
+	var _constant = __webpack_require__(/*! ../constant */ 446);
 	
 	var _constant2 = _interopRequireDefault(_constant);
 	
@@ -98373,7 +98366,7 @@
 	    */
 
 /***/ },
-/* 447 */
+/* 446 */
 /*!******************************************!*\
   !*** ./~/react-tooltip/dist/constant.js ***!
   \******************************************/
@@ -98394,7 +98387,7 @@
 	};
 
 /***/ },
-/* 448 */
+/* 447 */
 /*!***********************************************************!*\
   !*** ./~/react-tooltip/dist/decorators/windowListener.js ***!
   \***********************************************************/
@@ -98441,14 +98434,14 @@
 	  };
 	};
 	
-	var _constant = __webpack_require__(/*! ../constant */ 447);
+	var _constant = __webpack_require__(/*! ../constant */ 446);
 	
 	var _constant2 = _interopRequireDefault(_constant);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 449 */
+/* 448 */
 /*!********************************************************!*\
   !*** ./~/react-tooltip/dist/decorators/customEvent.js ***!
   \********************************************************/
@@ -98544,7 +98537,7 @@
 	var customListener = void 0;
 
 /***/ },
-/* 450 */
+/* 449 */
 /*!******************************************************!*\
   !*** ./~/react-tooltip/dist/decorators/isCapture.js ***!
   \******************************************************/
@@ -98564,7 +98557,7 @@
 	};
 
 /***/ },
-/* 451 */
+/* 450 */
 /*!***************************************************!*\
   !*** ./~/react-tooltip/dist/utils/getPosition.js ***!
   \***************************************************/
@@ -98885,7 +98878,7 @@
 	};
 
 /***/ },
-/* 452 */
+/* 451 */
 /*!*****************************************************!*\
   !*** ./~/react-tooltip/dist/utils/getTipContent.js ***!
   \*****************************************************/
@@ -98922,7 +98915,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 453 */
+/* 452 */
 /*!********************************************!*\
   !*** ./~/react-tooltip/dist/utils/aria.js ***!
   \********************************************/
@@ -98954,7 +98947,7 @@
 	}
 
 /***/ },
-/* 454 */
+/* 453 */
 /*!***************************************!*\
   !*** ./~/react-tooltip/dist/style.js ***!
   \***************************************/
@@ -98968,7 +98961,7 @@
 	exports.default = '.__react_component_tooltip{border-radius:3px;display:inline-block;font-size:13px;left:-999em;opacity:0;padding:8px 21px;position:fixed;pointer-events:none;transition:opacity 0.3s ease-out;top:-999em;visibility:hidden;z-index:999}.__react_component_tooltip:before,.__react_component_tooltip:after{content:"";width:0;height:0;position:absolute}.__react_component_tooltip.show{opacity:0.9;margin-top:0px;margin-left:0px;visibility:visible}.__react_component_tooltip.type-dark{color:#fff;background-color:#222}.__react_component_tooltip.type-dark.place-top:after{border-top-color:#222;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-dark.place-bottom:after{border-bottom-color:#222;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-dark.place-left:after{border-left-color:#222;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-dark.place-right:after{border-right-color:#222;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-dark.border{border:1px solid #fff}.__react_component_tooltip.type-dark.border.place-top:before{border-top:8px solid #fff}.__react_component_tooltip.type-dark.border.place-bottom:before{border-bottom:8px solid #fff}.__react_component_tooltip.type-dark.border.place-left:before{border-left:8px solid #fff}.__react_component_tooltip.type-dark.border.place-right:before{border-right:8px solid #fff}.__react_component_tooltip.type-success{color:#fff;background-color:#8DC572}.__react_component_tooltip.type-success.place-top:after{border-top-color:#8DC572;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-success.place-bottom:after{border-bottom-color:#8DC572;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-success.place-left:after{border-left-color:#8DC572;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-success.place-right:after{border-right-color:#8DC572;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-success.border{border:1px solid #fff}.__react_component_tooltip.type-success.border.place-top:before{border-top:8px solid #fff}.__react_component_tooltip.type-success.border.place-bottom:before{border-bottom:8px solid #fff}.__react_component_tooltip.type-success.border.place-left:before{border-left:8px solid #fff}.__react_component_tooltip.type-success.border.place-right:before{border-right:8px solid #fff}.__react_component_tooltip.type-warning{color:#fff;background-color:#F0AD4E}.__react_component_tooltip.type-warning.place-top:after{border-top-color:#F0AD4E;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-warning.place-bottom:after{border-bottom-color:#F0AD4E;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-warning.place-left:after{border-left-color:#F0AD4E;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-warning.place-right:after{border-right-color:#F0AD4E;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-warning.border{border:1px solid #fff}.__react_component_tooltip.type-warning.border.place-top:before{border-top:8px solid #fff}.__react_component_tooltip.type-warning.border.place-bottom:before{border-bottom:8px solid #fff}.__react_component_tooltip.type-warning.border.place-left:before{border-left:8px solid #fff}.__react_component_tooltip.type-warning.border.place-right:before{border-right:8px solid #fff}.__react_component_tooltip.type-error{color:#fff;background-color:#BE6464}.__react_component_tooltip.type-error.place-top:after{border-top-color:#BE6464;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-error.place-bottom:after{border-bottom-color:#BE6464;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-error.place-left:after{border-left-color:#BE6464;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-error.place-right:after{border-right-color:#BE6464;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-error.border{border:1px solid #fff}.__react_component_tooltip.type-error.border.place-top:before{border-top:8px solid #fff}.__react_component_tooltip.type-error.border.place-bottom:before{border-bottom:8px solid #fff}.__react_component_tooltip.type-error.border.place-left:before{border-left:8px solid #fff}.__react_component_tooltip.type-error.border.place-right:before{border-right:8px solid #fff}.__react_component_tooltip.type-info{color:#fff;background-color:#337AB7}.__react_component_tooltip.type-info.place-top:after{border-top-color:#337AB7;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-info.place-bottom:after{border-bottom-color:#337AB7;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-info.place-left:after{border-left-color:#337AB7;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-info.place-right:after{border-right-color:#337AB7;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-info.border{border:1px solid #fff}.__react_component_tooltip.type-info.border.place-top:before{border-top:8px solid #fff}.__react_component_tooltip.type-info.border.place-bottom:before{border-bottom:8px solid #fff}.__react_component_tooltip.type-info.border.place-left:before{border-left:8px solid #fff}.__react_component_tooltip.type-info.border.place-right:before{border-right:8px solid #fff}.__react_component_tooltip.type-light{color:#222;background-color:#fff}.__react_component_tooltip.type-light.place-top:after{border-top-color:#fff;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-light.place-bottom:after{border-bottom-color:#fff;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-light.place-left:after{border-left-color:#fff;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-light.place-right:after{border-right-color:#fff;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-light.border{border:1px solid #222}.__react_component_tooltip.type-light.border.place-top:before{border-top:8px solid #222}.__react_component_tooltip.type-light.border.place-bottom:before{border-bottom:8px solid #222}.__react_component_tooltip.type-light.border.place-left:before{border-left:8px solid #222}.__react_component_tooltip.type-light.border.place-right:before{border-right:8px solid #222}.__react_component_tooltip.place-top{margin-top:-10px}.__react_component_tooltip.place-top:before{border-left:10px solid transparent;border-right:10px solid transparent;bottom:-8px;left:50%;margin-left:-10px}.__react_component_tooltip.place-top:after{border-left:8px solid transparent;border-right:8px solid transparent;bottom:-6px;left:50%;margin-left:-8px}.__react_component_tooltip.place-bottom{margin-top:10px}.__react_component_tooltip.place-bottom:before{border-left:10px solid transparent;border-right:10px solid transparent;top:-8px;left:50%;margin-left:-10px}.__react_component_tooltip.place-bottom:after{border-left:8px solid transparent;border-right:8px solid transparent;top:-6px;left:50%;margin-left:-8px}.__react_component_tooltip.place-left{margin-left:-10px}.__react_component_tooltip.place-left:before{border-top:6px solid transparent;border-bottom:6px solid transparent;right:-8px;top:50%;margin-top:-5px}.__react_component_tooltip.place-left:after{border-top:5px solid transparent;border-bottom:5px solid transparent;right:-6px;top:50%;margin-top:-4px}.__react_component_tooltip.place-right{margin-left:10px}.__react_component_tooltip.place-right:before{border-top:6px solid transparent;border-bottom:6px solid transparent;left:-8px;top:50%;margin-top:-5px}.__react_component_tooltip.place-right:after{border-top:5px solid transparent;border-bottom:5px solid transparent;left:-6px;top:50%;margin-top:-4px}.__react_component_tooltip .multi-line{display:block;padding:2px 0px;text-align:center}';
 
 /***/ },
-/* 455 */
+/* 454 */
 /*!***********************************************!*\
   !*** ./app/components/portfolio.component.js ***!
   \***********************************************/
@@ -98986,15 +98979,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _tablesort = __webpack_require__(/*! ../libs/tablesort.number */ 348);
+	var _tablesort = __webpack_require__(/*! ../libs/tablesort.number */ 347);
 	
 	var _tablesort2 = _interopRequireDefault(_tablesort);
 	
-	var _portfolioRow = __webpack_require__(/*! ./portfolio.row.component */ 456);
+	var _portfolioRow = __webpack_require__(/*! ./portfolio.row.component */ 455);
 	
 	var _portfolioRow2 = _interopRequireDefault(_portfolioRow);
 	
-	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 416);
+	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 415);
 	
 	var _formatNumberWithCommas2 = _interopRequireDefault(_formatNumberWithCommas);
 	
@@ -99228,7 +99221,7 @@
 	exports.default = Portfolio;
 
 /***/ },
-/* 456 */
+/* 455 */
 /*!***************************************************!*\
   !*** ./app/components/portfolio.row.component.js ***!
   \***************************************************/
@@ -99246,7 +99239,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 416);
+	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 415);
 	
 	var _formatNumberWithCommas2 = _interopRequireDefault(_formatNumberWithCommas);
 	
@@ -99455,7 +99448,7 @@
 	exports.default = PortfolioRow;
 
 /***/ },
-/* 457 */
+/* 456 */
 /*!************************************************!*\
   !*** ./app/components/placeorder.component.js ***!
   \************************************************/
@@ -99483,11 +99476,11 @@
 	
 	var Config = _interopRequireWildcard(_config);
 	
-	var _tradeErrorParser = __webpack_require__(/*! ../smartboard/trade-error-parser */ 458);
+	var _tradeErrorParser = __webpack_require__(/*! ../smartboard/trade-error-parser */ 457);
 	
 	var _tradeErrorParser2 = _interopRequireDefault(_tradeErrorParser);
 	
-	var _placeorderOrdertype = __webpack_require__(/*! ./placeorder.ordertype.component */ 459);
+	var _placeorderOrdertype = __webpack_require__(/*! ./placeorder.ordertype.component */ 458);
 	
 	var _placeorderOrdertype2 = _interopRequireDefault(_placeorderOrdertype);
 	
@@ -100038,7 +100031,7 @@
 	}
 
 /***/ },
-/* 458 */
+/* 457 */
 /*!**********************************************!*\
   !*** ./app/smartboard/trade-error-parser.js ***!
   \**********************************************/
@@ -100104,7 +100097,7 @@
 	};
 
 /***/ },
-/* 459 */
+/* 458 */
 /*!**********************************************************!*\
   !*** ./app/components/placeorder.ordertype.component.js ***!
   \**********************************************************/
@@ -100170,7 +100163,7 @@
 	exports.default = OrderType;
 
 /***/ },
-/* 460 */
+/* 459 */
 /*!******************************************!*\
   !*** ./app/components/loan.component.js ***!
   \******************************************/
@@ -100188,17 +100181,23 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _loanOverview = __webpack_require__(/*! ./loan.overview.component */ 461);
+	var _loanOverview = __webpack_require__(/*! ./loan.overview.component */ 460);
 	
 	var _loanOverview2 = _interopRequireDefault(_loanOverview);
 	
-	var _loanDetail = __webpack_require__(/*! ./loan.detail.component */ 463);
+	var _loanDetail = __webpack_require__(/*! ./loan.detail.component */ 462);
 	
 	var _loanDetail2 = _interopRequireDefault(_loanDetail);
 	
-	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 416);
+	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 415);
 	
 	var _formatNumberWithCommas2 = _interopRequireDefault(_formatNumberWithCommas);
+	
+	var _config = __webpack_require__(/*! ../config */ 219);
+	
+	var Config = _interopRequireWildcard(_config);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -100228,16 +100227,19 @@
 		_createClass(LoanComponent, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
+				this._mounted = true;
+				this.registerEventEmitter();
+			}
+		}, {
+			key: 'registerEventEmitter',
+			value: function registerEventEmitter() {
 				var _this2 = this;
 	
-				this._mounted = true;
-	
-				var interval = setInterval(function () {
+				this.props.emitter.on(Config.Event.ViewPage.LOAN, function () {
 					if (_this2.props.accounts.length > 0) {
 						_this2.loadLoan(_this2.props.accounts[0].accountNumber);
-						clearInterval(interval);
 					}
-				}, 500);
+				});
 			}
 		}, {
 			key: 'loadLoan',
@@ -100261,7 +100263,8 @@
 						// tk k co no
 						_this3._setState({
 							notFound: true,
-							loadedLoan: true
+							loadedLoan: true,
+							activeAccountNumber: accountNo
 						});
 					}
 				});
@@ -100284,17 +100287,12 @@
 				return _react2.default.createElement(
 					'div',
 					{ className: 'loan' },
-					this.state.loadedLoan && this.state.notFound ? _react2.default.createElement(
-						'div',
-						null,
-						'Tài khoản không có nợ'
-					) : null,
-					this.state.loadedLoan && !this.state.notFound ? _react2.default.createElement(
+					this.state.loadedLoan ? _react2.default.createElement(
 						'div',
 						null,
 						_react2.default.createElement(_loanOverview2.default, { activeAccountNumber: this.state.activeAccountNumber,
 							accounts: this.props.accounts, getLoan: this.loadLoan.bind(this), data: this.state.data }),
-						_react2.default.createElement(_loanDetail2.default, { data: this.state.data })
+						_react2.default.createElement(_loanDetail2.default, { data: this.state.data, notFound: this.state.notFound })
 					) : null,
 					!this.state.loadedLoan ? _react2.default.createElement('i', { className: 'fa fa-spin fa-spinner loanLoandingIcon', 'aria-hidden': 'true' }) : null
 				);
@@ -100307,7 +100305,7 @@
 	exports.default = LoanComponent;
 
 /***/ },
-/* 461 */
+/* 460 */
 /*!***************************************************!*\
   !*** ./app/components/loan.overview.component.js ***!
   \***************************************************/
@@ -100325,11 +100323,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _loanAccounts = __webpack_require__(/*! ./loan.accounts.component */ 462);
+	var _loanAccounts = __webpack_require__(/*! ./loan.accounts.component */ 461);
 	
 	var _loanAccounts2 = _interopRequireDefault(_loanAccounts);
 	
-	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 416);
+	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 415);
 	
 	var _formatNumberWithCommas2 = _interopRequireDefault(_formatNumberWithCommas);
 	
@@ -100353,6 +100351,26 @@
 		_createClass(LoanOverviewComponent, [{
 			key: 'render',
 			value: function render() {
+	
+				var totalInterest = 0;
+				if (this.props.data.overdueLoans) {
+					this.props.data.overdueLoans.forEach(function (loan) {
+						totalInterest += loan.interest;
+					});
+				}
+	
+				if (this.props.data.dueLoans) {
+					this.props.data.dueLoans.forEach(function (loan) {
+						totalInterest += loan.interest;
+					});
+				}
+	
+				if (this.props.data.undueLoans) {
+					this.props.data.undueLoans.forEach(function (loan) {
+						totalInterest += loan.interest;
+					});
+				}
+	
 				return _react2.default.createElement(
 					'div',
 					{ className: 'loanOverviewWrapper' },
@@ -100476,6 +100494,20 @@
 									{ className: 'tr' },
 									_react2.default.createElement(_formatNumberWithCommas2.default, { value: this.props.data.addingAmountTo100 })
 								)
+							),
+							_react2.default.createElement(
+								'tr',
+								null,
+								_react2.default.createElement(
+									'td',
+									null,
+									'Tổng số tiền lãi'
+								),
+								_react2.default.createElement(
+									'td',
+									{ className: 'tr' },
+									_react2.default.createElement(_formatNumberWithCommas2.default, { value: totalInterest })
+								)
 							)
 						)
 					)
@@ -100489,7 +100521,7 @@
 	exports.default = LoanOverviewComponent;
 
 /***/ },
-/* 462 */
+/* 461 */
 /*!***************************************************!*\
   !*** ./app/components/loan.accounts.component.js ***!
   \***************************************************/
@@ -100507,7 +100539,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _accountSelectBox = __webpack_require__(/*! ./builtin/account.select.box.component */ 424);
+	var _accountSelectBox = __webpack_require__(/*! ./builtin/account.select.box.component */ 423);
 	
 	var _accountSelectBox2 = _interopRequireDefault(_accountSelectBox);
 	
@@ -100582,7 +100614,7 @@
 	exports.default = LoanAccountsComponent;
 
 /***/ },
-/* 463 */
+/* 462 */
 /*!*************************************************!*\
   !*** ./app/components/loan.detail.component.js ***!
   \*************************************************/
@@ -100600,7 +100632,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _loanDetailRow = __webpack_require__(/*! ./loan.detail.row.component */ 464);
+	var _loanDetailRow = __webpack_require__(/*! ./loan.detail.row.component */ 463);
 	
 	var _loanDetailRow2 = _interopRequireDefault(_loanDetailRow);
 	
@@ -100632,103 +100664,120 @@
 			value: function render() {
 	
 				var index = 0;
+				var overdue = [];
+				var due = [];
+				var undue = [];
 	
-				var overdue = this.props.data.overdueLoans.map(function (loan) {
-					if (loan.prinloan > 1) {
-						index++;
-						return _react2.default.createElement(_loanDetailRow2.default, { key: index, loan: loan, type: 'overdue' });
-					}
-				});
+				if (this.props.data.overdueLoans) {
+					overdue = this.props.data.overdueLoans.map(function (loan) {
+						if (loan.prinloan > 1) {
+							index++;
+							return _react2.default.createElement(_loanDetailRow2.default, { key: index, loan: loan, type: 'overdue' });
+						}
+					});
+				}
 	
-				var due = this.props.data.dueLoans.map(function (loan) {
-					if (loan.prinloan > 1) {
-						index++;
-						return _react2.default.createElement(_loanDetailRow2.default, { key: index, loan: loan, type: 'due' });
-					}
-				});
+				if (this.props.data.dueLoans) {
+					due = this.props.data.dueLoans.map(function (loan) {
+						if (loan.prinloan > 1) {
+							index++;
+							return _react2.default.createElement(_loanDetailRow2.default, { key: index, loan: loan, type: 'due' });
+						}
+					});
+				}
 	
-				var undue = this.props.data.undueLoans.map(function (loan) {
-					if (loan.prinloan > 1) {
-						index++;
-						return _react2.default.createElement(_loanDetailRow2.default, { key: index, loan: loan, type: 'undue' });
-					}
-				});
+				if (this.props.data.undueLoans) {
+					undue = this.props.data.undueLoans.map(function (loan) {
+						if (loan.prinloan > 1) {
+							index++;
+							return _react2.default.createElement(_loanDetailRow2.default, { key: index, loan: loan, type: 'undue' });
+						}
+					});
+				}
 	
 				return _react2.default.createElement(
 					'div',
 					{ className: 'loanDetailWrapper' },
-					_react2.default.createElement(
+					!this.props.notFound ? _react2.default.createElement(
 						'div',
-						{ className: 'title' },
-						'Báo cáo nợ'
-					),
-					_react2.default.createElement(
-						'table',
-						{ className: 'loanDetailTable striped' },
+						null,
 						_react2.default.createElement(
-							'thead',
-							null,
+							'div',
+							{ className: 'title' },
+							'Báo cáo nợ'
+						),
+						_react2.default.createElement(
+							'table',
+							{ className: 'loanDetailTable striped' },
 							_react2.default.createElement(
-								'tr',
-								{ className: 'loanDetailTable-header1' },
+								'thead',
+								null,
 								_react2.default.createElement(
-									'th',
-									{ colSpan: '4' },
-									'Thông tin khoản nợ gốc'
+									'tr',
+									{ className: 'loanDetailTable-header1' },
+									_react2.default.createElement(
+										'th',
+										{ colSpan: '4' },
+										'Thông tin khoản nợ gốc'
+									),
+									_react2.default.createElement(
+										'th',
+										{ colSpan: '3' },
+										'Nợ chưa trả'
+									)
 								),
 								_react2.default.createElement(
-									'th',
-									{ colSpan: '3' },
-									'Nợ chưa trả'
+									'tr',
+									{ className: 'loanDetailTable-header2' },
+									_react2.default.createElement(
+										'th',
+										{ className: 'tl' },
+										'Phân loại'
+									),
+									_react2.default.createElement(
+										'th',
+										{ className: 'tl' },
+										'Ngày vay nợ'
+									),
+									_react2.default.createElement(
+										'th',
+										{ className: 'tl' },
+										'Ngày đến hạn'
+									),
+									_react2.default.createElement(
+										'th',
+										{ className: 'tr' },
+										'Giá trị vay'
+									),
+									_react2.default.createElement(
+										'th',
+										{ className: 'tr' },
+										'Tổng nợ chưa trả'
+									),
+									_react2.default.createElement(
+										'th',
+										{ className: 'tr' },
+										'Nợ gốc'
+									),
+									_react2.default.createElement(
+										'th',
+										{ className: 'tr' },
+										'Lãi'
+									)
 								)
 							),
 							_react2.default.createElement(
-								'tr',
-								{ className: 'loanDetailTable-header2' },
-								_react2.default.createElement(
-									'th',
-									{ className: 'tl' },
-									'Phân loại'
-								),
-								_react2.default.createElement(
-									'th',
-									{ className: 'tl' },
-									'Ngày vay nợ'
-								),
-								_react2.default.createElement(
-									'th',
-									{ className: 'tl' },
-									'Ngày đến hạn'
-								),
-								_react2.default.createElement(
-									'th',
-									{ className: 'tr' },
-									'Giá trị vay'
-								),
-								_react2.default.createElement(
-									'th',
-									{ className: 'tr' },
-									'Nợ gốc'
-								),
-								_react2.default.createElement(
-									'th',
-									{ className: 'tr' },
-									'Lãi'
-								),
-								_react2.default.createElement(
-									'th',
-									{ className: 'tr' },
-									'Tổng nợ chưa trả'
-								)
+								'tbody',
+								null,
+								overdue,
+								due,
+								undue
 							)
-						),
-						_react2.default.createElement(
-							'tbody',
-							null,
-							overdue,
-							due,
-							undue
 						)
+					) : _react2.default.createElement(
+						'div',
+						null,
+						'Tài khoản không có nợ'
 					)
 				);
 			}
@@ -100740,7 +100789,7 @@
 	exports.default = LoanDetailComponent;
 
 /***/ },
-/* 464 */
+/* 463 */
 /*!*****************************************************!*\
   !*** ./app/components/loan.detail.row.component.js ***!
   \*****************************************************/
@@ -100758,7 +100807,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 416);
+	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 415);
 	
 	var _formatNumberWithCommas2 = _interopRequireDefault(_formatNumberWithCommas);
 	
@@ -100818,17 +100867,17 @@
 					_react2.default.createElement(
 						'td',
 						{ className: 'tr' },
+						_react2.default.createElement(_formatNumberWithCommas2.default, { value: this.props.loan.outstandingloan })
+					),
+					_react2.default.createElement(
+						'td',
+						{ className: 'tr' },
 						_react2.default.createElement(_formatNumberWithCommas2.default, { value: this.props.loan.debt })
 					),
 					_react2.default.createElement(
 						'td',
 						{ className: 'tr' },
 						_react2.default.createElement(_formatNumberWithCommas2.default, { value: this.props.loan.interest })
-					),
-					_react2.default.createElement(
-						'td',
-						{ className: 'tr' },
-						_react2.default.createElement(_formatNumberWithCommas2.default, { value: this.props.loan.outstandingloan })
 					)
 				);
 			}
@@ -100840,7 +100889,7 @@
 	exports.default = LoanDetailRow;
 
 /***/ },
-/* 465 */
+/* 464 */
 /*!*******************************************!*\
   !*** ./app/components/chart.component.js ***!
   \*******************************************/
@@ -100908,7 +100957,7 @@
 	exports.default = Chart;
 
 /***/ },
-/* 466 */
+/* 465 */
 /*!*************************************************!*\
   !*** ./app/components/marketwatch.component.js ***!
   \*************************************************/
@@ -101020,7 +101069,7 @@
 	exports.default = MarketWatchComponent;
 
 /***/ },
-/* 467 */
+/* 466 */
 /*!*****************************************!*\
   !*** ./app/components/spy.component.js ***!
   \*****************************************/
@@ -101038,31 +101087,31 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _spyAccounts = __webpack_require__(/*! ./spy.accounts.component */ 468);
+	var _spyAccounts = __webpack_require__(/*! ./spy.accounts.component */ 467);
 	
 	var _spyAccounts2 = _interopRequireDefault(_spyAccounts);
 	
-	var _spyShortPortfolio = __webpack_require__(/*! ./spy.short.portfolio.component */ 469);
+	var _spyShortPortfolio = __webpack_require__(/*! ./spy.short.portfolio.component */ 468);
 	
 	var _spyShortPortfolio2 = _interopRequireDefault(_spyShortPortfolio);
 	
-	var _spyStocks = __webpack_require__(/*! ./spy.stocks.component */ 470);
+	var _spyStocks = __webpack_require__(/*! ./spy.stocks.component */ 469);
 	
 	var _spyStocks2 = _interopRequireDefault(_spyStocks);
 	
-	var _spyOrders = __webpack_require__(/*! ./spy.orders.component */ 472);
+	var _spyOrders = __webpack_require__(/*! ./spy.orders.component */ 471);
 	
 	var _spyOrders2 = _interopRequireDefault(_spyOrders);
 	
-	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 416);
+	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 415);
 	
 	var _formatNumberWithCommas2 = _interopRequireDefault(_formatNumberWithCommas);
 	
-	var _slackHook = __webpack_require__(/*! ../slack/slack.hook.service */ 474);
+	var _slackHook = __webpack_require__(/*! ../slack/slack.hook.service */ 473);
 	
 	var _slackHook2 = _interopRequireDefault(_slackHook);
 	
-	var _spying = __webpack_require__(/*! ../libs/spying */ 477);
+	var _spying = __webpack_require__(/*! ../libs/spying */ 476);
 	
 	var Spying = _interopRequireWildcard(_spying);
 	
@@ -101390,7 +101439,7 @@
 	exports.default = Spy;
 
 /***/ },
-/* 468 */
+/* 467 */
 /*!**************************************************!*\
   !*** ./app/components/spy.accounts.component.js ***!
   \**************************************************/
@@ -101502,7 +101551,7 @@
 	exports.default = SpyAccounts;
 
 /***/ },
-/* 469 */
+/* 468 */
 /*!*********************************************************!*\
   !*** ./app/components/spy.short.portfolio.component.js ***!
   \*********************************************************/
@@ -101576,7 +101625,7 @@
 	exports.default = SpyShortPortfolio;
 
 /***/ },
-/* 470 */
+/* 469 */
 /*!************************************************!*\
   !*** ./app/components/spy.stocks.component.js ***!
   \************************************************/
@@ -101594,7 +101643,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _spyStock = __webpack_require__(/*! ./spy.stock.component */ 471);
+	var _spyStock = __webpack_require__(/*! ./spy.stock.component */ 470);
 	
 	var _spyStock2 = _interopRequireDefault(_spyStock);
 	
@@ -101696,7 +101745,7 @@
 	exports.default = SpyStocks;
 
 /***/ },
-/* 471 */
+/* 470 */
 /*!***********************************************!*\
   !*** ./app/components/spy.stock.component.js ***!
   \***********************************************/
@@ -101714,7 +101763,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 416);
+	var _formatNumberWithCommas = __webpack_require__(/*! ./builtin/format.number.with.commas.component */ 415);
 	
 	var _formatNumberWithCommas2 = _interopRequireDefault(_formatNumberWithCommas);
 	
@@ -101820,7 +101869,7 @@
 	exports.default = SpyStock;
 
 /***/ },
-/* 472 */
+/* 471 */
 /*!************************************************!*\
   !*** ./app/components/spy.orders.component.js ***!
   \************************************************/
@@ -101838,7 +101887,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _spyOrder = __webpack_require__(/*! ./spy.order.component */ 473);
+	var _spyOrder = __webpack_require__(/*! ./spy.order.component */ 472);
 	
 	var _spyOrder2 = _interopRequireDefault(_spyOrder);
 	
@@ -101931,7 +101980,7 @@
 	exports.default = SpyOrders;
 
 /***/ },
-/* 473 */
+/* 472 */
 /*!***********************************************!*\
   !*** ./app/components/spy.order.component.js ***!
   \***********************************************/
@@ -102104,7 +102153,7 @@
 	exports.default = SpyOrder;
 
 /***/ },
-/* 474 */
+/* 473 */
 /*!*****************************************!*\
   !*** ./app/slack/slack.hook.service.js ***!
   \*****************************************/
@@ -102126,7 +102175,7 @@
 	
 	var Config = _interopRequireWildcard(_config);
 	
-	var _slackHookAccounts = __webpack_require__(/*! ./slack.hook.accounts.service */ 475);
+	var _slackHookAccounts = __webpack_require__(/*! ./slack.hook.accounts.service */ 474);
 	
 	var _slackHookAccounts2 = _interopRequireDefault(_slackHookAccounts);
 	
@@ -102232,7 +102281,7 @@
 	}
 
 /***/ },
-/* 475 */
+/* 474 */
 /*!**************************************************!*\
   !*** ./app/slack/slack.hook.accounts.service.js ***!
   \**************************************************/
@@ -102246,7 +102295,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _slackHook = __webpack_require__(/*! ./slack.hook.accounts */ 476);
+	var _slackHook = __webpack_require__(/*! ./slack.hook.accounts */ 475);
 	
 	var Slack = _interopRequireWildcard(_slackHook);
 	
@@ -102272,7 +102321,7 @@
 	exports.default = SlackHookAccountService;
 
 /***/ },
-/* 476 */
+/* 475 */
 /*!******************************************!*\
   !*** ./app/slack/slack.hook.accounts.js ***!
   \******************************************/
@@ -102293,7 +102342,7 @@
 	};
 
 /***/ },
-/* 477 */
+/* 476 */
 /*!****************************!*\
   !*** ./app/libs/spying.js ***!
   \****************************/
@@ -104253,7 +104302,7 @@
 	}];
 
 /***/ },
-/* 478 */
+/* 477 */
 /*!*********************************************!*\
   !*** ./app/validator/strategy.validator.js ***!
   \*********************************************/
@@ -104341,7 +104390,7 @@
 	exports.default = StrategyValidator;
 
 /***/ },
-/* 479 */
+/* 478 */
 /*!***********************************************!*\
   !*** ./app/validator/placeorder.validator.js ***!
   \***********************************************/
@@ -104426,7 +104475,7 @@
 	exports.default = PlaceOrderValidator;
 
 /***/ },
-/* 480 */
+/* 479 */
 /*!*************************************!*\
   !*** ./app/module/noti.consumer.js ***!
   \*************************************/
@@ -104440,7 +104489,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _notiConnector = __webpack_require__(/*! ./noti.connector.module */ 481);
+	var _notiConnector = __webpack_require__(/*! ./noti.connector.module */ 480);
 	
 	var _notiConnector2 = _interopRequireDefault(_notiConnector);
 	
@@ -104515,7 +104564,7 @@
 	exports.default = NotiConsumer;
 
 /***/ },
-/* 481 */
+/* 480 */
 /*!*********************************************!*\
   !*** ./app/module/noti.connector.module.js ***!
   \*********************************************/
@@ -104533,11 +104582,11 @@
 	
 	var _sockjs2 = _interopRequireDefault(_sockjs);
 	
-	var _stomp = __webpack_require__(/*! ../libs/stomp */ 482);
+	var _stomp = __webpack_require__(/*! ../libs/stomp */ 481);
 	
 	var _stomp2 = _interopRequireDefault(_stomp);
 	
-	var _notiConverter = __webpack_require__(/*! ./noti.converter.module */ 483);
+	var _notiConverter = __webpack_require__(/*! ./noti.converter.module */ 482);
 	
 	var _notiConverter2 = _interopRequireDefault(_notiConverter);
 	
@@ -104619,7 +104668,7 @@
 	exports.default = NotiConnector;
 
 /***/ },
-/* 482 */
+/* 481 */
 /*!***************************!*\
   !*** ./app/libs/stomp.js ***!
   \***************************/
@@ -105106,7 +105155,7 @@
 	}).call(undefined);
 
 /***/ },
-/* 483 */
+/* 482 */
 /*!*********************************************!*\
   !*** ./app/module/noti.converter.module.js ***!
   \*********************************************/
@@ -105181,7 +105230,7 @@
 	exports.default = NotiConverter;
 
 /***/ },
-/* 484 */
+/* 483 */
 /*!*********************************************!*\
   !*** ./app/service/notification.service.js ***!
   \*********************************************/
@@ -105207,7 +105256,7 @@
 	
 	var _axios2 = _interopRequireDefault(_axios);
 	
-	var _jsonp = __webpack_require__(/*! jsonp */ 485);
+	var _jsonp = __webpack_require__(/*! jsonp */ 484);
 	
 	var _jsonp2 = _interopRequireDefault(_jsonp);
 	
@@ -105250,7 +105299,7 @@
 	exports.default = NotificationService;
 
 /***/ },
-/* 485 */
+/* 484 */
 /*!**************************!*\
   !*** ./~/jsonp/index.js ***!
   \**************************/
@@ -105260,7 +105309,7 @@
 	 * Module dependencies
 	 */
 	
-	var debug = __webpack_require__(/*! debug */ 486)('jsonp');
+	var debug = __webpack_require__(/*! debug */ 485)('jsonp');
 	
 	/**
 	 * Module exports.
@@ -105356,7 +105405,7 @@
 
 
 /***/ },
-/* 486 */
+/* 485 */
 /*!************************************!*\
   !*** ./~/jsonp/~/debug/browser.js ***!
   \************************************/
@@ -105369,7 +105418,7 @@
 	 * Expose `debug()` as the module.
 	 */
 	
-	exports = module.exports = __webpack_require__(/*! ./debug */ 487);
+	exports = module.exports = __webpack_require__(/*! ./debug */ 486);
 	exports.log = log;
 	exports.formatArgs = formatArgs;
 	exports.save = save;
@@ -105540,7 +105589,7 @@
 
 
 /***/ },
-/* 487 */
+/* 486 */
 /*!**********************************!*\
   !*** ./~/jsonp/~/debug/debug.js ***!
   \**********************************/
@@ -105559,7 +105608,7 @@
 	exports.disable = disable;
 	exports.enable = enable;
 	exports.enabled = enabled;
-	exports.humanize = __webpack_require__(/*! ms */ 488);
+	exports.humanize = __webpack_require__(/*! ms */ 487);
 	
 	/**
 	 * The currently active debug mode names, and names to skip.
@@ -105746,7 +105795,7 @@
 
 
 /***/ },
-/* 488 */
+/* 487 */
 /*!*******************************!*\
   !*** ./~/jsonp/~/ms/index.js ***!
   \*******************************/
@@ -105878,7 +105927,7 @@
 
 
 /***/ },
-/* 489 */
+/* 488 */
 /*!*******************************!*\
   !*** ./public/css/global.css ***!
   \*******************************/
@@ -105887,10 +105936,10 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../../~/css-loader!./../../~/sass-loader!./global.css */ 490);
+	var content = __webpack_require__(/*! !./../../~/css-loader!./../../~/sass-loader!./global.css */ 489);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 493)(content, {});
+	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 492)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -105907,24 +105956,24 @@
 	}
 
 /***/ },
-/* 490 */
+/* 489 */
 /*!**************************************************************!*\
   !*** ./~/css-loader!./~/sass-loader!./public/css/global.css ***!
   \**************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 491)();
+	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 490)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, "/* Box sizing resets*/\n*, *:before, *:after {\n  box-sizing: border-box; }\n\n/* Body resets and fancy font*/\nbody {\n  background-color: #303030;\n  color: #AAA;\n  margin: 0;\n  font-family: Helvetica;\n  font-size: 13px; }\n\n.beautiful-background {\n  background-image: url(\"https://www.vndirect.com.vn/wp-content/themes/vnd/images/login-bg.jpg\"); }\n\na {\n  color: #aadf55;\n  text-decoration: none; }\n\na:hover {\n  color: #94d629;\n  text-decoration: underline; }\n\ninput[type=number]::-webkit-inner-spin-button,\ninput[type=number]::-webkit-outer-spin-button {\n  -webkit-appearance: none;\n  margin: 0; }\n\ntable {\n  display: table;\n  width: 100%;\n  border-collapse: collapse;\n  overflow: hidden; }\n\n.striped tbody tr:nth-child(odd) {\n  background-color: #181818; }\n\ntbody tr:nth-child(odd) .matchField {\n  background-color: #222; }\n\n.hidden {\n  display: none; }\n\n.toggle-select-box {\n  padding: 7px 15px;\n  margin-top: 7px;\n  background-color: #464646;\n  border-radius: 3px;\n  color: #fafafa;\n  border: 1px solid transparent;\n  outline: none; }\n\n.toggle-select-box:hover {\n  background-color: #5A5A5A;\n  cursor: pointer; }\n\n.matchField {\n  background-color: #3a3a3a; }\n\n.striped tbody tr:nth-child(odd):hover {\n  background-color: #222; }\n\n.striped tbody tr:nth-child(even):hover {\n  background-color: #3a3a3a; }\n\n/* The CSS */\nselect {\n  padding: 3px;\n  margin: 0;\n  -webkit-border-radius: 4px;\n  -moz-border-radius: 4px;\n  border-radius: 4px;\n  -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;\n  -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;\n  box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;\n  background: #f8f8f8;\n  color: #888;\n  border: none;\n  outline: none;\n  display: inline-block;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  cursor: pointer; }\n\n/* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */\n@media screen and (-webkit-min-device-pixel-ratio: 0) {\n  select {\n    padding-right: 18px; } }\n\n/*label {position:relative}\nlabel:after {\n    content:'<>';\n    font:11px \"Consolas\", monospace;\n    color:#aaa;\n    -webkit-transform:rotate(90deg);\n    -moz-transform:rotate(90deg);\n    -ms-transform:rotate(90deg);\n    transform:rotate(90deg);\n    right:8px; top:2px;\n    padding:0 0 2px;\n    border-bottom:1px solid #ddd;\n    position:absolute;\n    pointer-events:none;\n}\nlabel:before {\n    content:'';\n    right:6px; top:0px;\n    width:20px; height:20px;\n    background:#f8f8f8;\n    position:absolute;\n    pointer-events:none;\n    display:block;\n}*/\n.input {\n  border: 1px solid #ededed;\n  padding: 8px 10px; }\n\n.button {\n  padding: 8px 10px;\n  background-color: #404040;\n  border: 1px solid #404040;\n  color: #fff;\n  cursor: pointer; }\n\n.right {\n  float: right; }\n\n.left {\n  float: left; }\n\n.green {\n  color: green; }\n\n.red {\n  color: red; }\n\n.dialogErrorMessage {\n  color: red; }\n\n.tl {\n  text-align: left !important; }\n\n.tr {\n  text-align: right !important; }\n\n.tc {\n  text-align: center !important; }\n\n.up {\n  color: #1FFF00; }\n\n.down {\n  color: #FF0000; }\n\n.nochange {\n  color: #F4C300; }\n\n.ceil {\n  color: #F300FF; }\n\n.floor {\n  color: deepskyblue; }\n\n.clear {\n  clear: both; }\n\n.outlinenone {\n  outline: none; }\n\n.emptyColumn {\n  display: none; }\n\n.section1 {\n  position: relative;\n  width: 100%;\n  padding-bottom: 10px;\n  /*overflow: auto;*/ }\n\n.section2 {\n  padding: 0px 20px 20px;\n  width: 100%;\n  overflow: auto; }\n\n.main {\n  width: 100%;\n  padding-bottom: 50px; }\n\n.leftContent {\n  margin: auto 2% 100px 0;\n  width: 69%;\n  float: left; }\n\n.rightContent {\n  width: 26%;\n  float: left;\n  margin-left: 0%;\n  margin-bottom: 100px; }\n\n.nav {\n  padding-top: 3px;\n  float: left; }\n\n.nav a {\n  padding: 6px;\n  border-radius: 26px;\n  color: #fff;\n  background-color: #5A5A5A;\n  margin-right: 30px; }\n\n.nav a:hover {\n  background-color: #6E6E6E; }\n\n.nav i {\n  font-size: 14px; }\n\n.nav .active, .nav .active:hover {\n  background-color: #F47023; }\n\n.login-wrapper {\n  margin: 40px auto; }\n\n.login-wrapper .logo {\n  background-image: url(\"https://www.vndirect.com.vn/wp-content/themes/vnd/images/logo-white.png\");\n  text-align: center;\n  margin: auto;\n  width: 238px;\n  height: 65px; }\n\n.login-error {\n  color: #f39200;\n  margin: auto; }\n\n.login {\n  width: 350px;\n  margin: 10px auto;\n  text-align: center;\n  border: 1px solid #5a5a5a;\n  padding: 30px 0;\n  border-radius: 3px;\n  background: #696969;\n  color: #fafafa; }\n\n.login .title {\n  padding-bottom: 10px;\n  font-size: 18px;\n  color: #ededed;\n  font-weight: bold; }\n\n.login .input {\n  outline: none;\n  padding: 14px 5px 10px 50px;\n  width: 100%;\n  font-size: 14px;\n  background: #696969;\n  border-left: none;\n  border-right: none;\n  border-top: none;\n  border-color: #cccccc;\n  color: #fff; }\n\n.login .loginBtn {\n  padding: 10px;\n  background-color: #44C8BA;\n  color: #fff;\n  width: 60%;\n  margin-top: 20px;\n  border: none;\n  border-radius: 3px;\n  font-size: 15px;\n  cursor: pointer; }\n\n.login .loginBtn:hover {\n  background-color: #61d1c6; }\n\n.login .loginBtn:focus {\n  outline: none; }\n\n.login .username, .login .password {\n  position: relative;\n  width: 80%;\n  margin: 15px auto; }\n\n.login .username i, .login .password i {\n  position: absolute;\n  left: 10px;\n  top: 14px;\n  font-size: 18px; }\n\n.button:hover {\n  background-color: #595959;\n  border: 1px solid #595959; }\n\n.error {\n  width: 50%;\n  margin: auto;\n  color: red;\n  clear: both; }\n\n.profile {\n  height: 38px;\n  background-color: #464646;\n  width: 100%;\n  padding: 10px 5px 10px 10px; }\n\n.one-edge-shadow {\n  box-shadow: 0 4px 8px -6px black; }\n\n.inside-shadow {\n  box-shadow: inset 0 0 10px #000000; }\n\n.firstlogin {\n  width: 100%;\n  padding: 10px 50px;\n  clear: both; }\n\n.secondFa {\n  width: 100%;\n  padding: 0px 50px 20px;\n  clear: both; }\n\n.section4 {\n  width: 100%;\n  padding: 20px 20px 20px 0;\n  overflow: auto; }\n\n.section5 {\n  width: 100%;\n  padding-bottom: 30px; }\n\n.marketwatch {\n  width: 40%;\n  float: right;\n  margin-left: 20px;\n  padding: 15px;\n  border-radius: 5px;\n  border: 1px solid #5a5a5a;\n  margin-top: 20px; }\n\n.marketwatch .header {\n  width: 100%;\n  border-bottom: 1px solid #5a5a5a;\n  padding: 5px 0 10px;\n  margin-bottom: 10px;\n  height: 40px; }\n\n.marketwatch .title {\n  float: left;\n  text-transform: uppercase; }\n\n.marketwatch .menu {\n  float: right;\n  margin: 0;\n  padding: 0; }\n\n.marketwatch .menu li {\n  display: inline;\n  margin-left: 10px;\n  font-size: 18px;\n  cursor: pointer;\n  border: 1px solid #5a5a5a;\n  padding: 2px 10px;\n  border-radius: 5px;\n  background-color: #5a5a5a;\n  color: #fff; }\n\n.marketwatch .menu li:hover {\n  color: #f47023; }\n\n.marketwatch .menu .active {\n  background-color: #f47023;\n  color: #fff;\n  border-color: #f47023; }\n\n.marketwatch .menu .active:hover {\n  color: #fff; }\n\n.strategies {\n  width: 58%;\n  float: left; }\n\n.strategies td {\n  padding: 10px; }\n\n.strategies th {\n  text-align: left;\n  padding: 10px;\n  /*font-weight: normal;*/\n  border-bottom: 1px solid darkolivegreen;\n  /*color: #fafafa;*/ }\n\n.strategies .sortable:hover {\n  cursor: url(" + __webpack_require__(/*! ../img/arrow-updown.gif */ 492) + "), auto;\n  background-color: #333333; }\n\n.strategies .remove, .strategies .edit, .strategies .copy {\n  font-size: 18px;\n  cursor: pointer;\n  color: #a6a6a6; }\n\n.strategies .remove:hover {\n  color: red; }\n\n.strategies .edit:hover, .strategies .copy:hover {\n  color: #aadf55; }\n\n.strategies .lastColumn {\n  padding-right: 0; }\n\n.strategies .new-strategy {\n  margin: 20px 0 0 10px; }\n\n.strategies-loading {\n  font-size: 20px !important; }\n\n.new-strategy-dialog input {\n  outline: none;\n  border-radius: 3px; }\n\n.new-strategy-dialog input:focus {\n  border: 1px solid #aadf55; }\n\n.editing-strategy {\n  margin-top: 20px; }\n\n.editing-strategy td {\n  padding: 5px; }\n\n.new-strategy .strategy-name {\n  color: green; }\n\n.strategy-name-action {\n  width: 170px;\n  line-height: 18px; }\n\n.strategy-active .active-icon {\n  font-size: 20px; }\n\n.strategy-deactive .deactive-icon {\n  font-size: 20px;\n  color: red; }\n\n.strategy-active .NS, .strategy-active .NB, .strategy-deactive .NS, .strategy-deactive .NB {\n  font-size: 14px;\n  color: #fff;\n  border-radius: 3px;\n  padding: 1px 5px; }\n\n.strategy-active .NS, .strategy-deactive .NS {\n  background-color: #D10000;\n  border: 1px solid #D10000; }\n\n.strategy-active .NB, .strategy-deactive .NB {\n  background-color: #2CA800;\n  border: 1px solid #2CA800; }\n\n.strategy-active .NB:hover, .strategy-deactive .NB:hover {\n  background-color: green;\n  border: 1px solid green;\n  cursor: pointer; }\n\n.strategy-active .NS:hover, .strategy-deactive .NS:hover {\n  background-color: #ff6666;\n  border: 1px solid #ff6666;\n  cursor: pointer; }\n\n.strategy-done .done-icon {\n  color: green;\n  font-size: 20px; }\n\n.strategy-done .strategy-name {\n  text-decoration: line-through; }\n\n.strategy-active .active-icon {\n  color: #f39200; }\n\n.strategy-active .strategy-name {\n  /*color: #9F5069;*/ }\n\n.strategy-deactive {\n  /*color: #696969;*/ }\n\n.strategy-contract {\n  color: #b3b3b3; }\n\n.strategy-status {\n  text-align: center; }\n\n.remove-strategy-dialog {\n  line-height: 30px; }\n\n.orderbook-wrapper {\n  width: 41%;\n  float: right;\n  margin-left: 20px;\n  overflow: auto;\n  padding: 15px;\n  border-radius: 5px;\n  border: 1px solid #5a5a5a;\n  margin-top: 20px;\n  font-size: 12px; }\n\n.orderbook {\n  width: 100%; }\n\n.orderbook td {\n  padding: 10px; }\n\n.orderbook .good {\n  color: #00b300; }\n\n.orderbook .bad {\n  color: red; }\n\n.quickpp td {\n  padding: 7px 0px; }\n\n.orderbook th, .quickpp th, .portfolio th {\n  padding: 10px;\n  border-bottom: 1px solid darkolivegreen; }\n\n.orderbook .header, .portfolio .header {\n  padding: 3px 10px 13px;\n  position: relative;\n  text-transform: uppercase; }\n\n.portfolio:hover .refresh, .portfolio:hover .addPortfolioStockToBoardBtn, .orderbook:hover .refresh {\n  display: block !important; }\n\n.orderbook .header .refresh, .portfolio .header .refresh, .portfolio .header .addPortfolioStockToBoardBtn {\n  float: right;\n  padding: 7px 15px;\n  background-color: #464646;\n  border-radius: 3px;\n  color: #fafafa;\n  border: 1px solid transparent;\n  outline: none;\n  display: none;\n  position: absolute;\n  right: 0;\n  top: 0; }\n\n.portfolio .header .addPortfolioStockToBoardBtn {\n  right: 85px; }\n\n.orderbook .header .refresh:hover, .portfolio .header .refresh:hover,\n.portfolio .header .addPortfolioStockToBoardBtn:hover {\n  background-color: #5A5A5A;\n  cursor: pointer; }\n\n.portfolio .header .text, .orderbook .header .text {\n  display: inline-flex;\n  padding-top: 3px; }\n\n.orderbook-table {\n  margin-top: 5px; }\n\n.orderbook-table .NS {\n  color: red; }\n\n.orderbook-table .NB {\n  color: #00b300; }\n\n.orderbook-table .Cancelled {\n  text-decoration: line-through;\n  color: #696969; }\n\n.orderbook-table .Cancelled .NS, .orderbook-table .Cancelled .NB {\n  color: #696969; }\n\n.orderbook-table tr:hover {\n  cursor: pointer; }\n\n.orderbook-row-detail-dialog {\n  padding: 20px; }\n\n.orderbook-row-detail-dialog tbody tr:nth-child(odd) {\n  background-color: #ededed; }\n\n.orderbook-row-detail-dialog .title {\n  color: #696969;\n  border-right: 1px solid #dedede; }\n\n.orderbook-row-detail-dialog .originOrder {\n  font-weight: bold;\n  padding: 0 20px 7px;\n  color: green;\n  font-size: 17px; }\n\n.orderbook-row-detail-dialog .good {\n  color: green; }\n\n.orderbook-row-detail-dialog .bad {\n  color: red; }\n\n.orderbook-row-detail-dialog .replace {\n  background-color: #2eb000; }\n\n.orderbook-row-detail-dialog .cancel {\n  background-color: #de0000; }\n\n.orderbook-row-detail-dialog .replace:hover {\n  background-color: #1b6600;\n  cursor: pointer; }\n\n.orderbook-row-detail-dialog .cancel:hover {\n  background-color: #990000;\n  cursor: pointer; }\n\n.orderbook-row-detail-dialog button {\n  border: 1px solid transparent;\n  border-radius: 3px;\n  color: #fff;\n  padding: 8px; }\n\n.orderbook-row-detail-dialog table td {\n  padding: 10px 20px; }\n\n.portfolio-wrapper {\n  float: left;\n  width: 57%;\n  overflow: auto;\n  margin-top: 20px;\n  padding: 15px;\n  border-radius: 5px;\n  border: 1px solid #5A5A5A;\n  font-size: 12px; }\n\n.portfolio {\n  width: 100%; }\n\n.portfolio td {\n  padding: 10px; }\n\n.portfolio-table {\n  margin-top: 5px;\n  font-size: 12px; }\n\n.portfolio-table tfoot {\n  font-size: 13px;\n  font-weight: bold; }\n\n.portfolio-table .symbol {\n  cursor: pointer; }\n\n.portfolio-table .sortable:hover {\n  cursor: url(" + __webpack_require__(/*! ../img/arrow-updown.gif */ 492) + "), auto; }\n\n.quickpp {\n  width: 100%; }\n\n.quickpp table {\n  margin-left: 13px; }\n\n.quickpp .hint {\n  font-size: 12px;\n  margin-left: 10px; }\n\n.quickpp .hint i {\n  line-height: 20px; }\n\n.quickpp .account-active {\n  color: #f39200; }\n\n.miniboard-loading-wrp {\n  margin: auto;\n  width: 180px;\n  padding-bottom: 8px;\n  color: #F39200; }\n\n.miniboard-loading-title {\n  padding-top: 7px; }\n\n.miniboard-loading-wrp i {\n  font-size: 30px;\n  float: left; }\n\n.miniboard {\n  margin-bottom: 20px;\n  font-size: 12px; }\n\n.miniboard thead {\n  border-bottom: 1px solid darkolivegreen; }\n\n.miniboard .matchFieldTitle {\n  color: #f39200; }\n\n.miniboard th, .miniboard td {\n  padding: 7px 2px 7px 3px;\n  text-align: right; }\n\n.miniboard td {\n  border: 1px solid #343434; }\n\n.miniboard tbody > tr {\n  border-bottom: 1px solid transparent; }\n\n.miniboard .percentVolume {\n  width: 72px; }\n\n.miniboard th:hover {\n  background-color: #333333;\n  cursor: url(" + __webpack_require__(/*! ../img/arrow-updown.gif */ 492) + "), auto; }\n\n.miniboard .sym {\n  text-align: left;\n  width: 56px;\n  cursor: pointer; }\n\n.miniboard .sym i {\n  display: none;\n  cursor: pointer;\n  color: red;\n  margin-right: 8px; }\n\n.miniboard .sym:hover i {\n  display: inline-block; }\n\n.miniboard .sym i:hover {\n  color: #ff4d4d; }\n\n.miniboard .quantity {\n  min-width: 50px; }\n\n.miniboard .addCodeField input {\n  padding: 7px 8px 5px 27px;\n  width: 150px;\n  border: 1px solid #5A5A5A;\n  border-radius: 26px;\n  outline: none;\n  background-color: #303030;\n  margin: 10px 0 0 6px; }\n\n.miniboard .addCodeField input:focus {\n  /*border-color: #aadf55;*/\n  background-color: #5A5A5A;\n  text-transform: uppercase;\n  color: #fff; }\n\n.miniboard .addCodeField > div > div {\n  padding: 0 !important; }\n\n.miniboard .addCodeField {\n  float: left;\n  position: relative; }\n\n.miniboard .addCodeField .search-icon {\n  position: absolute;\n  left: 14px;\n  top: 16px;\n  font-size: 15px; }\n\n.stockdetailModal-table-wrp {\n  height: 400px;\n  overflow-y: scroll;\n  padding-right: 20px; }\n\n.stockdetailModal-table th, .stockdetailModal-table td {\n  padding: 6px; }\n\n.stockdetailModal .up {\n  color: green; }\n\n.stockdetailModal .down {\n  color: red; }\n\n.stockdetailModal .nochange {\n  color: #f39200; }\n\n.stockdetailModal .view-chart-btn {\n  margin-left: 10px;\n  color: #f39200;\n  font-size: 15px; }\n\n.stockdetailModal .view-chart-btn:hover {\n  cursor: pointer;\n  color: #cc7a00; }\n\n.chartView {\n  min-height: 750px;\n  padding: 0 20px;\n  margin-top: 3px; }\n\n.board-config {\n  padding-bottom: 10px;\n  height: 47px; }\n\n.board-config .toggle-board-column {\n  float: left;\n  margin-left: 200px; }\n\n.board-config .refreshBoardBtn {\n  font-size: 13px;\n  margin: 10px 10px 0 15px;\n  cursor: pointer; }\n\n.board-config .showHighLowPriceBtn,\n.board-config .showMarketInfoBoardBtn,\n.board-config .showVolumePercentBtn,\n.board-config .showChangePricePercentBtn,\n.board-config .showCeilFloorBtn,\n.board-config .showSecondBtn,\n.board-config .showThirdBtn {\n  font-size: 20px;\n  margin: 10px 10px 0 15px;\n  cursor: pointer; }\n\n.board-config .showVolumePercentBtn,\n.board-config .showChangePricePercentBtn,\n.board-config .showSecondBtn,\n.board-config .showThirdBtn,\n.board-config .showCeilFloorBtn {\n  font-size: 16px;\n  margin-top: 14px; }\n\n.board-config .showHighLowPriceBtn-active,\n.board-config .showMarketInfoBoardBtn-active,\n.board-config .showVolumePercentBtn-active,\n.board-config .showChangePricePercentBtn-active,\n.board-config .showCeilFloorBtn-active,\n.board-config .showSecondBtn-active,\n.board-config .showThirdBtn-active {\n  color: #f39200; }\n\n.board-config .showHighLowPriceBtn:hover,\n.board-config .showMarketInfoBoardBtn:hover,\n.board-config .refreshBoardBtn:hover,\n.board-config .showVolumePercentBtn:hover,\n.board-config .showChangePricePercentBtn:hover,\n.board-config .showCeilFloorBtn:hover,\n.board-config .showSecondBtn:hover,\n.board-config .showThirdBtn:hover {\n  color: #ffad33; }\n\n.board-config .toggle-place-order {\n  float: right;\n  margin-right: 5px; }\n\n.board-config .toggle-place-order .toggle-place-order-btn {\n  width: 100px; }\n\n.board-config .toggle-place-order .toggle-select-account-btn {\n  width: 160px;\n  cursor: default; }\n\n.board-config .toggle-place-order .toggle-select-account-btn .select-icon {\n  cursor: pointer;\n  font-size: 14px;\n  float: right; }\n\n.board-config .toggle-place-order .toggle-select-account-btn .view-icon {\n  cursor: pointer;\n  font-size: 14px; }\n\n.board-config .toggle-place-order .toggle-select-account-btn .select-icon:hover,\n.board-config .toggle-place-order .toggle-select-account-btn .view-icon:hover {\n  color: #f47023; }\n\n.board-config .toggle-place-order button {\n  margin-left: 20px; }\n\n.board-config .toggle-place-order .active {\n  color: #F47023; }\n\n.priceServiceStatus {\n  float: left;\n  margin-left: 10px;\n  font-size: 11px;\n  cursor: pointer; }\n\n.priceServiceStatus i {\n  font-size: 14px; }\n\n.priceServiceStatus-active {\n  color: #1FFF00; }\n\n.priceServiceStatus-pause {\n  color: #f39200; }\n\n.miniboard-place-order-true {\n  min-height: 350px; }\n\n#miniboard-table {\n  font-size: 11px; }\n\n.miniboard-table-place-order-true {\n  width: 74%;\n  margin-top: 3px; }\n\n.miniboard-table-place-order-false {\n  margin-top: 3px; }\n\n.board-marketinfo-place-order-true {\n  width: 74%; }\n\n.miniboard .buynow, .miniboard .sellnow {\n  padding: 3px 7px;\n  color: #fff;\n  cursor: pointer;\n  border-radius: 3px;\n  font-size: 12px; }\n\n.miniboard .sellnow {\n  background-color: #D10000; }\n\n.miniboard .buynow {\n  background-color: #2CA800; }\n\n.miniboard .sellnow:hover {\n  background-color: #ff6666; }\n\n.miniboard .buynow:hover {\n  background-color: green; }\n\n.miniboard .nextLastColumn {\n  border-right: none; }\n\n.miniboard .lastColumn {\n  padding-right: 0;\n  padding-left: 0;\n  border-bottom: none;\n  border-right: none;\n  border-left: none; }\n\n.miniboard .clickable {\n  cursor: pointer; }\n\n.board-marketinfo {\n  margin: 0 auto;\n  padding-right: 40px;\n  padding-top: 15px; }\n\n.board-marketinfo-market {\n  width: 30%;\n  height: 170px !important;\n  overflow: hidden; }\n\n.placeorder-wrapper {\n  width: 23%;\n  position: absolute;\n  top: 50px;\n  right: 5px; }\n\n.placeorder {\n  width: 100%; }\n\n.placeorder .type-switch {\n  padding: 10px 0;\n  text-align: center; }\n\n.placeorder .NB {\n  background: #CEEDB5;\n  margin-bottom: 20px;\n  border: 1px solid transparent;\n  border-radius: 3px;\n  padding-bottom: 20px;\n  overflow: auto; }\n\n.placeorder .NS {\n  background: #FFCCCC;\n  margin-bottom: 20px;\n  border: 1px solid transparent;\n  border-radius: 3px;\n  padding-bottom: 20px;\n  overflow: auto; }\n\n.placeorder .NB .placeorder-body {\n  background: #B4E48E; }\n\n.placeorder-body .symbol {\n  text-transform: uppercase;\n  float: left;\n  width: 38%; }\n\n.placeorder-body .quantity {\n  width: 100%; }\n\n.placeorder-body .price {\n  width: 52%; }\n\n.placeorder-body .orderType {\n  padding: 8px;\n  width: 38%; }\n\n.placeorder-body .quantityWrp {\n  position: relative;\n  width: 52%;\n  margin-left: 10%;\n  float: left; }\n\n.placeorder-body .maxSellQtty {\n  position: absolute;\n  top: 7px;\n  right: 2px; }\n\n.placeorder .NS .placeorder-body {\n  background: #FFB1B1; }\n\n.placeorder .placeorder-body {\n  padding: 20px; }\n\n.placeorder input {\n  padding: 7px;\n  border: 1px solid transparent;\n  border-radius: 5px; }\n\n.placeorder input:focus {\n  outline: none; }\n\n.placeorder .NB input, .placeorder .NB .orderType {\n  background: #F0F9E8; }\n\n.placeorder .NB input:focus, .placeorder .NB .orderType:focus,\n.placeorder .NS input:focus, .placeorder .NS .orderType:focus {\n  background: #FFF; }\n\n.placeorder .NS input, .placeorder .NS .orderType {\n  background: #FFEFEF; }\n\n.placeorder .type-switch a {\n  font-size: 14px;\n  text-decoration: none;\n  color: #333;\n  margin: 0 10px; }\n\n.placeorder .price {\n  margin-left: 10%; }\n\n.placeorder .row {\n  margin-bottom: 15px;\n  overflow: auto; }\n\n.placeorder .placeorder-bottom {\n  padding: 10px;\n  color: #696969;\n  width: 100%; }\n\n.order-placeorder-info {\n  color: #4d4d4d; }\n\n.order-placeorder-info div {\n  padding-bottom: 15px; }\n\n.placeorder-bottom .order-total {\n  text-align: center;\n  margin-top: 10px; }\n\n.placeorder .placeorder-submit {\n  padding: 10px 0;\n  text-align: center;\n  margin-top: 20px; }\n\n.placeorder .placeorder-submit a {\n  padding: 8px 20px;\n  color: #fff;\n  border: 1px solid transparent;\n  border-radius: 3px;\n  text-decoration: none;\n  margin: 0 10px; }\n\n.placeorder .placeorder-submit .NB {\n  background-color: #2CA800; }\n\n.placeorder .placeorder-submit .NB:hover {\n  background: green; }\n\n.placeorder .placeorder-submit .NS {\n  background-color: #D10000; }\n\n.placeorder .placeorder-submit .NS:hover {\n  background-color: #ff6666; }\n\n.placeorder .placeorder-submit .cancel {\n  background-color: #848484; }\n\n.placeorder .placeorder-submit .cancel:hover {\n  background-color: #696969; }\n\n.placeorder-errmsg {\n  padding: 10px 2px 5px;\n  color: red; }\n\n.placeorder-okmsg {\n  padding: 10px 0 5px;\n  color: green; }\n\n.guide {\n  padding: 0 20px; }\n\n.hotkeyGuide {\n  /*width: 50%;*/ }\n\n.hotkeyGuide th, .hotkeyGuide td {\n  text-align: left;\n  padding: 5px 10px; }\n\n.spy {\n  /*display: inline-block;*/\n  width: 100%; }\n\n.spy .spySelectingAccounts {\n  padding: 6px; }\n\n.spy .spySelectingAccounts .prevNextIcon {\n  font-size: 20px; }\n\n.spy .spySelectingAccounts .prevNextIcon:hover {\n  cursor: pointer;\n  color: yellow; }\n\n.spy .spyAccounts {\n  padding: 8px;\n  width: 70%;\n  margin: 0 10px 0px; }\n\n.spy .spyVipAccounts {\n  color: yellow;\n  background-color: cadetblue; }\n\n.spy {\n  padding-bottom: 50px;\n  overflow: auto; }\n\n.spy-left {\n  width: 17%;\n  float: left; }\n\n.spy-right {\n  width: 50%;\n  float: left; }\n\n.spy-stocks {\n  width: 31%;\n  float: right;\n  margin-right: 5px;\n  font-size: 12px; }\n\n.spy-orders-table th {\n  text-align: left; }\n\n.spy-orders-table th, .spy-orders-table td {\n  padding: 10px 6px; }\n\n.spy-orders-table .notiCurrentDay {\n  color: indianred; }\n\n.spy-orders-table .notiCurrentDay i {\n  font-size: 15px; }\n\n.spy-orders-table .notiCurrentDay .buy {\n  color: green; }\n\n.spy-orders-table .notiCurrentDay .sell {\n  color: blueviolet; }\n\n.spy-orders-table .notiCurrentDay .spy-order-symbol {\n  color: orange; }\n\n.spy-orders-table .spy-order-action {\n  cursor: pointer; }\n\n.spy-orders-table .ordersTime {\n  font-size: 12px;\n  width: 120px; }\n\n.spy-orders-table .ordersAccount {\n  font-size: 12px; }\n\n.spy .ci {\n  padding: 0 6px;\n  border: 1px solid #3a3a3a;\n  border-radius: 3px;\n  background-color: #3a3a3a;\n  width: 90%;\n  margin-left: 6px;\n  margin-bottom: 20px; }\n\n.spy .ci table td {\n  padding: 10px; }\n\n.spy-stocks-table th, .spy-stocks-table td {\n  padding: 10px 6px; }\n\n.spy-stocks-table .mark {\n  color: lightgreen; }\n\n.spy-stocks-table i {\n  margin: 0 3px; }\n\n.spy-stocks-table i:hover {\n  color: #f39200;\n  cursor: pointer; }\n\n.notiHistoryMoreBtn {\n  float: right;\n  font-size: 16px !important;\n  color: #fff;\n  margin-top: 20px; }\n\n.notiHistoryMoreBtn:hover {\n  cursor: pointer;\n  color: #f39200; }\n\n.spyShortStocks {\n  padding: 14px 10px;\n  border: 1px solid #3a3a3a;\n  background-color: #3a3a3a;\n  margin-bottom: 10px;\n  border-radius: 3px;\n  overflow: auto; }\n\n.spyShortStocks .symbol {\n  margin: 0 10px;\n  float: left;\n  line-height: 27px; }\n\n.spyShortStocks .caring {\n  color: yellow; }\n\n.loan .loanAccountsWrapper {\n  border-bottom: 1px solid #5a5a5a;\n  overflow: auto; }\n\n.loan .loanAccountsWrapper button {\n  padding: 7px 15px;\n  background-color: #5a5a5a;\n  color: #fafafa;\n  border: 1px solid transparent;\n  outline: none;\n  float: right; }\n\n.loan .loanAccountsWrapper button:hover {\n  cursor: pointer;\n  background-color: #787878; }\n\n.loan .loanAccountsWrapper button .active {\n  color: #f47023; }\n\n.loan .loanOverviewWrapper .account-select-box {\n  background-color: #5A5A5A;\n  right: 10px;\n  top: 41px; }\n\n.loanOverviewTable td {\n  padding: 12px 6px; }\n\n.loanOverviewTable td:first-child {\n  border-right: 1px solid #5a5a5a; }\n\n.loanOverviewTable tr:last-child {\n  border-bottom: 1px solid #5a5a5a; }\n\n.loanOverviewTable-symbol {\n  width: 35px; }\n\n.loanOverviewTable-symbol i {\n  color: orange; }\n\n.loanDetailWrapper .striped tbody tr:nth-child(odd) {\n  background-color: #333; }\n\n.loanOverviewWrapper .striped tbody tr:nth-child(odd) {\n  background-color: #333; }\n\n.loanDetailTable .loanDetailTable-header1 {\n  padding: 15px 6px;\n  font-size: 15px; }\n\n.loanDetailTable th, .loanDetailTable td {\n  padding: 12px 6px; }\n\n.loanDetailTable .undue {\n  color: #2CA800; }\n\n.loanDetailTable .due {\n  color: orange; }\n\n.loanDetailTable .overdue {\n  color: red; }\n\n.loan .loanOverviewWrapper {\n  float: left;\n  width: 25%;\n  box-shadow: inset 0px 1px 2px 1px #333;\n  margin-right: 20px;\n  background-color: #464646;\n  margin-top: 0px;\n  height: 100vh;\n  padding: 10px;\n  position: relative; }\n\n.loan .loanDetailWrapper {\n  float: left;\n  width: 72%;\n  padding: 20px; }\n\n.loan .loanDetailWrapper .title {\n  text-align: center;\n  font-size: 20px;\n  font-weight: bold;\n  padding: 0 0 10px; }\n\n.account-select-box {\n  position: absolute;\n  top: 39px;\n  right: 125px;\n  background-color: #464646;\n  border-radius: 3px;\n  width: 160px;\n  z-index: 1; }\n\n.account-select-box ul {\n  list-style: none;\n  padding: 0;\n  margin: 0; }\n\n.account-select-box li {\n  padding: 8px 0;\n  width: 100%;\n  text-align: center; }\n\n.account-select-box li:hover {\n  cursor: pointer;\n  background-color: #787878;\n  color: #fafafa; }\n\n.view-account-select-box {\n  position: absolute;\n  top: 39px;\n  right: 125px;\n  background-color: #464646;\n  border-radius: 3px;\n  width: 230px;\n  z-index: 1; }\n\n.view-account-select-box-content .title {\n  padding: 10px;\n  border-bottom: 1px solid #5A5A5A; }\n\n.view-account-select-box-content .title i {\n  float: right; }\n\n.view-account-select-box-content .title i:hover {\n  color: #f47023;\n  cursor: pointer; }\n\n.view-account-select-box-content table {\n  width: 98%; }\n\n.view-account-select-box-content td {\n  border: none; }\n\n/*QUOTE*/\n.changing {\n  background-color: #E88A2B; }\n\n.footer {\n  color: white;\n  position: fixed;\n  bottom: 0px;\n  width: 100%;\n  background: #524C4C; }\n\n.footer p {\n  text-align: center; }\n", ""]);
+	exports.push([module.id, "/* Box sizing resets*/\n*, *:before, *:after {\n  box-sizing: border-box; }\n\n/* Body resets and fancy font*/\nbody {\n  background-color: #303030;\n  color: #AAA;\n  margin: 0;\n  font-family: Helvetica;\n  font-size: 13px; }\n\n.beautiful-background {\n  background-image: url(\"https://www.vndirect.com.vn/wp-content/themes/vnd/images/login-bg.jpg\"); }\n\na {\n  color: #aadf55;\n  text-decoration: none; }\n\na:hover {\n  color: #94d629;\n  text-decoration: underline; }\n\ninput[type=number]::-webkit-inner-spin-button,\ninput[type=number]::-webkit-outer-spin-button {\n  -webkit-appearance: none;\n  margin: 0; }\n\ntable {\n  display: table;\n  width: 100%;\n  border-collapse: collapse;\n  overflow: hidden; }\n\n.striped tbody tr:nth-child(odd) {\n  background-color: #181818; }\n\ntbody tr:nth-child(odd) .matchField {\n  background-color: #222; }\n\n.hidden {\n  display: none; }\n\n.toggle-select-box {\n  padding: 7px 15px;\n  margin-top: 7px;\n  background-color: #464646;\n  border-radius: 3px;\n  color: #fafafa;\n  border: 1px solid transparent;\n  outline: none; }\n\n.toggle-select-box:hover {\n  background-color: #5A5A5A;\n  cursor: pointer; }\n\n.matchField {\n  background-color: #3a3a3a; }\n\n.striped tbody tr:nth-child(odd):hover {\n  background-color: #222; }\n\n.striped tbody tr:nth-child(even):hover {\n  background-color: #3a3a3a; }\n\n/* The CSS */\nselect {\n  padding: 3px;\n  margin: 0;\n  -webkit-border-radius: 4px;\n  -moz-border-radius: 4px;\n  border-radius: 4px;\n  -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;\n  -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;\n  box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;\n  background: #f8f8f8;\n  color: #888;\n  border: none;\n  outline: none;\n  display: inline-block;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  cursor: pointer; }\n\n/* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */\n@media screen and (-webkit-min-device-pixel-ratio: 0) {\n  select {\n    padding-right: 18px; } }\n\n/*label {position:relative}\nlabel:after {\n    content:'<>';\n    font:11px \"Consolas\", monospace;\n    color:#aaa;\n    -webkit-transform:rotate(90deg);\n    -moz-transform:rotate(90deg);\n    -ms-transform:rotate(90deg);\n    transform:rotate(90deg);\n    right:8px; top:2px;\n    padding:0 0 2px;\n    border-bottom:1px solid #ddd;\n    position:absolute;\n    pointer-events:none;\n}\nlabel:before {\n    content:'';\n    right:6px; top:0px;\n    width:20px; height:20px;\n    background:#f8f8f8;\n    position:absolute;\n    pointer-events:none;\n    display:block;\n}*/\n.input {\n  border: 1px solid #ededed;\n  padding: 8px 10px; }\n\n.button {\n  padding: 8px 10px;\n  background-color: #404040;\n  border: 1px solid #404040;\n  color: #fff;\n  cursor: pointer; }\n\n.right {\n  float: right; }\n\n.left {\n  float: left; }\n\n.green {\n  color: green; }\n\n.red {\n  color: red; }\n\n.dialogErrorMessage {\n  color: red; }\n\n.tl {\n  text-align: left !important; }\n\n.tr {\n  text-align: right !important; }\n\n.tc {\n  text-align: center !important; }\n\n.up {\n  color: #1FFF00; }\n\n.down {\n  color: #FF0000; }\n\n.nochange {\n  color: #F4C300; }\n\n.ceil {\n  color: #F300FF; }\n\n.floor {\n  color: deepskyblue; }\n\n.clear {\n  clear: both; }\n\n.outlinenone {\n  outline: none; }\n\n.emptyColumn {\n  display: none; }\n\n.section1 {\n  position: relative;\n  width: 100%;\n  padding-bottom: 10px;\n  /*overflow: auto;*/ }\n\n.section2 {\n  padding: 0px 20px 20px;\n  width: 100%;\n  overflow: auto; }\n\n.main {\n  width: 100%;\n  padding-bottom: 50px; }\n\n.leftContent {\n  margin: auto 2% 100px 0;\n  width: 69%;\n  float: left; }\n\n.rightContent {\n  width: 26%;\n  float: left;\n  margin-left: 0%;\n  margin-bottom: 100px; }\n\n.nav {\n  padding-top: 3px;\n  float: left;\n  margin-left: 10px; }\n\n.nav a {\n  padding: 6px 7px;\n  border-radius: 26px;\n  color: #fff;\n  background-color: #5A5A5A;\n  margin-right: 30px; }\n\n.nav a:hover {\n  background-color: #6E6E6E; }\n\n.nav i {\n  font-size: 14px; }\n\n.nav .active, .nav .active:hover {\n  background-color: #F47023; }\n\n.login-wrapper {\n  margin: 40px auto; }\n\n.login-wrapper .logo {\n  background-image: url(\"https://www.vndirect.com.vn/wp-content/themes/vnd/images/logo-white.png\");\n  text-align: center;\n  margin: auto;\n  width: 238px;\n  height: 65px; }\n\n.login-error {\n  color: #f39200;\n  margin: auto; }\n\n.login {\n  width: 350px;\n  margin: 10px auto;\n  text-align: center;\n  border: 1px solid #5a5a5a;\n  padding: 30px 0;\n  border-radius: 3px;\n  background: #696969;\n  color: #fafafa; }\n\n.login .title {\n  padding-bottom: 10px;\n  font-size: 18px;\n  color: #ededed;\n  font-weight: bold; }\n\n.login .input {\n  outline: none;\n  padding: 14px 5px 10px 50px;\n  width: 100%;\n  font-size: 14px;\n  background: #696969;\n  border-left: none;\n  border-right: none;\n  border-top: none;\n  border-color: #999999;\n  color: #fff; }\n\n.login .loginBtn {\n  padding: 10px;\n  background-color: #44C8BA;\n  color: #fff;\n  width: 60%;\n  margin-top: 20px;\n  border: none;\n  border-radius: 3px;\n  font-size: 15px;\n  cursor: pointer; }\n\n.login .loginBtn:hover {\n  background-color: #61d1c6; }\n\n.login .loginBtn:focus {\n  outline: none; }\n\n.login .username, .login .password {\n  position: relative;\n  width: 80%;\n  margin: 15px auto; }\n\n.login .username i, .login .password i {\n  position: absolute;\n  left: 10px;\n  top: 14px;\n  font-size: 18px; }\n\n.button:hover {\n  background-color: #595959;\n  border: 1px solid #595959; }\n\n.error {\n  width: 50%;\n  margin: auto;\n  color: red;\n  clear: both; }\n\n.profile {\n  height: 38px;\n  background-color: #464646;\n  width: 100%;\n  padding: 10px 5px 10px 10px; }\n\n.one-edge-shadow {\n  box-shadow: 0 4px 8px -6px black; }\n\n.inside-shadow {\n  box-shadow: inset 0 0 10px #000000; }\n\n.firstlogin {\n  width: 100%;\n  padding: 10px 50px;\n  clear: both; }\n\n.secondFa {\n  width: 600px;\n  padding: 30px 50px 30px;\n  text-align: center;\n  background: #696969;\n  margin: 130px auto;\n  border-radius: 3px; }\n\n.secondFa .title {\n  font-size: 14px;\n  font-style: italic;\n  line-height: 30px; }\n\n.secondFa .title .disable {\n  color: #aaa;\n  text-decoration: none;\n  cursor: default; }\n\n.secondFa .input {\n  border-radius: 3px;\n  padding: 10px; }\n\n.secondFa .input:focus {\n  outline: none; }\n\n.secondFa .loginOtpBtn {\n  padding: 10px;\n  background-color: #44C8BA;\n  color: #fff;\n  border: none;\n  border-radius: 3px;\n  font-size: 12px;\n  cursor: pointer; }\n\n.secondFa .loginOtpBtn:hover {\n  background-color: #61d1c6; }\n\n.secondFa .loginOtpBtn:focus {\n  outline: none; }\n\n.section4 {\n  width: 100%;\n  padding: 20px 20px 20px 0;\n  overflow: auto; }\n\n.section5 {\n  width: 100%;\n  padding-bottom: 30px; }\n\n.marketwatch {\n  width: 40%;\n  float: right;\n  margin-left: 20px;\n  padding: 15px;\n  border-radius: 5px;\n  border: 1px solid #5a5a5a;\n  margin-top: 20px; }\n\n.marketwatch .header {\n  width: 100%;\n  border-bottom: 1px solid #5a5a5a;\n  padding: 5px 0 10px;\n  margin-bottom: 10px;\n  height: 40px; }\n\n.marketwatch .title {\n  float: left;\n  text-transform: uppercase; }\n\n.marketwatch .menu {\n  float: right;\n  margin: 0;\n  padding: 0; }\n\n.marketwatch .menu li {\n  display: inline;\n  margin-left: 10px;\n  font-size: 18px;\n  cursor: pointer;\n  border: 1px solid #5a5a5a;\n  padding: 2px 10px;\n  border-radius: 5px;\n  background-color: #5a5a5a;\n  color: #fff; }\n\n.marketwatch .menu li:hover {\n  color: #f47023; }\n\n.marketwatch .menu .active {\n  background-color: #f47023;\n  color: #fff;\n  border-color: #f47023; }\n\n.marketwatch .menu .active:hover {\n  color: #fff; }\n\n.strategies {\n  width: 58%;\n  float: left; }\n\n.strategies td {\n  padding: 10px; }\n\n.strategies th {\n  text-align: left;\n  padding: 10px;\n  /*font-weight: normal;*/\n  border-bottom: 1px solid darkolivegreen;\n  /*color: #fafafa;*/ }\n\n.strategies .sortable:hover {\n  cursor: url(" + __webpack_require__(/*! ../img/arrow-updown.gif */ 491) + "), auto;\n  background-color: #333333; }\n\n.strategies .remove, .strategies .edit, .strategies .copy {\n  font-size: 18px;\n  cursor: pointer;\n  color: #a6a6a6; }\n\n.strategies .remove:hover {\n  color: red; }\n\n.strategies .edit:hover, .strategies .copy:hover {\n  color: #aadf55; }\n\n.strategies .lastColumn {\n  padding-right: 0; }\n\n.strategies .new-strategy {\n  margin: 20px 0 0 10px; }\n\n.strategies-loading {\n  font-size: 20px !important; }\n\n.new-strategy-dialog input {\n  outline: none;\n  border-radius: 3px; }\n\n.new-strategy-dialog input:focus {\n  border: 1px solid #aadf55; }\n\n.editing-strategy {\n  margin-top: 20px; }\n\n.editing-strategy td {\n  padding: 5px; }\n\n.new-strategy .strategy-name {\n  color: green; }\n\n.strategy-name-action {\n  width: 170px;\n  line-height: 18px; }\n\n.strategy-active .active-icon {\n  font-size: 20px; }\n\n.strategy-deactive .deactive-icon {\n  font-size: 20px;\n  color: red; }\n\n.strategy-active .NS, .strategy-active .NB, .strategy-deactive .NS, .strategy-deactive .NB {\n  font-size: 14px;\n  color: #fff;\n  border-radius: 3px;\n  padding: 1px 5px; }\n\n.strategy-active .NS, .strategy-deactive .NS {\n  background-color: #D10000;\n  border: 1px solid #D10000; }\n\n.strategy-active .NB, .strategy-deactive .NB {\n  background-color: #2CA800;\n  border: 1px solid #2CA800; }\n\n.strategy-active .NB:hover, .strategy-deactive .NB:hover {\n  background-color: green;\n  border: 1px solid green;\n  cursor: pointer; }\n\n.strategy-active .NS:hover, .strategy-deactive .NS:hover {\n  background-color: #ff6666;\n  border: 1px solid #ff6666;\n  cursor: pointer; }\n\n.strategy-done .done-icon {\n  color: green;\n  font-size: 20px; }\n\n.strategy-done .strategy-name {\n  text-decoration: line-through; }\n\n.strategy-active .active-icon {\n  color: #f39200; }\n\n.strategy-active .strategy-name {\n  /*color: #9F5069;*/ }\n\n.strategy-deactive {\n  /*color: #696969;*/ }\n\n.strategy-contract {\n  color: #b3b3b3; }\n\n.strategy-status {\n  text-align: center; }\n\n.remove-strategy-dialog {\n  line-height: 30px; }\n\n.orderbook-wrapper {\n  width: 41%;\n  float: right;\n  margin-left: 20px;\n  overflow: auto;\n  padding: 15px;\n  border-radius: 5px;\n  border: 1px solid #5a5a5a;\n  margin-top: 20px;\n  font-size: 12px; }\n\n.orderbook {\n  width: 100%; }\n\n.orderbook td {\n  padding: 10px; }\n\n.orderbook .good {\n  color: #00b300; }\n\n.orderbook .bad {\n  color: red; }\n\n.quickpp td {\n  padding: 7px 0px; }\n\n.orderbook th, .quickpp th, .portfolio th {\n  padding: 10px;\n  border-bottom: 1px solid darkolivegreen; }\n\n.orderbook .header, .portfolio .header {\n  padding: 3px 10px 13px;\n  position: relative;\n  text-transform: uppercase; }\n\n.portfolio:hover .refresh, .portfolio:hover .addPortfolioStockToBoardBtn, .orderbook:hover .refresh {\n  display: block !important; }\n\n.orderbook .header .refresh, .portfolio .header .refresh, .portfolio .header .addPortfolioStockToBoardBtn {\n  float: right;\n  padding: 7px 15px;\n  background-color: #464646;\n  border-radius: 3px;\n  color: #fafafa;\n  border: 1px solid transparent;\n  outline: none;\n  display: none;\n  position: absolute;\n  right: 0;\n  top: 0; }\n\n.portfolio .header .addPortfolioStockToBoardBtn {\n  right: 85px; }\n\n.orderbook .header .refresh:hover, .portfolio .header .refresh:hover,\n.portfolio .header .addPortfolioStockToBoardBtn:hover {\n  background-color: #5A5A5A;\n  cursor: pointer; }\n\n.portfolio .header .text, .orderbook .header .text {\n  display: inline-flex;\n  padding-top: 3px; }\n\n.orderbook-table {\n  margin-top: 5px; }\n\n.orderbook-table .NS {\n  color: red; }\n\n.orderbook-table .NB {\n  color: #00b300; }\n\n.orderbook-table .Cancelled {\n  text-decoration: line-through;\n  color: #696969; }\n\n.orderbook-table .Cancelled .NS, .orderbook-table .Cancelled .NB {\n  color: #696969; }\n\n.orderbook-table tr:hover {\n  cursor: pointer; }\n\n.orderbook-row-detail-dialog {\n  padding: 20px; }\n\n.orderbook-row-detail-dialog tbody tr:nth-child(odd) {\n  background-color: #ededed; }\n\n.orderbook-row-detail-dialog .title {\n  color: #696969;\n  border-right: 1px solid #dedede; }\n\n.orderbook-row-detail-dialog .originOrder {\n  font-weight: bold;\n  padding: 0 20px 7px;\n  color: green;\n  font-size: 17px; }\n\n.orderbook-row-detail-dialog .good {\n  color: green; }\n\n.orderbook-row-detail-dialog .bad {\n  color: red; }\n\n.orderbook-row-detail-dialog .replace {\n  background-color: #2eb000; }\n\n.orderbook-row-detail-dialog .cancel {\n  background-color: #de0000; }\n\n.orderbook-row-detail-dialog .replace:hover {\n  background-color: #1b6600;\n  cursor: pointer; }\n\n.orderbook-row-detail-dialog .cancel:hover {\n  background-color: #990000;\n  cursor: pointer; }\n\n.orderbook-row-detail-dialog button {\n  border: 1px solid transparent;\n  border-radius: 3px;\n  color: #fff;\n  padding: 8px; }\n\n.orderbook-row-detail-dialog table td {\n  padding: 10px 20px; }\n\n.portfolio-wrapper {\n  float: left;\n  width: 57%;\n  overflow: auto;\n  margin-top: 20px;\n  padding: 15px;\n  border-radius: 5px;\n  border: 1px solid #5A5A5A;\n  font-size: 12px; }\n\n.portfolio {\n  width: 100%; }\n\n.portfolio td {\n  padding: 10px; }\n\n.portfolio-table {\n  margin-top: 5px;\n  font-size: 12px; }\n\n.portfolio-table tfoot {\n  font-size: 13px;\n  font-weight: bold; }\n\n.portfolio-table .symbol {\n  cursor: pointer; }\n\n.portfolio-table .sortable:hover {\n  cursor: url(" + __webpack_require__(/*! ../img/arrow-updown.gif */ 491) + "), auto; }\n\n.quickpp {\n  width: 100%; }\n\n.quickpp table {\n  margin-left: 13px; }\n\n.quickpp .hint {\n  font-size: 12px;\n  margin-left: 10px; }\n\n.quickpp .hint i {\n  line-height: 20px; }\n\n.quickpp .account-active {\n  color: #f39200; }\n\n.miniboard-loading-wrp {\n  margin: auto;\n  width: 180px;\n  padding-bottom: 8px;\n  color: #F39200; }\n\n.miniboard-loading-title {\n  padding-top: 7px; }\n\n.miniboard-loading-wrp i {\n  font-size: 30px;\n  float: left; }\n\n.miniboard {\n  margin-bottom: 20px;\n  font-size: 12px; }\n\n.miniboard thead {\n  border-bottom: 1px solid darkolivegreen; }\n\n.miniboard .matchFieldTitle {\n  color: #f39200; }\n\n.miniboard th, .miniboard td {\n  padding: 7px 2px 7px 3px;\n  text-align: right; }\n\n.miniboard td {\n  border: 1px solid #343434; }\n\n.miniboard tbody > tr {\n  border-bottom: 1px solid transparent; }\n\n.miniboard .percentVolume {\n  width: 72px; }\n\n.miniboard th:hover {\n  background-color: #333333;\n  cursor: url(" + __webpack_require__(/*! ../img/arrow-updown.gif */ 491) + "), auto; }\n\n.miniboard .sym {\n  text-align: left;\n  width: 56px;\n  cursor: pointer; }\n\n.miniboard .sym i {\n  display: none;\n  cursor: pointer;\n  color: red;\n  margin-right: 8px; }\n\n.miniboard .sym:hover i {\n  display: inline-block; }\n\n.miniboard .sym i:hover {\n  color: #ff4d4d; }\n\n.miniboard .quantity {\n  min-width: 50px; }\n\n.miniboard .addCodeField input {\n  padding: 7px 8px 5px 27px;\n  width: 150px;\n  border: 1px solid #5A5A5A;\n  border-radius: 26px;\n  outline: none;\n  background-color: #303030;\n  margin: 10px 0 0 6px; }\n\n.miniboard .addCodeField input:focus {\n  /*border-color: #aadf55;*/\n  background-color: #5A5A5A;\n  text-transform: uppercase;\n  color: #fff; }\n\n.miniboard .addCodeField > div > div {\n  padding: 0 !important; }\n\n.miniboard .addCodeField {\n  float: left;\n  position: relative; }\n\n.miniboard .addCodeField .search-icon {\n  position: absolute;\n  left: 14px;\n  top: 16px;\n  font-size: 15px; }\n\n.stockdetailModal-table-wrp {\n  height: 400px;\n  overflow-y: scroll;\n  padding-right: 20px; }\n\n.stockdetailModal-table th, .stockdetailModal-table td {\n  padding: 6px; }\n\n.stockdetailModal .up {\n  color: green; }\n\n.stockdetailModal .down {\n  color: red; }\n\n.stockdetailModal .nochange {\n  color: #f39200; }\n\n.stockdetailModal .view-chart-btn {\n  margin-left: 10px;\n  color: #f39200;\n  font-size: 15px; }\n\n.stockdetailModal .view-chart-btn:hover {\n  cursor: pointer;\n  color: #cc7a00; }\n\n.chartView {\n  min-height: 750px;\n  padding: 0 20px;\n  margin-top: 3px; }\n\n.board-config {\n  padding-bottom: 10px;\n  height: 47px; }\n\n.board-config .toggle-board-column {\n  float: left;\n  margin-left: 200px; }\n\n.board-config .refreshBoardBtn {\n  font-size: 13px;\n  margin: 10px 10px 0 15px;\n  cursor: pointer; }\n\n.board-config .showHighLowPriceBtn,\n.board-config .showMarketInfoBoardBtn,\n.board-config .showVolumePercentBtn,\n.board-config .showChangePricePercentBtn,\n.board-config .showCeilFloorBtn,\n.board-config .showSecondBtn,\n.board-config .showThirdBtn {\n  font-size: 20px;\n  margin: 10px 10px 0 15px;\n  cursor: pointer; }\n\n.board-config .showVolumePercentBtn,\n.board-config .showChangePricePercentBtn,\n.board-config .showSecondBtn,\n.board-config .showThirdBtn,\n.board-config .showCeilFloorBtn {\n  font-size: 16px;\n  margin-top: 14px; }\n\n.board-config .showHighLowPriceBtn-active,\n.board-config .showMarketInfoBoardBtn-active,\n.board-config .showVolumePercentBtn-active,\n.board-config .showChangePricePercentBtn-active,\n.board-config .showCeilFloorBtn-active,\n.board-config .showSecondBtn-active,\n.board-config .showThirdBtn-active {\n  color: #f39200; }\n\n.board-config .showHighLowPriceBtn:hover,\n.board-config .showMarketInfoBoardBtn:hover,\n.board-config .refreshBoardBtn:hover,\n.board-config .showVolumePercentBtn:hover,\n.board-config .showChangePricePercentBtn:hover,\n.board-config .showCeilFloorBtn:hover,\n.board-config .showSecondBtn:hover,\n.board-config .showThirdBtn:hover {\n  color: #ffad33; }\n\n.board-config .toggle-place-order {\n  float: right;\n  margin-right: 5px; }\n\n.board-config .toggle-place-order .toggle-place-order-btn {\n  width: 100px; }\n\n.board-config .toggle-place-order .toggle-select-account-btn {\n  width: 160px;\n  cursor: default; }\n\n.board-config .toggle-place-order .toggle-select-account-btn .select-icon {\n  cursor: pointer;\n  font-size: 14px;\n  float: right; }\n\n.board-config .toggle-place-order .toggle-select-account-btn .view-icon {\n  cursor: pointer;\n  font-size: 14px; }\n\n.board-config .toggle-place-order .toggle-select-account-btn .select-icon:hover,\n.board-config .toggle-place-order .toggle-select-account-btn .view-icon:hover {\n  color: #f47023; }\n\n.board-config .toggle-place-order button {\n  margin-left: 20px; }\n\n.board-config .toggle-place-order .active {\n  color: #F47023; }\n\n.priceServiceStatus {\n  float: left;\n  margin-left: 10px;\n  font-size: 11px;\n  cursor: pointer; }\n\n.priceServiceStatus i {\n  font-size: 14px; }\n\n.priceServiceStatus-active {\n  color: #1FFF00; }\n\n.priceServiceStatus-pause {\n  color: #f39200; }\n\n.miniboard-place-order-true {\n  min-height: 350px; }\n\n#miniboard-table {\n  font-size: 11px; }\n\n.miniboard-table-place-order-true {\n  width: 74%;\n  margin-top: 3px; }\n\n.miniboard-table-place-order-false {\n  margin-top: 3px; }\n\n.board-marketinfo-place-order-true {\n  width: 74%; }\n\n.miniboard .buynow, .miniboard .sellnow {\n  padding: 3px 7px;\n  color: #fff;\n  cursor: pointer;\n  border-radius: 3px;\n  font-size: 12px; }\n\n.miniboard .sellnow {\n  background-color: #D10000; }\n\n.miniboard .buynow {\n  background-color: #2CA800; }\n\n.miniboard .sellnow:hover {\n  background-color: #ff6666; }\n\n.miniboard .buynow:hover {\n  background-color: green; }\n\n.miniboard .nextLastColumn {\n  border-right: none; }\n\n.miniboard .lastColumn {\n  padding-right: 0;\n  padding-left: 0;\n  border-bottom: none;\n  border-right: none;\n  border-left: none; }\n\n.miniboard .clickable {\n  cursor: pointer; }\n\n.board-marketinfo {\n  margin: 0 auto;\n  padding-right: 40px;\n  padding-top: 15px; }\n\n.board-marketinfo-market {\n  width: 30%;\n  height: 170px !important;\n  overflow: hidden; }\n\n.placeorder-wrapper {\n  width: 23%;\n  position: absolute;\n  top: 50px;\n  right: 5px; }\n\n.placeorder {\n  width: 100%; }\n\n.placeorder .type-switch {\n  padding: 10px 0;\n  text-align: center; }\n\n.placeorder .NB {\n  background: #CEEDB5;\n  margin-bottom: 20px;\n  border: 1px solid transparent;\n  border-radius: 3px;\n  padding-bottom: 20px;\n  overflow: auto; }\n\n.placeorder .NS {\n  background: #FFCCCC;\n  margin-bottom: 20px;\n  border: 1px solid transparent;\n  border-radius: 3px;\n  padding-bottom: 20px;\n  overflow: auto; }\n\n.placeorder .NB .placeorder-body {\n  background: #B4E48E; }\n\n.placeorder-body .symbol {\n  text-transform: uppercase;\n  float: left;\n  width: 38%; }\n\n.placeorder-body .quantity {\n  width: 100%; }\n\n.placeorder-body .price {\n  width: 52%; }\n\n.placeorder-body .orderType {\n  padding: 8px;\n  width: 38%; }\n\n.placeorder-body .quantityWrp {\n  position: relative;\n  width: 52%;\n  margin-left: 10%;\n  float: left; }\n\n.placeorder-body .maxSellQtty {\n  position: absolute;\n  top: 7px;\n  right: 2px; }\n\n.placeorder .NS .placeorder-body {\n  background: #FFB1B1; }\n\n.placeorder .placeorder-body {\n  padding: 20px; }\n\n.placeorder input {\n  padding: 7px;\n  border: 1px solid transparent;\n  border-radius: 5px; }\n\n.placeorder input:focus {\n  outline: none; }\n\n.placeorder .NB input, .placeorder .NB .orderType {\n  background: #F0F9E8; }\n\n.placeorder .NB input:focus, .placeorder .NB .orderType:focus,\n.placeorder .NS input:focus, .placeorder .NS .orderType:focus {\n  background: #FFF; }\n\n.placeorder .NS input, .placeorder .NS .orderType {\n  background: #FFEFEF; }\n\n.placeorder .type-switch a {\n  font-size: 14px;\n  text-decoration: none;\n  color: #333;\n  margin: 0 10px; }\n\n.placeorder .price {\n  margin-left: 10%; }\n\n.placeorder .row {\n  margin-bottom: 15px;\n  overflow: auto; }\n\n.placeorder .placeorder-bottom {\n  padding: 10px;\n  color: #696969;\n  width: 100%; }\n\n.order-placeorder-info {\n  color: #4d4d4d; }\n\n.order-placeorder-info div {\n  padding-bottom: 15px; }\n\n.placeorder-bottom .order-total {\n  text-align: center;\n  margin-top: 10px; }\n\n.placeorder .placeorder-submit {\n  padding: 10px 0;\n  text-align: center;\n  margin-top: 20px; }\n\n.placeorder .placeorder-submit a {\n  padding: 8px 20px;\n  color: #fff;\n  border: 1px solid transparent;\n  border-radius: 3px;\n  text-decoration: none;\n  margin: 0 10px; }\n\n.placeorder .placeorder-submit .NB {\n  background-color: #2CA800; }\n\n.placeorder .placeorder-submit .NB:hover {\n  background: green; }\n\n.placeorder .placeorder-submit .NS {\n  background-color: #D10000; }\n\n.placeorder .placeorder-submit .NS:hover {\n  background-color: #ff6666; }\n\n.placeorder .placeorder-submit .cancel {\n  background-color: #848484; }\n\n.placeorder .placeorder-submit .cancel:hover {\n  background-color: #696969; }\n\n.placeorder-errmsg {\n  padding: 10px 2px 5px;\n  color: red; }\n\n.placeorder-okmsg {\n  padding: 10px 0 5px;\n  color: green; }\n\n.guide {\n  padding: 0 20px; }\n\n.hotkeyGuide {\n  /*width: 50%;*/ }\n\n.hotkeyGuide th, .hotkeyGuide td {\n  text-align: left;\n  padding: 5px 10px; }\n\n.spy {\n  /*display: inline-block;*/\n  width: 100%; }\n\n.spy .spySelectingAccounts {\n  padding: 6px; }\n\n.spy .spySelectingAccounts .prevNextIcon {\n  font-size: 20px; }\n\n.spy .spySelectingAccounts .prevNextIcon:hover {\n  cursor: pointer;\n  color: yellow; }\n\n.spy .spyAccounts {\n  padding: 8px;\n  width: 70%;\n  margin: 0 10px 0px; }\n\n.spy .spyVipAccounts {\n  color: yellow;\n  background-color: cadetblue; }\n\n.spy {\n  padding-bottom: 50px;\n  overflow: auto; }\n\n.spy-left {\n  width: 17%;\n  float: left; }\n\n.spy-right {\n  width: 50%;\n  float: left; }\n\n.spy-stocks {\n  width: 31%;\n  float: right;\n  margin-right: 5px;\n  font-size: 12px; }\n\n.spy-orders-table th {\n  text-align: left; }\n\n.spy-orders-table th, .spy-orders-table td {\n  padding: 10px 6px; }\n\n.spy-orders-table .notiCurrentDay {\n  color: indianred; }\n\n.spy-orders-table .notiCurrentDay i {\n  font-size: 15px; }\n\n.spy-orders-table .notiCurrentDay .buy {\n  color: green; }\n\n.spy-orders-table .notiCurrentDay .sell {\n  color: blueviolet; }\n\n.spy-orders-table .notiCurrentDay .spy-order-symbol {\n  color: orange; }\n\n.spy-orders-table .spy-order-action {\n  cursor: pointer; }\n\n.spy-orders-table .ordersTime {\n  font-size: 12px;\n  width: 120px; }\n\n.spy-orders-table .ordersAccount {\n  font-size: 12px; }\n\n.spy .ci {\n  padding: 0 6px;\n  border: 1px solid #3a3a3a;\n  border-radius: 3px;\n  background-color: #3a3a3a;\n  width: 90%;\n  margin-left: 6px;\n  margin-bottom: 20px; }\n\n.spy .ci table td {\n  padding: 10px; }\n\n.spy-stocks-table th, .spy-stocks-table td {\n  padding: 10px 6px; }\n\n.spy-stocks-table .mark {\n  color: lightgreen; }\n\n.spy-stocks-table i {\n  margin: 0 3px; }\n\n.spy-stocks-table i:hover {\n  color: #f39200;\n  cursor: pointer; }\n\n.notiHistoryMoreBtn {\n  float: right;\n  font-size: 16px !important;\n  color: #fff;\n  margin-top: 20px; }\n\n.notiHistoryMoreBtn:hover {\n  cursor: pointer;\n  color: #f39200; }\n\n.spyShortStocks {\n  padding: 14px 10px;\n  border: 1px solid #3a3a3a;\n  background-color: #3a3a3a;\n  margin-bottom: 10px;\n  border-radius: 3px;\n  overflow: auto; }\n\n.spyShortStocks .symbol {\n  margin: 0 10px;\n  float: left;\n  line-height: 27px; }\n\n.spyShortStocks .caring {\n  color: yellow; }\n\n.loan .loanAccountsWrapper {\n  border-bottom: 1px solid #5a5a5a;\n  overflow: auto; }\n\n.loan .loanAccountsWrapper button {\n  padding: 7px 15px;\n  background-color: #5a5a5a;\n  color: #fafafa;\n  border: 1px solid transparent;\n  outline: none;\n  float: right; }\n\n.loan .loanAccountsWrapper button:hover {\n  cursor: pointer;\n  background-color: #787878; }\n\n.loan .loanAccountsWrapper button .active {\n  color: #f47023; }\n\n.loan .loanOverviewWrapper .account-select-box {\n  background-color: #5A5A5A;\n  right: 10px;\n  top: 41px; }\n\n.loanOverviewTable td {\n  padding: 12px 6px; }\n\n.loanOverviewTable td:first-child {\n  border-right: 1px solid #5a5a5a; }\n\n.loanOverviewTable tr:last-child {\n  border-bottom: 1px solid #5a5a5a; }\n\n.loanOverviewTable-symbol {\n  width: 35px; }\n\n.loanOverviewTable-symbol i {\n  color: orange; }\n\n.loanDetailWrapper .striped tbody tr:nth-child(odd) {\n  background-color: #333; }\n\n.loanOverviewWrapper .striped tbody tr:nth-child(odd) {\n  background-color: #333; }\n\n.loanDetailTable .loanDetailTable-header1 {\n  padding: 15px 6px;\n  font-size: 15px; }\n\n.loanDetailTable th, .loanDetailTable td {\n  padding: 12px 6px; }\n\n.loanDetailTable .undue {\n  color: #2CA800; }\n\n.loanDetailTable .due {\n  color: orange; }\n\n.loanDetailTable .overdue {\n  color: red; }\n\n.loan .loanOverviewWrapper {\n  float: left;\n  width: 25%;\n  box-shadow: inset 0px 1px 2px 1px #333;\n  margin-right: 20px;\n  background-color: #464646;\n  margin-top: 0px;\n  height: 100vh;\n  padding: 10px;\n  position: relative; }\n\n.loan .loanDetailWrapper {\n  float: left;\n  width: 72%;\n  padding: 20px; }\n\n.loan .loanDetailWrapper .title {\n  text-align: center;\n  font-size: 20px;\n  font-weight: bold;\n  padding: 0 0 10px; }\n\n.account-select-box {\n  position: absolute;\n  top: 39px;\n  right: 125px;\n  background-color: #464646;\n  border-radius: 3px;\n  width: 160px;\n  z-index: 1; }\n\n.account-select-box ul {\n  list-style: none;\n  padding: 0;\n  margin: 0; }\n\n.account-select-box li {\n  padding: 8px 0;\n  width: 100%;\n  text-align: center; }\n\n.account-select-box li:hover {\n  cursor: pointer;\n  background-color: #787878;\n  color: #fafafa; }\n\n.view-account-select-box {\n  position: absolute;\n  top: 39px;\n  right: 125px;\n  background-color: #464646;\n  border-radius: 3px;\n  width: 230px;\n  z-index: 1; }\n\n.view-account-select-box-content .title {\n  padding: 10px;\n  border-bottom: 1px solid #5A5A5A; }\n\n.view-account-select-box-content .title i {\n  float: right; }\n\n.view-account-select-box-content .title i:hover {\n  color: #f47023;\n  cursor: pointer; }\n\n.view-account-select-box-content table {\n  width: 98%; }\n\n.view-account-select-box-content td {\n  border: none; }\n\n/*QUOTE*/\n.changing {\n  background-color: #E88A2B; }\n\n.footer {\n  color: white;\n  position: fixed;\n  bottom: 0px;\n  width: 100%;\n  background: #524C4C; }\n\n.footer p {\n  text-align: center; }\n", ""]);
 	
 	// exports
 
 
 /***/ },
-/* 491 */
+/* 490 */
 /*!**************************************!*\
   !*** ./~/css-loader/lib/css-base.js ***!
   \**************************************/
@@ -105983,7 +106032,7 @@
 
 
 /***/ },
-/* 492 */
+/* 491 */
 /*!*************************************!*\
   !*** ./public/img/arrow-updown.gif ***!
   \*************************************/
@@ -105992,7 +106041,7 @@
 	module.exports = __webpack_require__.p + "5585dac4d8703eb7669ffe1c6aa09335.gif";
 
 /***/ },
-/* 493 */
+/* 492 */
 /*!*************************************!*\
   !*** ./~/style-loader/addStyles.js ***!
   \*************************************/
@@ -106247,7 +106296,7 @@
 
 
 /***/ },
-/* 494 */
+/* 493 */
 /*!*************************************!*\
   !*** ./public/css/font-awesome.css ***!
   \*************************************/
@@ -106256,10 +106305,10 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../../~/css-loader!./../../~/sass-loader!./font-awesome.css */ 495);
+	var content = __webpack_require__(/*! !./../../~/css-loader!./../../~/sass-loader!./font-awesome.css */ 494);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 493)(content, {});
+	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 492)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -106276,24 +106325,24 @@
 	}
 
 /***/ },
-/* 495 */
+/* 494 */
 /*!********************************************************************!*\
   !*** ./~/css-loader!./~/sass-loader!./public/css/font-awesome.css ***!
   \********************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 491)();
+	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 490)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, "/*!\n *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome\n *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)\n */\n/* FONT PATH\n * -------------------------- */\n@font-face {\n  font-family: 'FontAwesome';\n  src: url(" + __webpack_require__(/*! ../fonts/fontawesome-webfont.eot?v=4.6.3 */ 496) + ");\n  src: url(" + __webpack_require__(/*! ../fonts/fontawesome-webfont.eot */ 497) + "?#iefix&v=4.6.3) format(\"embedded-opentype\"), url(" + __webpack_require__(/*! ../fonts/fontawesome-webfont.woff2?v=4.6.3 */ 498) + ") format(\"woff2\"), url(" + __webpack_require__(/*! ../fonts/fontawesome-webfont.woff?v=4.6.3 */ 499) + ") format(\"woff\"), url(" + __webpack_require__(/*! ../fonts/fontawesome-webfont.ttf?v=4.6.3 */ 500) + ") format(\"truetype\"), url(" + __webpack_require__(/*! ../fonts/fontawesome-webfont.svg?v=4.6.3 */ 501) + "#fontawesomeregular) format(\"svg\");\n  font-weight: normal;\n  font-style: normal; }\n\n.fa {\n  display: inline-block;\n  font: normal normal normal 14px/1 FontAwesome;\n  font-size: inherit;\n  text-rendering: auto;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\n/* makes the font 33% larger relative to the icon container */\n.fa-lg {\n  font-size: 1.33333333em;\n  line-height: 0.75em;\n  vertical-align: -15%; }\n\n.fa-2x {\n  font-size: 2em; }\n\n.fa-3x {\n  font-size: 3em; }\n\n.fa-4x {\n  font-size: 4em; }\n\n.fa-5x {\n  font-size: 5em; }\n\n.fa-fw {\n  width: 1.28571429em;\n  text-align: center; }\n\n.fa-ul {\n  padding-left: 0;\n  margin-left: 2.14285714em;\n  list-style-type: none; }\n\n.fa-ul > li {\n  position: relative; }\n\n.fa-li {\n  position: absolute;\n  left: -2.14285714em;\n  width: 2.14285714em;\n  top: 0.14285714em;\n  text-align: center; }\n\n.fa-li.fa-lg {\n  left: -1.85714286em; }\n\n.fa-border {\n  padding: .2em .25em .15em;\n  border: solid 0.08em #eeeeee;\n  border-radius: .1em; }\n\n.fa-pull-left {\n  float: left; }\n\n.fa-pull-right {\n  float: right; }\n\n.fa.fa-pull-left {\n  margin-right: .3em; }\n\n.fa.fa-pull-right {\n  margin-left: .3em; }\n\n/* Deprecated as of 4.4.0 */\n.pull-right {\n  float: right; }\n\n.pull-left {\n  float: left; }\n\n.fa.pull-left {\n  margin-right: .3em; }\n\n.fa.pull-right {\n  margin-left: .3em; }\n\n.fa-spin {\n  -webkit-animation: fa-spin 2s infinite linear;\n  animation: fa-spin 2s infinite linear; }\n\n.fa-pulse {\n  -webkit-animation: fa-spin 1s infinite steps(8);\n  animation: fa-spin 1s infinite steps(8); }\n\n@-webkit-keyframes fa-spin {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(359deg);\n    transform: rotate(359deg); } }\n\n@keyframes fa-spin {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(359deg);\n    transform: rotate(359deg); } }\n\n.fa-rotate-90 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=1)\";\n  -webkit-transform: rotate(90deg);\n  -ms-transform: rotate(90deg);\n  transform: rotate(90deg); }\n\n.fa-rotate-180 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)\";\n  -webkit-transform: rotate(180deg);\n  -ms-transform: rotate(180deg);\n  transform: rotate(180deg); }\n\n.fa-rotate-270 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=3)\";\n  -webkit-transform: rotate(270deg);\n  -ms-transform: rotate(270deg);\n  transform: rotate(270deg); }\n\n.fa-flip-horizontal {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)\";\n  -webkit-transform: scale(-1, 1);\n  -ms-transform: scale(-1, 1);\n  transform: scale(-1, 1); }\n\n.fa-flip-vertical {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)\";\n  -webkit-transform: scale(1, -1);\n  -ms-transform: scale(1, -1);\n  transform: scale(1, -1); }\n\n:root .fa-rotate-90,\n:root .fa-rotate-180,\n:root .fa-rotate-270,\n:root .fa-flip-horizontal,\n:root .fa-flip-vertical {\n  filter: none; }\n\n.fa-stack {\n  position: relative;\n  display: inline-block;\n  width: 2em;\n  height: 2em;\n  line-height: 2em;\n  vertical-align: middle; }\n\n.fa-stack-1x,\n.fa-stack-2x {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  text-align: center; }\n\n.fa-stack-1x {\n  line-height: inherit; }\n\n.fa-stack-2x {\n  font-size: 2em; }\n\n.fa-inverse {\n  color: #ffffff; }\n\n/* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen\n   readers do not read off random characters that represent icons */\n.fa-glass:before {\n  content: \"\\F000\"; }\n\n.fa-music:before {\n  content: \"\\F001\"; }\n\n.fa-search:before {\n  content: \"\\F002\"; }\n\n.fa-envelope-o:before {\n  content: \"\\F003\"; }\n\n.fa-heart:before {\n  content: \"\\F004\"; }\n\n.fa-star:before {\n  content: \"\\F005\"; }\n\n.fa-star-o:before {\n  content: \"\\F006\"; }\n\n.fa-user:before {\n  content: \"\\F007\"; }\n\n.fa-film:before {\n  content: \"\\F008\"; }\n\n.fa-th-large:before {\n  content: \"\\F009\"; }\n\n.fa-th:before {\n  content: \"\\F00A\"; }\n\n.fa-th-list:before {\n  content: \"\\F00B\"; }\n\n.fa-check:before {\n  content: \"\\F00C\"; }\n\n.fa-remove:before,\n.fa-close:before,\n.fa-times:before {\n  content: \"\\F00D\"; }\n\n.fa-search-plus:before {\n  content: \"\\F00E\"; }\n\n.fa-search-minus:before {\n  content: \"\\F010\"; }\n\n.fa-power-off:before {\n  content: \"\\F011\"; }\n\n.fa-signal:before {\n  content: \"\\F012\"; }\n\n.fa-gear:before,\n.fa-cog:before {\n  content: \"\\F013\"; }\n\n.fa-trash-o:before {\n  content: \"\\F014\"; }\n\n.fa-home:before {\n  content: \"\\F015\"; }\n\n.fa-file-o:before {\n  content: \"\\F016\"; }\n\n.fa-clock-o:before {\n  content: \"\\F017\"; }\n\n.fa-road:before {\n  content: \"\\F018\"; }\n\n.fa-download:before {\n  content: \"\\F019\"; }\n\n.fa-arrow-circle-o-down:before {\n  content: \"\\F01A\"; }\n\n.fa-arrow-circle-o-up:before {\n  content: \"\\F01B\"; }\n\n.fa-inbox:before {\n  content: \"\\F01C\"; }\n\n.fa-play-circle-o:before {\n  content: \"\\F01D\"; }\n\n.fa-rotate-right:before,\n.fa-repeat:before {\n  content: \"\\F01E\"; }\n\n.fa-refresh:before {\n  content: \"\\F021\"; }\n\n.fa-list-alt:before {\n  content: \"\\F022\"; }\n\n.fa-lock:before {\n  content: \"\\F023\"; }\n\n.fa-flag:before {\n  content: \"\\F024\"; }\n\n.fa-headphones:before {\n  content: \"\\F025\"; }\n\n.fa-volume-off:before {\n  content: \"\\F026\"; }\n\n.fa-volume-down:before {\n  content: \"\\F027\"; }\n\n.fa-volume-up:before {\n  content: \"\\F028\"; }\n\n.fa-qrcode:before {\n  content: \"\\F029\"; }\n\n.fa-barcode:before {\n  content: \"\\F02A\"; }\n\n.fa-tag:before {\n  content: \"\\F02B\"; }\n\n.fa-tags:before {\n  content: \"\\F02C\"; }\n\n.fa-book:before {\n  content: \"\\F02D\"; }\n\n.fa-bookmark:before {\n  content: \"\\F02E\"; }\n\n.fa-print:before {\n  content: \"\\F02F\"; }\n\n.fa-camera:before {\n  content: \"\\F030\"; }\n\n.fa-font:before {\n  content: \"\\F031\"; }\n\n.fa-bold:before {\n  content: \"\\F032\"; }\n\n.fa-italic:before {\n  content: \"\\F033\"; }\n\n.fa-text-height:before {\n  content: \"\\F034\"; }\n\n.fa-text-width:before {\n  content: \"\\F035\"; }\n\n.fa-align-left:before {\n  content: \"\\F036\"; }\n\n.fa-align-center:before {\n  content: \"\\F037\"; }\n\n.fa-align-right:before {\n  content: \"\\F038\"; }\n\n.fa-align-justify:before {\n  content: \"\\F039\"; }\n\n.fa-list:before {\n  content: \"\\F03A\"; }\n\n.fa-dedent:before,\n.fa-outdent:before {\n  content: \"\\F03B\"; }\n\n.fa-indent:before {\n  content: \"\\F03C\"; }\n\n.fa-video-camera:before {\n  content: \"\\F03D\"; }\n\n.fa-photo:before,\n.fa-image:before,\n.fa-picture-o:before {\n  content: \"\\F03E\"; }\n\n.fa-pencil:before {\n  content: \"\\F040\"; }\n\n.fa-map-marker:before {\n  content: \"\\F041\"; }\n\n.fa-adjust:before {\n  content: \"\\F042\"; }\n\n.fa-tint:before {\n  content: \"\\F043\"; }\n\n.fa-edit:before,\n.fa-pencil-square-o:before {\n  content: \"\\F044\"; }\n\n.fa-share-square-o:before {\n  content: \"\\F045\"; }\n\n.fa-check-square-o:before {\n  content: \"\\F046\"; }\n\n.fa-arrows:before {\n  content: \"\\F047\"; }\n\n.fa-step-backward:before {\n  content: \"\\F048\"; }\n\n.fa-fast-backward:before {\n  content: \"\\F049\"; }\n\n.fa-backward:before {\n  content: \"\\F04A\"; }\n\n.fa-play:before {\n  content: \"\\F04B\"; }\n\n.fa-pause:before {\n  content: \"\\F04C\"; }\n\n.fa-stop:before {\n  content: \"\\F04D\"; }\n\n.fa-forward:before {\n  content: \"\\F04E\"; }\n\n.fa-fast-forward:before {\n  content: \"\\F050\"; }\n\n.fa-step-forward:before {\n  content: \"\\F051\"; }\n\n.fa-eject:before {\n  content: \"\\F052\"; }\n\n.fa-chevron-left:before {\n  content: \"\\F053\"; }\n\n.fa-chevron-right:before {\n  content: \"\\F054\"; }\n\n.fa-plus-circle:before {\n  content: \"\\F055\"; }\n\n.fa-minus-circle:before {\n  content: \"\\F056\"; }\n\n.fa-times-circle:before {\n  content: \"\\F057\"; }\n\n.fa-check-circle:before {\n  content: \"\\F058\"; }\n\n.fa-question-circle:before {\n  content: \"\\F059\"; }\n\n.fa-info-circle:before {\n  content: \"\\F05A\"; }\n\n.fa-crosshairs:before {\n  content: \"\\F05B\"; }\n\n.fa-times-circle-o:before {\n  content: \"\\F05C\"; }\n\n.fa-check-circle-o:before {\n  content: \"\\F05D\"; }\n\n.fa-ban:before {\n  content: \"\\F05E\"; }\n\n.fa-arrow-left:before {\n  content: \"\\F060\"; }\n\n.fa-arrow-right:before {\n  content: \"\\F061\"; }\n\n.fa-arrow-up:before {\n  content: \"\\F062\"; }\n\n.fa-arrow-down:before {\n  content: \"\\F063\"; }\n\n.fa-mail-forward:before,\n.fa-share:before {\n  content: \"\\F064\"; }\n\n.fa-expand:before {\n  content: \"\\F065\"; }\n\n.fa-compress:before {\n  content: \"\\F066\"; }\n\n.fa-plus:before {\n  content: \"\\F067\"; }\n\n.fa-minus:before {\n  content: \"\\F068\"; }\n\n.fa-asterisk:before {\n  content: \"\\F069\"; }\n\n.fa-exclamation-circle:before {\n  content: \"\\F06A\"; }\n\n.fa-gift:before {\n  content: \"\\F06B\"; }\n\n.fa-leaf:before {\n  content: \"\\F06C\"; }\n\n.fa-fire:before {\n  content: \"\\F06D\"; }\n\n.fa-eye:before {\n  content: \"\\F06E\"; }\n\n.fa-eye-slash:before {\n  content: \"\\F070\"; }\n\n.fa-warning:before,\n.fa-exclamation-triangle:before {\n  content: \"\\F071\"; }\n\n.fa-plane:before {\n  content: \"\\F072\"; }\n\n.fa-calendar:before {\n  content: \"\\F073\"; }\n\n.fa-random:before {\n  content: \"\\F074\"; }\n\n.fa-comment:before {\n  content: \"\\F075\"; }\n\n.fa-magnet:before {\n  content: \"\\F076\"; }\n\n.fa-chevron-up:before {\n  content: \"\\F077\"; }\n\n.fa-chevron-down:before {\n  content: \"\\F078\"; }\n\n.fa-retweet:before {\n  content: \"\\F079\"; }\n\n.fa-shopping-cart:before {\n  content: \"\\F07A\"; }\n\n.fa-folder:before {\n  content: \"\\F07B\"; }\n\n.fa-folder-open:before {\n  content: \"\\F07C\"; }\n\n.fa-arrows-v:before {\n  content: \"\\F07D\"; }\n\n.fa-arrows-h:before {\n  content: \"\\F07E\"; }\n\n.fa-bar-chart-o:before,\n.fa-bar-chart:before {\n  content: \"\\F080\"; }\n\n.fa-twitter-square:before {\n  content: \"\\F081\"; }\n\n.fa-facebook-square:before {\n  content: \"\\F082\"; }\n\n.fa-camera-retro:before {\n  content: \"\\F083\"; }\n\n.fa-key:before {\n  content: \"\\F084\"; }\n\n.fa-gears:before,\n.fa-cogs:before {\n  content: \"\\F085\"; }\n\n.fa-comments:before {\n  content: \"\\F086\"; }\n\n.fa-thumbs-o-up:before {\n  content: \"\\F087\"; }\n\n.fa-thumbs-o-down:before {\n  content: \"\\F088\"; }\n\n.fa-star-half:before {\n  content: \"\\F089\"; }\n\n.fa-heart-o:before {\n  content: \"\\F08A\"; }\n\n.fa-sign-out:before {\n  content: \"\\F08B\"; }\n\n.fa-linkedin-square:before {\n  content: \"\\F08C\"; }\n\n.fa-thumb-tack:before {\n  content: \"\\F08D\"; }\n\n.fa-external-link:before {\n  content: \"\\F08E\"; }\n\n.fa-sign-in:before {\n  content: \"\\F090\"; }\n\n.fa-trophy:before {\n  content: \"\\F091\"; }\n\n.fa-github-square:before {\n  content: \"\\F092\"; }\n\n.fa-upload:before {\n  content: \"\\F093\"; }\n\n.fa-lemon-o:before {\n  content: \"\\F094\"; }\n\n.fa-phone:before {\n  content: \"\\F095\"; }\n\n.fa-square-o:before {\n  content: \"\\F096\"; }\n\n.fa-bookmark-o:before {\n  content: \"\\F097\"; }\n\n.fa-phone-square:before {\n  content: \"\\F098\"; }\n\n.fa-twitter:before {\n  content: \"\\F099\"; }\n\n.fa-facebook-f:before,\n.fa-facebook:before {\n  content: \"\\F09A\"; }\n\n.fa-github:before {\n  content: \"\\F09B\"; }\n\n.fa-unlock:before {\n  content: \"\\F09C\"; }\n\n.fa-credit-card:before {\n  content: \"\\F09D\"; }\n\n.fa-feed:before,\n.fa-rss:before {\n  content: \"\\F09E\"; }\n\n.fa-hdd-o:before {\n  content: \"\\F0A0\"; }\n\n.fa-bullhorn:before {\n  content: \"\\F0A1\"; }\n\n.fa-bell:before {\n  content: \"\\F0F3\"; }\n\n.fa-certificate:before {\n  content: \"\\F0A3\"; }\n\n.fa-hand-o-right:before {\n  content: \"\\F0A4\"; }\n\n.fa-hand-o-left:before {\n  content: \"\\F0A5\"; }\n\n.fa-hand-o-up:before {\n  content: \"\\F0A6\"; }\n\n.fa-hand-o-down:before {\n  content: \"\\F0A7\"; }\n\n.fa-arrow-circle-left:before {\n  content: \"\\F0A8\"; }\n\n.fa-arrow-circle-right:before {\n  content: \"\\F0A9\"; }\n\n.fa-arrow-circle-up:before {\n  content: \"\\F0AA\"; }\n\n.fa-arrow-circle-down:before {\n  content: \"\\F0AB\"; }\n\n.fa-globe:before {\n  content: \"\\F0AC\"; }\n\n.fa-wrench:before {\n  content: \"\\F0AD\"; }\n\n.fa-tasks:before {\n  content: \"\\F0AE\"; }\n\n.fa-filter:before {\n  content: \"\\F0B0\"; }\n\n.fa-briefcase:before {\n  content: \"\\F0B1\"; }\n\n.fa-arrows-alt:before {\n  content: \"\\F0B2\"; }\n\n.fa-group:before,\n.fa-users:before {\n  content: \"\\F0C0\"; }\n\n.fa-chain:before,\n.fa-link:before {\n  content: \"\\F0C1\"; }\n\n.fa-cloud:before {\n  content: \"\\F0C2\"; }\n\n.fa-flask:before {\n  content: \"\\F0C3\"; }\n\n.fa-cut:before,\n.fa-scissors:before {\n  content: \"\\F0C4\"; }\n\n.fa-copy:before,\n.fa-files-o:before {\n  content: \"\\F0C5\"; }\n\n.fa-paperclip:before {\n  content: \"\\F0C6\"; }\n\n.fa-save:before,\n.fa-floppy-o:before {\n  content: \"\\F0C7\"; }\n\n.fa-square:before {\n  content: \"\\F0C8\"; }\n\n.fa-navicon:before,\n.fa-reorder:before,\n.fa-bars:before {\n  content: \"\\F0C9\"; }\n\n.fa-list-ul:before {\n  content: \"\\F0CA\"; }\n\n.fa-list-ol:before {\n  content: \"\\F0CB\"; }\n\n.fa-strikethrough:before {\n  content: \"\\F0CC\"; }\n\n.fa-underline:before {\n  content: \"\\F0CD\"; }\n\n.fa-table:before {\n  content: \"\\F0CE\"; }\n\n.fa-magic:before {\n  content: \"\\F0D0\"; }\n\n.fa-truck:before {\n  content: \"\\F0D1\"; }\n\n.fa-pinterest:before {\n  content: \"\\F0D2\"; }\n\n.fa-pinterest-square:before {\n  content: \"\\F0D3\"; }\n\n.fa-google-plus-square:before {\n  content: \"\\F0D4\"; }\n\n.fa-google-plus:before {\n  content: \"\\F0D5\"; }\n\n.fa-money:before {\n  content: \"\\F0D6\"; }\n\n.fa-caret-down:before {\n  content: \"\\F0D7\"; }\n\n.fa-caret-up:before {\n  content: \"\\F0D8\"; }\n\n.fa-caret-left:before {\n  content: \"\\F0D9\"; }\n\n.fa-caret-right:before {\n  content: \"\\F0DA\"; }\n\n.fa-columns:before {\n  content: \"\\F0DB\"; }\n\n.fa-unsorted:before,\n.fa-sort:before {\n  content: \"\\F0DC\"; }\n\n.fa-sort-down:before,\n.fa-sort-desc:before {\n  content: \"\\F0DD\"; }\n\n.fa-sort-up:before,\n.fa-sort-asc:before {\n  content: \"\\F0DE\"; }\n\n.fa-envelope:before {\n  content: \"\\F0E0\"; }\n\n.fa-linkedin:before {\n  content: \"\\F0E1\"; }\n\n.fa-rotate-left:before,\n.fa-undo:before {\n  content: \"\\F0E2\"; }\n\n.fa-legal:before,\n.fa-gavel:before {\n  content: \"\\F0E3\"; }\n\n.fa-dashboard:before,\n.fa-tachometer:before {\n  content: \"\\F0E4\"; }\n\n.fa-comment-o:before {\n  content: \"\\F0E5\"; }\n\n.fa-comments-o:before {\n  content: \"\\F0E6\"; }\n\n.fa-flash:before,\n.fa-bolt:before {\n  content: \"\\F0E7\"; }\n\n.fa-sitemap:before {\n  content: \"\\F0E8\"; }\n\n.fa-umbrella:before {\n  content: \"\\F0E9\"; }\n\n.fa-paste:before,\n.fa-clipboard:before {\n  content: \"\\F0EA\"; }\n\n.fa-lightbulb-o:before {\n  content: \"\\F0EB\"; }\n\n.fa-exchange:before {\n  content: \"\\F0EC\"; }\n\n.fa-cloud-download:before {\n  content: \"\\F0ED\"; }\n\n.fa-cloud-upload:before {\n  content: \"\\F0EE\"; }\n\n.fa-user-md:before {\n  content: \"\\F0F0\"; }\n\n.fa-stethoscope:before {\n  content: \"\\F0F1\"; }\n\n.fa-suitcase:before {\n  content: \"\\F0F2\"; }\n\n.fa-bell-o:before {\n  content: \"\\F0A2\"; }\n\n.fa-coffee:before {\n  content: \"\\F0F4\"; }\n\n.fa-cutlery:before {\n  content: \"\\F0F5\"; }\n\n.fa-file-text-o:before {\n  content: \"\\F0F6\"; }\n\n.fa-building-o:before {\n  content: \"\\F0F7\"; }\n\n.fa-hospital-o:before {\n  content: \"\\F0F8\"; }\n\n.fa-ambulance:before {\n  content: \"\\F0F9\"; }\n\n.fa-medkit:before {\n  content: \"\\F0FA\"; }\n\n.fa-fighter-jet:before {\n  content: \"\\F0FB\"; }\n\n.fa-beer:before {\n  content: \"\\F0FC\"; }\n\n.fa-h-square:before {\n  content: \"\\F0FD\"; }\n\n.fa-plus-square:before {\n  content: \"\\F0FE\"; }\n\n.fa-angle-double-left:before {\n  content: \"\\F100\"; }\n\n.fa-angle-double-right:before {\n  content: \"\\F101\"; }\n\n.fa-angle-double-up:before {\n  content: \"\\F102\"; }\n\n.fa-angle-double-down:before {\n  content: \"\\F103\"; }\n\n.fa-angle-left:before {\n  content: \"\\F104\"; }\n\n.fa-angle-right:before {\n  content: \"\\F105\"; }\n\n.fa-angle-up:before {\n  content: \"\\F106\"; }\n\n.fa-angle-down:before {\n  content: \"\\F107\"; }\n\n.fa-desktop:before {\n  content: \"\\F108\"; }\n\n.fa-laptop:before {\n  content: \"\\F109\"; }\n\n.fa-tablet:before {\n  content: \"\\F10A\"; }\n\n.fa-mobile-phone:before,\n.fa-mobile:before {\n  content: \"\\F10B\"; }\n\n.fa-circle-o:before {\n  content: \"\\F10C\"; }\n\n.fa-quote-left:before {\n  content: \"\\F10D\"; }\n\n.fa-quote-right:before {\n  content: \"\\F10E\"; }\n\n.fa-spinner:before {\n  content: \"\\F110\"; }\n\n.fa-circle:before {\n  content: \"\\F111\"; }\n\n.fa-mail-reply:before,\n.fa-reply:before {\n  content: \"\\F112\"; }\n\n.fa-github-alt:before {\n  content: \"\\F113\"; }\n\n.fa-folder-o:before {\n  content: \"\\F114\"; }\n\n.fa-folder-open-o:before {\n  content: \"\\F115\"; }\n\n.fa-smile-o:before {\n  content: \"\\F118\"; }\n\n.fa-frown-o:before {\n  content: \"\\F119\"; }\n\n.fa-meh-o:before {\n  content: \"\\F11A\"; }\n\n.fa-gamepad:before {\n  content: \"\\F11B\"; }\n\n.fa-keyboard-o:before {\n  content: \"\\F11C\"; }\n\n.fa-flag-o:before {\n  content: \"\\F11D\"; }\n\n.fa-flag-checkered:before {\n  content: \"\\F11E\"; }\n\n.fa-terminal:before {\n  content: \"\\F120\"; }\n\n.fa-code:before {\n  content: \"\\F121\"; }\n\n.fa-mail-reply-all:before,\n.fa-reply-all:before {\n  content: \"\\F122\"; }\n\n.fa-star-half-empty:before,\n.fa-star-half-full:before,\n.fa-star-half-o:before {\n  content: \"\\F123\"; }\n\n.fa-location-arrow:before {\n  content: \"\\F124\"; }\n\n.fa-crop:before {\n  content: \"\\F125\"; }\n\n.fa-code-fork:before {\n  content: \"\\F126\"; }\n\n.fa-unlink:before,\n.fa-chain-broken:before {\n  content: \"\\F127\"; }\n\n.fa-question:before {\n  content: \"\\F128\"; }\n\n.fa-info:before {\n  content: \"\\F129\"; }\n\n.fa-exclamation:before {\n  content: \"\\F12A\"; }\n\n.fa-superscript:before {\n  content: \"\\F12B\"; }\n\n.fa-subscript:before {\n  content: \"\\F12C\"; }\n\n.fa-eraser:before {\n  content: \"\\F12D\"; }\n\n.fa-puzzle-piece:before {\n  content: \"\\F12E\"; }\n\n.fa-microphone:before {\n  content: \"\\F130\"; }\n\n.fa-microphone-slash:before {\n  content: \"\\F131\"; }\n\n.fa-shield:before {\n  content: \"\\F132\"; }\n\n.fa-calendar-o:before {\n  content: \"\\F133\"; }\n\n.fa-fire-extinguisher:before {\n  content: \"\\F134\"; }\n\n.fa-rocket:before {\n  content: \"\\F135\"; }\n\n.fa-maxcdn:before {\n  content: \"\\F136\"; }\n\n.fa-chevron-circle-left:before {\n  content: \"\\F137\"; }\n\n.fa-chevron-circle-right:before {\n  content: \"\\F138\"; }\n\n.fa-chevron-circle-up:before {\n  content: \"\\F139\"; }\n\n.fa-chevron-circle-down:before {\n  content: \"\\F13A\"; }\n\n.fa-html5:before {\n  content: \"\\F13B\"; }\n\n.fa-css3:before {\n  content: \"\\F13C\"; }\n\n.fa-anchor:before {\n  content: \"\\F13D\"; }\n\n.fa-unlock-alt:before {\n  content: \"\\F13E\"; }\n\n.fa-bullseye:before {\n  content: \"\\F140\"; }\n\n.fa-ellipsis-h:before {\n  content: \"\\F141\"; }\n\n.fa-ellipsis-v:before {\n  content: \"\\F142\"; }\n\n.fa-rss-square:before {\n  content: \"\\F143\"; }\n\n.fa-play-circle:before {\n  content: \"\\F144\"; }\n\n.fa-ticket:before {\n  content: \"\\F145\"; }\n\n.fa-minus-square:before {\n  content: \"\\F146\"; }\n\n.fa-minus-square-o:before {\n  content: \"\\F147\"; }\n\n.fa-level-up:before {\n  content: \"\\F148\"; }\n\n.fa-level-down:before {\n  content: \"\\F149\"; }\n\n.fa-check-square:before {\n  content: \"\\F14A\"; }\n\n.fa-pencil-square:before {\n  content: \"\\F14B\"; }\n\n.fa-external-link-square:before {\n  content: \"\\F14C\"; }\n\n.fa-share-square:before {\n  content: \"\\F14D\"; }\n\n.fa-compass:before {\n  content: \"\\F14E\"; }\n\n.fa-toggle-down:before,\n.fa-caret-square-o-down:before {\n  content: \"\\F150\"; }\n\n.fa-toggle-up:before,\n.fa-caret-square-o-up:before {\n  content: \"\\F151\"; }\n\n.fa-toggle-right:before,\n.fa-caret-square-o-right:before {\n  content: \"\\F152\"; }\n\n.fa-euro:before,\n.fa-eur:before {\n  content: \"\\F153\"; }\n\n.fa-gbp:before {\n  content: \"\\F154\"; }\n\n.fa-dollar:before,\n.fa-usd:before {\n  content: \"\\F155\"; }\n\n.fa-rupee:before,\n.fa-inr:before {\n  content: \"\\F156\"; }\n\n.fa-cny:before,\n.fa-rmb:before,\n.fa-yen:before,\n.fa-jpy:before {\n  content: \"\\F157\"; }\n\n.fa-ruble:before,\n.fa-rouble:before,\n.fa-rub:before {\n  content: \"\\F158\"; }\n\n.fa-won:before,\n.fa-krw:before {\n  content: \"\\F159\"; }\n\n.fa-bitcoin:before,\n.fa-btc:before {\n  content: \"\\F15A\"; }\n\n.fa-file:before {\n  content: \"\\F15B\"; }\n\n.fa-file-text:before {\n  content: \"\\F15C\"; }\n\n.fa-sort-alpha-asc:before {\n  content: \"\\F15D\"; }\n\n.fa-sort-alpha-desc:before {\n  content: \"\\F15E\"; }\n\n.fa-sort-amount-asc:before {\n  content: \"\\F160\"; }\n\n.fa-sort-amount-desc:before {\n  content: \"\\F161\"; }\n\n.fa-sort-numeric-asc:before {\n  content: \"\\F162\"; }\n\n.fa-sort-numeric-desc:before {\n  content: \"\\F163\"; }\n\n.fa-thumbs-up:before {\n  content: \"\\F164\"; }\n\n.fa-thumbs-down:before {\n  content: \"\\F165\"; }\n\n.fa-youtube-square:before {\n  content: \"\\F166\"; }\n\n.fa-youtube:before {\n  content: \"\\F167\"; }\n\n.fa-xing:before {\n  content: \"\\F168\"; }\n\n.fa-xing-square:before {\n  content: \"\\F169\"; }\n\n.fa-youtube-play:before {\n  content: \"\\F16A\"; }\n\n.fa-dropbox:before {\n  content: \"\\F16B\"; }\n\n.fa-stack-overflow:before {\n  content: \"\\F16C\"; }\n\n.fa-instagram:before {\n  content: \"\\F16D\"; }\n\n.fa-flickr:before {\n  content: \"\\F16E\"; }\n\n.fa-adn:before {\n  content: \"\\F170\"; }\n\n.fa-bitbucket:before {\n  content: \"\\F171\"; }\n\n.fa-bitbucket-square:before {\n  content: \"\\F172\"; }\n\n.fa-tumblr:before {\n  content: \"\\F173\"; }\n\n.fa-tumblr-square:before {\n  content: \"\\F174\"; }\n\n.fa-long-arrow-down:before {\n  content: \"\\F175\"; }\n\n.fa-long-arrow-up:before {\n  content: \"\\F176\"; }\n\n.fa-long-arrow-left:before {\n  content: \"\\F177\"; }\n\n.fa-long-arrow-right:before {\n  content: \"\\F178\"; }\n\n.fa-apple:before {\n  content: \"\\F179\"; }\n\n.fa-windows:before {\n  content: \"\\F17A\"; }\n\n.fa-android:before {\n  content: \"\\F17B\"; }\n\n.fa-linux:before {\n  content: \"\\F17C\"; }\n\n.fa-dribbble:before {\n  content: \"\\F17D\"; }\n\n.fa-skype:before {\n  content: \"\\F17E\"; }\n\n.fa-foursquare:before {\n  content: \"\\F180\"; }\n\n.fa-trello:before {\n  content: \"\\F181\"; }\n\n.fa-female:before {\n  content: \"\\F182\"; }\n\n.fa-male:before {\n  content: \"\\F183\"; }\n\n.fa-gittip:before,\n.fa-gratipay:before {\n  content: \"\\F184\"; }\n\n.fa-sun-o:before {\n  content: \"\\F185\"; }\n\n.fa-moon-o:before {\n  content: \"\\F186\"; }\n\n.fa-archive:before {\n  content: \"\\F187\"; }\n\n.fa-bug:before {\n  content: \"\\F188\"; }\n\n.fa-vk:before {\n  content: \"\\F189\"; }\n\n.fa-weibo:before {\n  content: \"\\F18A\"; }\n\n.fa-renren:before {\n  content: \"\\F18B\"; }\n\n.fa-pagelines:before {\n  content: \"\\F18C\"; }\n\n.fa-stack-exchange:before {\n  content: \"\\F18D\"; }\n\n.fa-arrow-circle-o-right:before {\n  content: \"\\F18E\"; }\n\n.fa-arrow-circle-o-left:before {\n  content: \"\\F190\"; }\n\n.fa-toggle-left:before,\n.fa-caret-square-o-left:before {\n  content: \"\\F191\"; }\n\n.fa-dot-circle-o:before {\n  content: \"\\F192\"; }\n\n.fa-wheelchair:before {\n  content: \"\\F193\"; }\n\n.fa-vimeo-square:before {\n  content: \"\\F194\"; }\n\n.fa-turkish-lira:before,\n.fa-try:before {\n  content: \"\\F195\"; }\n\n.fa-plus-square-o:before {\n  content: \"\\F196\"; }\n\n.fa-space-shuttle:before {\n  content: \"\\F197\"; }\n\n.fa-slack:before {\n  content: \"\\F198\"; }\n\n.fa-envelope-square:before {\n  content: \"\\F199\"; }\n\n.fa-wordpress:before {\n  content: \"\\F19A\"; }\n\n.fa-openid:before {\n  content: \"\\F19B\"; }\n\n.fa-institution:before,\n.fa-bank:before,\n.fa-university:before {\n  content: \"\\F19C\"; }\n\n.fa-mortar-board:before,\n.fa-graduation-cap:before {\n  content: \"\\F19D\"; }\n\n.fa-yahoo:before {\n  content: \"\\F19E\"; }\n\n.fa-google:before {\n  content: \"\\F1A0\"; }\n\n.fa-reddit:before {\n  content: \"\\F1A1\"; }\n\n.fa-reddit-square:before {\n  content: \"\\F1A2\"; }\n\n.fa-stumbleupon-circle:before {\n  content: \"\\F1A3\"; }\n\n.fa-stumbleupon:before {\n  content: \"\\F1A4\"; }\n\n.fa-delicious:before {\n  content: \"\\F1A5\"; }\n\n.fa-digg:before {\n  content: \"\\F1A6\"; }\n\n.fa-pied-piper-pp:before {\n  content: \"\\F1A7\"; }\n\n.fa-pied-piper-alt:before {\n  content: \"\\F1A8\"; }\n\n.fa-drupal:before {\n  content: \"\\F1A9\"; }\n\n.fa-joomla:before {\n  content: \"\\F1AA\"; }\n\n.fa-language:before {\n  content: \"\\F1AB\"; }\n\n.fa-fax:before {\n  content: \"\\F1AC\"; }\n\n.fa-building:before {\n  content: \"\\F1AD\"; }\n\n.fa-child:before {\n  content: \"\\F1AE\"; }\n\n.fa-paw:before {\n  content: \"\\F1B0\"; }\n\n.fa-spoon:before {\n  content: \"\\F1B1\"; }\n\n.fa-cube:before {\n  content: \"\\F1B2\"; }\n\n.fa-cubes:before {\n  content: \"\\F1B3\"; }\n\n.fa-behance:before {\n  content: \"\\F1B4\"; }\n\n.fa-behance-square:before {\n  content: \"\\F1B5\"; }\n\n.fa-steam:before {\n  content: \"\\F1B6\"; }\n\n.fa-steam-square:before {\n  content: \"\\F1B7\"; }\n\n.fa-recycle:before {\n  content: \"\\F1B8\"; }\n\n.fa-automobile:before,\n.fa-car:before {\n  content: \"\\F1B9\"; }\n\n.fa-cab:before,\n.fa-taxi:before {\n  content: \"\\F1BA\"; }\n\n.fa-tree:before {\n  content: \"\\F1BB\"; }\n\n.fa-spotify:before {\n  content: \"\\F1BC\"; }\n\n.fa-deviantart:before {\n  content: \"\\F1BD\"; }\n\n.fa-soundcloud:before {\n  content: \"\\F1BE\"; }\n\n.fa-database:before {\n  content: \"\\F1C0\"; }\n\n.fa-file-pdf-o:before {\n  content: \"\\F1C1\"; }\n\n.fa-file-word-o:before {\n  content: \"\\F1C2\"; }\n\n.fa-file-excel-o:before {\n  content: \"\\F1C3\"; }\n\n.fa-file-powerpoint-o:before {\n  content: \"\\F1C4\"; }\n\n.fa-file-photo-o:before,\n.fa-file-picture-o:before,\n.fa-file-image-o:before {\n  content: \"\\F1C5\"; }\n\n.fa-file-zip-o:before,\n.fa-file-archive-o:before {\n  content: \"\\F1C6\"; }\n\n.fa-file-sound-o:before,\n.fa-file-audio-o:before {\n  content: \"\\F1C7\"; }\n\n.fa-file-movie-o:before,\n.fa-file-video-o:before {\n  content: \"\\F1C8\"; }\n\n.fa-file-code-o:before {\n  content: \"\\F1C9\"; }\n\n.fa-vine:before {\n  content: \"\\F1CA\"; }\n\n.fa-codepen:before {\n  content: \"\\F1CB\"; }\n\n.fa-jsfiddle:before {\n  content: \"\\F1CC\"; }\n\n.fa-life-bouy:before,\n.fa-life-buoy:before,\n.fa-life-saver:before,\n.fa-support:before,\n.fa-life-ring:before {\n  content: \"\\F1CD\"; }\n\n.fa-circle-o-notch:before {\n  content: \"\\F1CE\"; }\n\n.fa-ra:before,\n.fa-resistance:before,\n.fa-rebel:before {\n  content: \"\\F1D0\"; }\n\n.fa-ge:before,\n.fa-empire:before {\n  content: \"\\F1D1\"; }\n\n.fa-git-square:before {\n  content: \"\\F1D2\"; }\n\n.fa-git:before {\n  content: \"\\F1D3\"; }\n\n.fa-y-combinator-square:before,\n.fa-yc-square:before,\n.fa-hacker-news:before {\n  content: \"\\F1D4\"; }\n\n.fa-tencent-weibo:before {\n  content: \"\\F1D5\"; }\n\n.fa-qq:before {\n  content: \"\\F1D6\"; }\n\n.fa-wechat:before,\n.fa-weixin:before {\n  content: \"\\F1D7\"; }\n\n.fa-send:before,\n.fa-paper-plane:before {\n  content: \"\\F1D8\"; }\n\n.fa-send-o:before,\n.fa-paper-plane-o:before {\n  content: \"\\F1D9\"; }\n\n.fa-history:before {\n  content: \"\\F1DA\"; }\n\n.fa-circle-thin:before {\n  content: \"\\F1DB\"; }\n\n.fa-header:before {\n  content: \"\\F1DC\"; }\n\n.fa-paragraph:before {\n  content: \"\\F1DD\"; }\n\n.fa-sliders:before {\n  content: \"\\F1DE\"; }\n\n.fa-share-alt:before {\n  content: \"\\F1E0\"; }\n\n.fa-share-alt-square:before {\n  content: \"\\F1E1\"; }\n\n.fa-bomb:before {\n  content: \"\\F1E2\"; }\n\n.fa-soccer-ball-o:before,\n.fa-futbol-o:before {\n  content: \"\\F1E3\"; }\n\n.fa-tty:before {\n  content: \"\\F1E4\"; }\n\n.fa-binoculars:before {\n  content: \"\\F1E5\"; }\n\n.fa-plug:before {\n  content: \"\\F1E6\"; }\n\n.fa-slideshare:before {\n  content: \"\\F1E7\"; }\n\n.fa-twitch:before {\n  content: \"\\F1E8\"; }\n\n.fa-yelp:before {\n  content: \"\\F1E9\"; }\n\n.fa-newspaper-o:before {\n  content: \"\\F1EA\"; }\n\n.fa-wifi:before {\n  content: \"\\F1EB\"; }\n\n.fa-calculator:before {\n  content: \"\\F1EC\"; }\n\n.fa-paypal:before {\n  content: \"\\F1ED\"; }\n\n.fa-google-wallet:before {\n  content: \"\\F1EE\"; }\n\n.fa-cc-visa:before {\n  content: \"\\F1F0\"; }\n\n.fa-cc-mastercard:before {\n  content: \"\\F1F1\"; }\n\n.fa-cc-discover:before {\n  content: \"\\F1F2\"; }\n\n.fa-cc-amex:before {\n  content: \"\\F1F3\"; }\n\n.fa-cc-paypal:before {\n  content: \"\\F1F4\"; }\n\n.fa-cc-stripe:before {\n  content: \"\\F1F5\"; }\n\n.fa-bell-slash:before {\n  content: \"\\F1F6\"; }\n\n.fa-bell-slash-o:before {\n  content: \"\\F1F7\"; }\n\n.fa-trash:before {\n  content: \"\\F1F8\"; }\n\n.fa-copyright:before {\n  content: \"\\F1F9\"; }\n\n.fa-at:before {\n  content: \"\\F1FA\"; }\n\n.fa-eyedropper:before {\n  content: \"\\F1FB\"; }\n\n.fa-paint-brush:before {\n  content: \"\\F1FC\"; }\n\n.fa-birthday-cake:before {\n  content: \"\\F1FD\"; }\n\n.fa-area-chart:before {\n  content: \"\\F1FE\"; }\n\n.fa-pie-chart:before {\n  content: \"\\F200\"; }\n\n.fa-line-chart:before {\n  content: \"\\F201\"; }\n\n.fa-lastfm:before {\n  content: \"\\F202\"; }\n\n.fa-lastfm-square:before {\n  content: \"\\F203\"; }\n\n.fa-toggle-off:before {\n  content: \"\\F204\"; }\n\n.fa-toggle-on:before {\n  content: \"\\F205\"; }\n\n.fa-bicycle:before {\n  content: \"\\F206\"; }\n\n.fa-bus:before {\n  content: \"\\F207\"; }\n\n.fa-ioxhost:before {\n  content: \"\\F208\"; }\n\n.fa-angellist:before {\n  content: \"\\F209\"; }\n\n.fa-cc:before {\n  content: \"\\F20A\"; }\n\n.fa-shekel:before,\n.fa-sheqel:before,\n.fa-ils:before {\n  content: \"\\F20B\"; }\n\n.fa-meanpath:before {\n  content: \"\\F20C\"; }\n\n.fa-buysellads:before {\n  content: \"\\F20D\"; }\n\n.fa-connectdevelop:before {\n  content: \"\\F20E\"; }\n\n.fa-dashcube:before {\n  content: \"\\F210\"; }\n\n.fa-forumbee:before {\n  content: \"\\F211\"; }\n\n.fa-leanpub:before {\n  content: \"\\F212\"; }\n\n.fa-sellsy:before {\n  content: \"\\F213\"; }\n\n.fa-shirtsinbulk:before {\n  content: \"\\F214\"; }\n\n.fa-simplybuilt:before {\n  content: \"\\F215\"; }\n\n.fa-skyatlas:before {\n  content: \"\\F216\"; }\n\n.fa-cart-plus:before {\n  content: \"\\F217\"; }\n\n.fa-cart-arrow-down:before {\n  content: \"\\F218\"; }\n\n.fa-diamond:before {\n  content: \"\\F219\"; }\n\n.fa-ship:before {\n  content: \"\\F21A\"; }\n\n.fa-user-secret:before {\n  content: \"\\F21B\"; }\n\n.fa-motorcycle:before {\n  content: \"\\F21C\"; }\n\n.fa-street-view:before {\n  content: \"\\F21D\"; }\n\n.fa-heartbeat:before {\n  content: \"\\F21E\"; }\n\n.fa-venus:before {\n  content: \"\\F221\"; }\n\n.fa-mars:before {\n  content: \"\\F222\"; }\n\n.fa-mercury:before {\n  content: \"\\F223\"; }\n\n.fa-intersex:before,\n.fa-transgender:before {\n  content: \"\\F224\"; }\n\n.fa-transgender-alt:before {\n  content: \"\\F225\"; }\n\n.fa-venus-double:before {\n  content: \"\\F226\"; }\n\n.fa-mars-double:before {\n  content: \"\\F227\"; }\n\n.fa-venus-mars:before {\n  content: \"\\F228\"; }\n\n.fa-mars-stroke:before {\n  content: \"\\F229\"; }\n\n.fa-mars-stroke-v:before {\n  content: \"\\F22A\"; }\n\n.fa-mars-stroke-h:before {\n  content: \"\\F22B\"; }\n\n.fa-neuter:before {\n  content: \"\\F22C\"; }\n\n.fa-genderless:before {\n  content: \"\\F22D\"; }\n\n.fa-facebook-official:before {\n  content: \"\\F230\"; }\n\n.fa-pinterest-p:before {\n  content: \"\\F231\"; }\n\n.fa-whatsapp:before {\n  content: \"\\F232\"; }\n\n.fa-server:before {\n  content: \"\\F233\"; }\n\n.fa-user-plus:before {\n  content: \"\\F234\"; }\n\n.fa-user-times:before {\n  content: \"\\F235\"; }\n\n.fa-hotel:before,\n.fa-bed:before {\n  content: \"\\F236\"; }\n\n.fa-viacoin:before {\n  content: \"\\F237\"; }\n\n.fa-train:before {\n  content: \"\\F238\"; }\n\n.fa-subway:before {\n  content: \"\\F239\"; }\n\n.fa-medium:before {\n  content: \"\\F23A\"; }\n\n.fa-yc:before,\n.fa-y-combinator:before {\n  content: \"\\F23B\"; }\n\n.fa-optin-monster:before {\n  content: \"\\F23C\"; }\n\n.fa-opencart:before {\n  content: \"\\F23D\"; }\n\n.fa-expeditedssl:before {\n  content: \"\\F23E\"; }\n\n.fa-battery-4:before,\n.fa-battery-full:before {\n  content: \"\\F240\"; }\n\n.fa-battery-3:before,\n.fa-battery-three-quarters:before {\n  content: \"\\F241\"; }\n\n.fa-battery-2:before,\n.fa-battery-half:before {\n  content: \"\\F242\"; }\n\n.fa-battery-1:before,\n.fa-battery-quarter:before {\n  content: \"\\F243\"; }\n\n.fa-battery-0:before,\n.fa-battery-empty:before {\n  content: \"\\F244\"; }\n\n.fa-mouse-pointer:before {\n  content: \"\\F245\"; }\n\n.fa-i-cursor:before {\n  content: \"\\F246\"; }\n\n.fa-object-group:before {\n  content: \"\\F247\"; }\n\n.fa-object-ungroup:before {\n  content: \"\\F248\"; }\n\n.fa-sticky-note:before {\n  content: \"\\F249\"; }\n\n.fa-sticky-note-o:before {\n  content: \"\\F24A\"; }\n\n.fa-cc-jcb:before {\n  content: \"\\F24B\"; }\n\n.fa-cc-diners-club:before {\n  content: \"\\F24C\"; }\n\n.fa-clone:before {\n  content: \"\\F24D\"; }\n\n.fa-balance-scale:before {\n  content: \"\\F24E\"; }\n\n.fa-hourglass-o:before {\n  content: \"\\F250\"; }\n\n.fa-hourglass-1:before,\n.fa-hourglass-start:before {\n  content: \"\\F251\"; }\n\n.fa-hourglass-2:before,\n.fa-hourglass-half:before {\n  content: \"\\F252\"; }\n\n.fa-hourglass-3:before,\n.fa-hourglass-end:before {\n  content: \"\\F253\"; }\n\n.fa-hourglass:before {\n  content: \"\\F254\"; }\n\n.fa-hand-grab-o:before,\n.fa-hand-rock-o:before {\n  content: \"\\F255\"; }\n\n.fa-hand-stop-o:before,\n.fa-hand-paper-o:before {\n  content: \"\\F256\"; }\n\n.fa-hand-scissors-o:before {\n  content: \"\\F257\"; }\n\n.fa-hand-lizard-o:before {\n  content: \"\\F258\"; }\n\n.fa-hand-spock-o:before {\n  content: \"\\F259\"; }\n\n.fa-hand-pointer-o:before {\n  content: \"\\F25A\"; }\n\n.fa-hand-peace-o:before {\n  content: \"\\F25B\"; }\n\n.fa-trademark:before {\n  content: \"\\F25C\"; }\n\n.fa-registered:before {\n  content: \"\\F25D\"; }\n\n.fa-creative-commons:before {\n  content: \"\\F25E\"; }\n\n.fa-gg:before {\n  content: \"\\F260\"; }\n\n.fa-gg-circle:before {\n  content: \"\\F261\"; }\n\n.fa-tripadvisor:before {\n  content: \"\\F262\"; }\n\n.fa-odnoklassniki:before {\n  content: \"\\F263\"; }\n\n.fa-odnoklassniki-square:before {\n  content: \"\\F264\"; }\n\n.fa-get-pocket:before {\n  content: \"\\F265\"; }\n\n.fa-wikipedia-w:before {\n  content: \"\\F266\"; }\n\n.fa-safari:before {\n  content: \"\\F267\"; }\n\n.fa-chrome:before {\n  content: \"\\F268\"; }\n\n.fa-firefox:before {\n  content: \"\\F269\"; }\n\n.fa-opera:before {\n  content: \"\\F26A\"; }\n\n.fa-internet-explorer:before {\n  content: \"\\F26B\"; }\n\n.fa-tv:before,\n.fa-television:before {\n  content: \"\\F26C\"; }\n\n.fa-contao:before {\n  content: \"\\F26D\"; }\n\n.fa-500px:before {\n  content: \"\\F26E\"; }\n\n.fa-amazon:before {\n  content: \"\\F270\"; }\n\n.fa-calendar-plus-o:before {\n  content: \"\\F271\"; }\n\n.fa-calendar-minus-o:before {\n  content: \"\\F272\"; }\n\n.fa-calendar-times-o:before {\n  content: \"\\F273\"; }\n\n.fa-calendar-check-o:before {\n  content: \"\\F274\"; }\n\n.fa-industry:before {\n  content: \"\\F275\"; }\n\n.fa-map-pin:before {\n  content: \"\\F276\"; }\n\n.fa-map-signs:before {\n  content: \"\\F277\"; }\n\n.fa-map-o:before {\n  content: \"\\F278\"; }\n\n.fa-map:before {\n  content: \"\\F279\"; }\n\n.fa-commenting:before {\n  content: \"\\F27A\"; }\n\n.fa-commenting-o:before {\n  content: \"\\F27B\"; }\n\n.fa-houzz:before {\n  content: \"\\F27C\"; }\n\n.fa-vimeo:before {\n  content: \"\\F27D\"; }\n\n.fa-black-tie:before {\n  content: \"\\F27E\"; }\n\n.fa-fonticons:before {\n  content: \"\\F280\"; }\n\n.fa-reddit-alien:before {\n  content: \"\\F281\"; }\n\n.fa-edge:before {\n  content: \"\\F282\"; }\n\n.fa-credit-card-alt:before {\n  content: \"\\F283\"; }\n\n.fa-codiepie:before {\n  content: \"\\F284\"; }\n\n.fa-modx:before {\n  content: \"\\F285\"; }\n\n.fa-fort-awesome:before {\n  content: \"\\F286\"; }\n\n.fa-usb:before {\n  content: \"\\F287\"; }\n\n.fa-product-hunt:before {\n  content: \"\\F288\"; }\n\n.fa-mixcloud:before {\n  content: \"\\F289\"; }\n\n.fa-scribd:before {\n  content: \"\\F28A\"; }\n\n.fa-pause-circle:before {\n  content: \"\\F28B\"; }\n\n.fa-pause-circle-o:before {\n  content: \"\\F28C\"; }\n\n.fa-stop-circle:before {\n  content: \"\\F28D\"; }\n\n.fa-stop-circle-o:before {\n  content: \"\\F28E\"; }\n\n.fa-shopping-bag:before {\n  content: \"\\F290\"; }\n\n.fa-shopping-basket:before {\n  content: \"\\F291\"; }\n\n.fa-hashtag:before {\n  content: \"\\F292\"; }\n\n.fa-bluetooth:before {\n  content: \"\\F293\"; }\n\n.fa-bluetooth-b:before {\n  content: \"\\F294\"; }\n\n.fa-percent:before {\n  content: \"\\F295\"; }\n\n.fa-gitlab:before {\n  content: \"\\F296\"; }\n\n.fa-wpbeginner:before {\n  content: \"\\F297\"; }\n\n.fa-wpforms:before {\n  content: \"\\F298\"; }\n\n.fa-envira:before {\n  content: \"\\F299\"; }\n\n.fa-universal-access:before {\n  content: \"\\F29A\"; }\n\n.fa-wheelchair-alt:before {\n  content: \"\\F29B\"; }\n\n.fa-question-circle-o:before {\n  content: \"\\F29C\"; }\n\n.fa-blind:before {\n  content: \"\\F29D\"; }\n\n.fa-audio-description:before {\n  content: \"\\F29E\"; }\n\n.fa-volume-control-phone:before {\n  content: \"\\F2A0\"; }\n\n.fa-braille:before {\n  content: \"\\F2A1\"; }\n\n.fa-assistive-listening-systems:before {\n  content: \"\\F2A2\"; }\n\n.fa-asl-interpreting:before,\n.fa-american-sign-language-interpreting:before {\n  content: \"\\F2A3\"; }\n\n.fa-deafness:before,\n.fa-hard-of-hearing:before,\n.fa-deaf:before {\n  content: \"\\F2A4\"; }\n\n.fa-glide:before {\n  content: \"\\F2A5\"; }\n\n.fa-glide-g:before {\n  content: \"\\F2A6\"; }\n\n.fa-signing:before,\n.fa-sign-language:before {\n  content: \"\\F2A7\"; }\n\n.fa-low-vision:before {\n  content: \"\\F2A8\"; }\n\n.fa-viadeo:before {\n  content: \"\\F2A9\"; }\n\n.fa-viadeo-square:before {\n  content: \"\\F2AA\"; }\n\n.fa-snapchat:before {\n  content: \"\\F2AB\"; }\n\n.fa-snapchat-ghost:before {\n  content: \"\\F2AC\"; }\n\n.fa-snapchat-square:before {\n  content: \"\\F2AD\"; }\n\n.fa-pied-piper:before {\n  content: \"\\F2AE\"; }\n\n.fa-first-order:before {\n  content: \"\\F2B0\"; }\n\n.fa-yoast:before {\n  content: \"\\F2B1\"; }\n\n.fa-themeisle:before {\n  content: \"\\F2B2\"; }\n\n.fa-google-plus-circle:before,\n.fa-google-plus-official:before {\n  content: \"\\F2B3\"; }\n\n.fa-fa:before,\n.fa-font-awesome:before {\n  content: \"\\F2B4\"; }\n\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0; }\n\n.sr-only-focusable:active,\n.sr-only-focusable:focus {\n  position: static;\n  width: auto;\n  height: auto;\n  margin: 0;\n  overflow: visible;\n  clip: auto; }\n", ""]);
+	exports.push([module.id, "/*!\n *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome\n *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)\n */\n/* FONT PATH\n * -------------------------- */\n@font-face {\n  font-family: 'FontAwesome';\n  src: url(" + __webpack_require__(/*! ../fonts/fontawesome-webfont.eot?v=4.6.3 */ 495) + ");\n  src: url(" + __webpack_require__(/*! ../fonts/fontawesome-webfont.eot */ 496) + "?#iefix&v=4.6.3) format(\"embedded-opentype\"), url(" + __webpack_require__(/*! ../fonts/fontawesome-webfont.woff2?v=4.6.3 */ 497) + ") format(\"woff2\"), url(" + __webpack_require__(/*! ../fonts/fontawesome-webfont.woff?v=4.6.3 */ 498) + ") format(\"woff\"), url(" + __webpack_require__(/*! ../fonts/fontawesome-webfont.ttf?v=4.6.3 */ 499) + ") format(\"truetype\"), url(" + __webpack_require__(/*! ../fonts/fontawesome-webfont.svg?v=4.6.3 */ 500) + "#fontawesomeregular) format(\"svg\");\n  font-weight: normal;\n  font-style: normal; }\n\n.fa {\n  display: inline-block;\n  font: normal normal normal 14px/1 FontAwesome;\n  font-size: inherit;\n  text-rendering: auto;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\n/* makes the font 33% larger relative to the icon container */\n.fa-lg {\n  font-size: 1.33333333em;\n  line-height: 0.75em;\n  vertical-align: -15%; }\n\n.fa-2x {\n  font-size: 2em; }\n\n.fa-3x {\n  font-size: 3em; }\n\n.fa-4x {\n  font-size: 4em; }\n\n.fa-5x {\n  font-size: 5em; }\n\n.fa-fw {\n  width: 1.28571429em;\n  text-align: center; }\n\n.fa-ul {\n  padding-left: 0;\n  margin-left: 2.14285714em;\n  list-style-type: none; }\n\n.fa-ul > li {\n  position: relative; }\n\n.fa-li {\n  position: absolute;\n  left: -2.14285714em;\n  width: 2.14285714em;\n  top: 0.14285714em;\n  text-align: center; }\n\n.fa-li.fa-lg {\n  left: -1.85714286em; }\n\n.fa-border {\n  padding: .2em .25em .15em;\n  border: solid 0.08em #eeeeee;\n  border-radius: .1em; }\n\n.fa-pull-left {\n  float: left; }\n\n.fa-pull-right {\n  float: right; }\n\n.fa.fa-pull-left {\n  margin-right: .3em; }\n\n.fa.fa-pull-right {\n  margin-left: .3em; }\n\n/* Deprecated as of 4.4.0 */\n.pull-right {\n  float: right; }\n\n.pull-left {\n  float: left; }\n\n.fa.pull-left {\n  margin-right: .3em; }\n\n.fa.pull-right {\n  margin-left: .3em; }\n\n.fa-spin {\n  -webkit-animation: fa-spin 2s infinite linear;\n  animation: fa-spin 2s infinite linear; }\n\n.fa-pulse {\n  -webkit-animation: fa-spin 1s infinite steps(8);\n  animation: fa-spin 1s infinite steps(8); }\n\n@-webkit-keyframes fa-spin {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(359deg);\n    transform: rotate(359deg); } }\n\n@keyframes fa-spin {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(359deg);\n    transform: rotate(359deg); } }\n\n.fa-rotate-90 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=1)\";\n  -webkit-transform: rotate(90deg);\n  -ms-transform: rotate(90deg);\n  transform: rotate(90deg); }\n\n.fa-rotate-180 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)\";\n  -webkit-transform: rotate(180deg);\n  -ms-transform: rotate(180deg);\n  transform: rotate(180deg); }\n\n.fa-rotate-270 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=3)\";\n  -webkit-transform: rotate(270deg);\n  -ms-transform: rotate(270deg);\n  transform: rotate(270deg); }\n\n.fa-flip-horizontal {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)\";\n  -webkit-transform: scale(-1, 1);\n  -ms-transform: scale(-1, 1);\n  transform: scale(-1, 1); }\n\n.fa-flip-vertical {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)\";\n  -webkit-transform: scale(1, -1);\n  -ms-transform: scale(1, -1);\n  transform: scale(1, -1); }\n\n:root .fa-rotate-90,\n:root .fa-rotate-180,\n:root .fa-rotate-270,\n:root .fa-flip-horizontal,\n:root .fa-flip-vertical {\n  filter: none; }\n\n.fa-stack {\n  position: relative;\n  display: inline-block;\n  width: 2em;\n  height: 2em;\n  line-height: 2em;\n  vertical-align: middle; }\n\n.fa-stack-1x,\n.fa-stack-2x {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  text-align: center; }\n\n.fa-stack-1x {\n  line-height: inherit; }\n\n.fa-stack-2x {\n  font-size: 2em; }\n\n.fa-inverse {\n  color: #ffffff; }\n\n/* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen\n   readers do not read off random characters that represent icons */\n.fa-glass:before {\n  content: \"\\F000\"; }\n\n.fa-music:before {\n  content: \"\\F001\"; }\n\n.fa-search:before {\n  content: \"\\F002\"; }\n\n.fa-envelope-o:before {\n  content: \"\\F003\"; }\n\n.fa-heart:before {\n  content: \"\\F004\"; }\n\n.fa-star:before {\n  content: \"\\F005\"; }\n\n.fa-star-o:before {\n  content: \"\\F006\"; }\n\n.fa-user:before {\n  content: \"\\F007\"; }\n\n.fa-film:before {\n  content: \"\\F008\"; }\n\n.fa-th-large:before {\n  content: \"\\F009\"; }\n\n.fa-th:before {\n  content: \"\\F00A\"; }\n\n.fa-th-list:before {\n  content: \"\\F00B\"; }\n\n.fa-check:before {\n  content: \"\\F00C\"; }\n\n.fa-remove:before,\n.fa-close:before,\n.fa-times:before {\n  content: \"\\F00D\"; }\n\n.fa-search-plus:before {\n  content: \"\\F00E\"; }\n\n.fa-search-minus:before {\n  content: \"\\F010\"; }\n\n.fa-power-off:before {\n  content: \"\\F011\"; }\n\n.fa-signal:before {\n  content: \"\\F012\"; }\n\n.fa-gear:before,\n.fa-cog:before {\n  content: \"\\F013\"; }\n\n.fa-trash-o:before {\n  content: \"\\F014\"; }\n\n.fa-home:before {\n  content: \"\\F015\"; }\n\n.fa-file-o:before {\n  content: \"\\F016\"; }\n\n.fa-clock-o:before {\n  content: \"\\F017\"; }\n\n.fa-road:before {\n  content: \"\\F018\"; }\n\n.fa-download:before {\n  content: \"\\F019\"; }\n\n.fa-arrow-circle-o-down:before {\n  content: \"\\F01A\"; }\n\n.fa-arrow-circle-o-up:before {\n  content: \"\\F01B\"; }\n\n.fa-inbox:before {\n  content: \"\\F01C\"; }\n\n.fa-play-circle-o:before {\n  content: \"\\F01D\"; }\n\n.fa-rotate-right:before,\n.fa-repeat:before {\n  content: \"\\F01E\"; }\n\n.fa-refresh:before {\n  content: \"\\F021\"; }\n\n.fa-list-alt:before {\n  content: \"\\F022\"; }\n\n.fa-lock:before {\n  content: \"\\F023\"; }\n\n.fa-flag:before {\n  content: \"\\F024\"; }\n\n.fa-headphones:before {\n  content: \"\\F025\"; }\n\n.fa-volume-off:before {\n  content: \"\\F026\"; }\n\n.fa-volume-down:before {\n  content: \"\\F027\"; }\n\n.fa-volume-up:before {\n  content: \"\\F028\"; }\n\n.fa-qrcode:before {\n  content: \"\\F029\"; }\n\n.fa-barcode:before {\n  content: \"\\F02A\"; }\n\n.fa-tag:before {\n  content: \"\\F02B\"; }\n\n.fa-tags:before {\n  content: \"\\F02C\"; }\n\n.fa-book:before {\n  content: \"\\F02D\"; }\n\n.fa-bookmark:before {\n  content: \"\\F02E\"; }\n\n.fa-print:before {\n  content: \"\\F02F\"; }\n\n.fa-camera:before {\n  content: \"\\F030\"; }\n\n.fa-font:before {\n  content: \"\\F031\"; }\n\n.fa-bold:before {\n  content: \"\\F032\"; }\n\n.fa-italic:before {\n  content: \"\\F033\"; }\n\n.fa-text-height:before {\n  content: \"\\F034\"; }\n\n.fa-text-width:before {\n  content: \"\\F035\"; }\n\n.fa-align-left:before {\n  content: \"\\F036\"; }\n\n.fa-align-center:before {\n  content: \"\\F037\"; }\n\n.fa-align-right:before {\n  content: \"\\F038\"; }\n\n.fa-align-justify:before {\n  content: \"\\F039\"; }\n\n.fa-list:before {\n  content: \"\\F03A\"; }\n\n.fa-dedent:before,\n.fa-outdent:before {\n  content: \"\\F03B\"; }\n\n.fa-indent:before {\n  content: \"\\F03C\"; }\n\n.fa-video-camera:before {\n  content: \"\\F03D\"; }\n\n.fa-photo:before,\n.fa-image:before,\n.fa-picture-o:before {\n  content: \"\\F03E\"; }\n\n.fa-pencil:before {\n  content: \"\\F040\"; }\n\n.fa-map-marker:before {\n  content: \"\\F041\"; }\n\n.fa-adjust:before {\n  content: \"\\F042\"; }\n\n.fa-tint:before {\n  content: \"\\F043\"; }\n\n.fa-edit:before,\n.fa-pencil-square-o:before {\n  content: \"\\F044\"; }\n\n.fa-share-square-o:before {\n  content: \"\\F045\"; }\n\n.fa-check-square-o:before {\n  content: \"\\F046\"; }\n\n.fa-arrows:before {\n  content: \"\\F047\"; }\n\n.fa-step-backward:before {\n  content: \"\\F048\"; }\n\n.fa-fast-backward:before {\n  content: \"\\F049\"; }\n\n.fa-backward:before {\n  content: \"\\F04A\"; }\n\n.fa-play:before {\n  content: \"\\F04B\"; }\n\n.fa-pause:before {\n  content: \"\\F04C\"; }\n\n.fa-stop:before {\n  content: \"\\F04D\"; }\n\n.fa-forward:before {\n  content: \"\\F04E\"; }\n\n.fa-fast-forward:before {\n  content: \"\\F050\"; }\n\n.fa-step-forward:before {\n  content: \"\\F051\"; }\n\n.fa-eject:before {\n  content: \"\\F052\"; }\n\n.fa-chevron-left:before {\n  content: \"\\F053\"; }\n\n.fa-chevron-right:before {\n  content: \"\\F054\"; }\n\n.fa-plus-circle:before {\n  content: \"\\F055\"; }\n\n.fa-minus-circle:before {\n  content: \"\\F056\"; }\n\n.fa-times-circle:before {\n  content: \"\\F057\"; }\n\n.fa-check-circle:before {\n  content: \"\\F058\"; }\n\n.fa-question-circle:before {\n  content: \"\\F059\"; }\n\n.fa-info-circle:before {\n  content: \"\\F05A\"; }\n\n.fa-crosshairs:before {\n  content: \"\\F05B\"; }\n\n.fa-times-circle-o:before {\n  content: \"\\F05C\"; }\n\n.fa-check-circle-o:before {\n  content: \"\\F05D\"; }\n\n.fa-ban:before {\n  content: \"\\F05E\"; }\n\n.fa-arrow-left:before {\n  content: \"\\F060\"; }\n\n.fa-arrow-right:before {\n  content: \"\\F061\"; }\n\n.fa-arrow-up:before {\n  content: \"\\F062\"; }\n\n.fa-arrow-down:before {\n  content: \"\\F063\"; }\n\n.fa-mail-forward:before,\n.fa-share:before {\n  content: \"\\F064\"; }\n\n.fa-expand:before {\n  content: \"\\F065\"; }\n\n.fa-compress:before {\n  content: \"\\F066\"; }\n\n.fa-plus:before {\n  content: \"\\F067\"; }\n\n.fa-minus:before {\n  content: \"\\F068\"; }\n\n.fa-asterisk:before {\n  content: \"\\F069\"; }\n\n.fa-exclamation-circle:before {\n  content: \"\\F06A\"; }\n\n.fa-gift:before {\n  content: \"\\F06B\"; }\n\n.fa-leaf:before {\n  content: \"\\F06C\"; }\n\n.fa-fire:before {\n  content: \"\\F06D\"; }\n\n.fa-eye:before {\n  content: \"\\F06E\"; }\n\n.fa-eye-slash:before {\n  content: \"\\F070\"; }\n\n.fa-warning:before,\n.fa-exclamation-triangle:before {\n  content: \"\\F071\"; }\n\n.fa-plane:before {\n  content: \"\\F072\"; }\n\n.fa-calendar:before {\n  content: \"\\F073\"; }\n\n.fa-random:before {\n  content: \"\\F074\"; }\n\n.fa-comment:before {\n  content: \"\\F075\"; }\n\n.fa-magnet:before {\n  content: \"\\F076\"; }\n\n.fa-chevron-up:before {\n  content: \"\\F077\"; }\n\n.fa-chevron-down:before {\n  content: \"\\F078\"; }\n\n.fa-retweet:before {\n  content: \"\\F079\"; }\n\n.fa-shopping-cart:before {\n  content: \"\\F07A\"; }\n\n.fa-folder:before {\n  content: \"\\F07B\"; }\n\n.fa-folder-open:before {\n  content: \"\\F07C\"; }\n\n.fa-arrows-v:before {\n  content: \"\\F07D\"; }\n\n.fa-arrows-h:before {\n  content: \"\\F07E\"; }\n\n.fa-bar-chart-o:before,\n.fa-bar-chart:before {\n  content: \"\\F080\"; }\n\n.fa-twitter-square:before {\n  content: \"\\F081\"; }\n\n.fa-facebook-square:before {\n  content: \"\\F082\"; }\n\n.fa-camera-retro:before {\n  content: \"\\F083\"; }\n\n.fa-key:before {\n  content: \"\\F084\"; }\n\n.fa-gears:before,\n.fa-cogs:before {\n  content: \"\\F085\"; }\n\n.fa-comments:before {\n  content: \"\\F086\"; }\n\n.fa-thumbs-o-up:before {\n  content: \"\\F087\"; }\n\n.fa-thumbs-o-down:before {\n  content: \"\\F088\"; }\n\n.fa-star-half:before {\n  content: \"\\F089\"; }\n\n.fa-heart-o:before {\n  content: \"\\F08A\"; }\n\n.fa-sign-out:before {\n  content: \"\\F08B\"; }\n\n.fa-linkedin-square:before {\n  content: \"\\F08C\"; }\n\n.fa-thumb-tack:before {\n  content: \"\\F08D\"; }\n\n.fa-external-link:before {\n  content: \"\\F08E\"; }\n\n.fa-sign-in:before {\n  content: \"\\F090\"; }\n\n.fa-trophy:before {\n  content: \"\\F091\"; }\n\n.fa-github-square:before {\n  content: \"\\F092\"; }\n\n.fa-upload:before {\n  content: \"\\F093\"; }\n\n.fa-lemon-o:before {\n  content: \"\\F094\"; }\n\n.fa-phone:before {\n  content: \"\\F095\"; }\n\n.fa-square-o:before {\n  content: \"\\F096\"; }\n\n.fa-bookmark-o:before {\n  content: \"\\F097\"; }\n\n.fa-phone-square:before {\n  content: \"\\F098\"; }\n\n.fa-twitter:before {\n  content: \"\\F099\"; }\n\n.fa-facebook-f:before,\n.fa-facebook:before {\n  content: \"\\F09A\"; }\n\n.fa-github:before {\n  content: \"\\F09B\"; }\n\n.fa-unlock:before {\n  content: \"\\F09C\"; }\n\n.fa-credit-card:before {\n  content: \"\\F09D\"; }\n\n.fa-feed:before,\n.fa-rss:before {\n  content: \"\\F09E\"; }\n\n.fa-hdd-o:before {\n  content: \"\\F0A0\"; }\n\n.fa-bullhorn:before {\n  content: \"\\F0A1\"; }\n\n.fa-bell:before {\n  content: \"\\F0F3\"; }\n\n.fa-certificate:before {\n  content: \"\\F0A3\"; }\n\n.fa-hand-o-right:before {\n  content: \"\\F0A4\"; }\n\n.fa-hand-o-left:before {\n  content: \"\\F0A5\"; }\n\n.fa-hand-o-up:before {\n  content: \"\\F0A6\"; }\n\n.fa-hand-o-down:before {\n  content: \"\\F0A7\"; }\n\n.fa-arrow-circle-left:before {\n  content: \"\\F0A8\"; }\n\n.fa-arrow-circle-right:before {\n  content: \"\\F0A9\"; }\n\n.fa-arrow-circle-up:before {\n  content: \"\\F0AA\"; }\n\n.fa-arrow-circle-down:before {\n  content: \"\\F0AB\"; }\n\n.fa-globe:before {\n  content: \"\\F0AC\"; }\n\n.fa-wrench:before {\n  content: \"\\F0AD\"; }\n\n.fa-tasks:before {\n  content: \"\\F0AE\"; }\n\n.fa-filter:before {\n  content: \"\\F0B0\"; }\n\n.fa-briefcase:before {\n  content: \"\\F0B1\"; }\n\n.fa-arrows-alt:before {\n  content: \"\\F0B2\"; }\n\n.fa-group:before,\n.fa-users:before {\n  content: \"\\F0C0\"; }\n\n.fa-chain:before,\n.fa-link:before {\n  content: \"\\F0C1\"; }\n\n.fa-cloud:before {\n  content: \"\\F0C2\"; }\n\n.fa-flask:before {\n  content: \"\\F0C3\"; }\n\n.fa-cut:before,\n.fa-scissors:before {\n  content: \"\\F0C4\"; }\n\n.fa-copy:before,\n.fa-files-o:before {\n  content: \"\\F0C5\"; }\n\n.fa-paperclip:before {\n  content: \"\\F0C6\"; }\n\n.fa-save:before,\n.fa-floppy-o:before {\n  content: \"\\F0C7\"; }\n\n.fa-square:before {\n  content: \"\\F0C8\"; }\n\n.fa-navicon:before,\n.fa-reorder:before,\n.fa-bars:before {\n  content: \"\\F0C9\"; }\n\n.fa-list-ul:before {\n  content: \"\\F0CA\"; }\n\n.fa-list-ol:before {\n  content: \"\\F0CB\"; }\n\n.fa-strikethrough:before {\n  content: \"\\F0CC\"; }\n\n.fa-underline:before {\n  content: \"\\F0CD\"; }\n\n.fa-table:before {\n  content: \"\\F0CE\"; }\n\n.fa-magic:before {\n  content: \"\\F0D0\"; }\n\n.fa-truck:before {\n  content: \"\\F0D1\"; }\n\n.fa-pinterest:before {\n  content: \"\\F0D2\"; }\n\n.fa-pinterest-square:before {\n  content: \"\\F0D3\"; }\n\n.fa-google-plus-square:before {\n  content: \"\\F0D4\"; }\n\n.fa-google-plus:before {\n  content: \"\\F0D5\"; }\n\n.fa-money:before {\n  content: \"\\F0D6\"; }\n\n.fa-caret-down:before {\n  content: \"\\F0D7\"; }\n\n.fa-caret-up:before {\n  content: \"\\F0D8\"; }\n\n.fa-caret-left:before {\n  content: \"\\F0D9\"; }\n\n.fa-caret-right:before {\n  content: \"\\F0DA\"; }\n\n.fa-columns:before {\n  content: \"\\F0DB\"; }\n\n.fa-unsorted:before,\n.fa-sort:before {\n  content: \"\\F0DC\"; }\n\n.fa-sort-down:before,\n.fa-sort-desc:before {\n  content: \"\\F0DD\"; }\n\n.fa-sort-up:before,\n.fa-sort-asc:before {\n  content: \"\\F0DE\"; }\n\n.fa-envelope:before {\n  content: \"\\F0E0\"; }\n\n.fa-linkedin:before {\n  content: \"\\F0E1\"; }\n\n.fa-rotate-left:before,\n.fa-undo:before {\n  content: \"\\F0E2\"; }\n\n.fa-legal:before,\n.fa-gavel:before {\n  content: \"\\F0E3\"; }\n\n.fa-dashboard:before,\n.fa-tachometer:before {\n  content: \"\\F0E4\"; }\n\n.fa-comment-o:before {\n  content: \"\\F0E5\"; }\n\n.fa-comments-o:before {\n  content: \"\\F0E6\"; }\n\n.fa-flash:before,\n.fa-bolt:before {\n  content: \"\\F0E7\"; }\n\n.fa-sitemap:before {\n  content: \"\\F0E8\"; }\n\n.fa-umbrella:before {\n  content: \"\\F0E9\"; }\n\n.fa-paste:before,\n.fa-clipboard:before {\n  content: \"\\F0EA\"; }\n\n.fa-lightbulb-o:before {\n  content: \"\\F0EB\"; }\n\n.fa-exchange:before {\n  content: \"\\F0EC\"; }\n\n.fa-cloud-download:before {\n  content: \"\\F0ED\"; }\n\n.fa-cloud-upload:before {\n  content: \"\\F0EE\"; }\n\n.fa-user-md:before {\n  content: \"\\F0F0\"; }\n\n.fa-stethoscope:before {\n  content: \"\\F0F1\"; }\n\n.fa-suitcase:before {\n  content: \"\\F0F2\"; }\n\n.fa-bell-o:before {\n  content: \"\\F0A2\"; }\n\n.fa-coffee:before {\n  content: \"\\F0F4\"; }\n\n.fa-cutlery:before {\n  content: \"\\F0F5\"; }\n\n.fa-file-text-o:before {\n  content: \"\\F0F6\"; }\n\n.fa-building-o:before {\n  content: \"\\F0F7\"; }\n\n.fa-hospital-o:before {\n  content: \"\\F0F8\"; }\n\n.fa-ambulance:before {\n  content: \"\\F0F9\"; }\n\n.fa-medkit:before {\n  content: \"\\F0FA\"; }\n\n.fa-fighter-jet:before {\n  content: \"\\F0FB\"; }\n\n.fa-beer:before {\n  content: \"\\F0FC\"; }\n\n.fa-h-square:before {\n  content: \"\\F0FD\"; }\n\n.fa-plus-square:before {\n  content: \"\\F0FE\"; }\n\n.fa-angle-double-left:before {\n  content: \"\\F100\"; }\n\n.fa-angle-double-right:before {\n  content: \"\\F101\"; }\n\n.fa-angle-double-up:before {\n  content: \"\\F102\"; }\n\n.fa-angle-double-down:before {\n  content: \"\\F103\"; }\n\n.fa-angle-left:before {\n  content: \"\\F104\"; }\n\n.fa-angle-right:before {\n  content: \"\\F105\"; }\n\n.fa-angle-up:before {\n  content: \"\\F106\"; }\n\n.fa-angle-down:before {\n  content: \"\\F107\"; }\n\n.fa-desktop:before {\n  content: \"\\F108\"; }\n\n.fa-laptop:before {\n  content: \"\\F109\"; }\n\n.fa-tablet:before {\n  content: \"\\F10A\"; }\n\n.fa-mobile-phone:before,\n.fa-mobile:before {\n  content: \"\\F10B\"; }\n\n.fa-circle-o:before {\n  content: \"\\F10C\"; }\n\n.fa-quote-left:before {\n  content: \"\\F10D\"; }\n\n.fa-quote-right:before {\n  content: \"\\F10E\"; }\n\n.fa-spinner:before {\n  content: \"\\F110\"; }\n\n.fa-circle:before {\n  content: \"\\F111\"; }\n\n.fa-mail-reply:before,\n.fa-reply:before {\n  content: \"\\F112\"; }\n\n.fa-github-alt:before {\n  content: \"\\F113\"; }\n\n.fa-folder-o:before {\n  content: \"\\F114\"; }\n\n.fa-folder-open-o:before {\n  content: \"\\F115\"; }\n\n.fa-smile-o:before {\n  content: \"\\F118\"; }\n\n.fa-frown-o:before {\n  content: \"\\F119\"; }\n\n.fa-meh-o:before {\n  content: \"\\F11A\"; }\n\n.fa-gamepad:before {\n  content: \"\\F11B\"; }\n\n.fa-keyboard-o:before {\n  content: \"\\F11C\"; }\n\n.fa-flag-o:before {\n  content: \"\\F11D\"; }\n\n.fa-flag-checkered:before {\n  content: \"\\F11E\"; }\n\n.fa-terminal:before {\n  content: \"\\F120\"; }\n\n.fa-code:before {\n  content: \"\\F121\"; }\n\n.fa-mail-reply-all:before,\n.fa-reply-all:before {\n  content: \"\\F122\"; }\n\n.fa-star-half-empty:before,\n.fa-star-half-full:before,\n.fa-star-half-o:before {\n  content: \"\\F123\"; }\n\n.fa-location-arrow:before {\n  content: \"\\F124\"; }\n\n.fa-crop:before {\n  content: \"\\F125\"; }\n\n.fa-code-fork:before {\n  content: \"\\F126\"; }\n\n.fa-unlink:before,\n.fa-chain-broken:before {\n  content: \"\\F127\"; }\n\n.fa-question:before {\n  content: \"\\F128\"; }\n\n.fa-info:before {\n  content: \"\\F129\"; }\n\n.fa-exclamation:before {\n  content: \"\\F12A\"; }\n\n.fa-superscript:before {\n  content: \"\\F12B\"; }\n\n.fa-subscript:before {\n  content: \"\\F12C\"; }\n\n.fa-eraser:before {\n  content: \"\\F12D\"; }\n\n.fa-puzzle-piece:before {\n  content: \"\\F12E\"; }\n\n.fa-microphone:before {\n  content: \"\\F130\"; }\n\n.fa-microphone-slash:before {\n  content: \"\\F131\"; }\n\n.fa-shield:before {\n  content: \"\\F132\"; }\n\n.fa-calendar-o:before {\n  content: \"\\F133\"; }\n\n.fa-fire-extinguisher:before {\n  content: \"\\F134\"; }\n\n.fa-rocket:before {\n  content: \"\\F135\"; }\n\n.fa-maxcdn:before {\n  content: \"\\F136\"; }\n\n.fa-chevron-circle-left:before {\n  content: \"\\F137\"; }\n\n.fa-chevron-circle-right:before {\n  content: \"\\F138\"; }\n\n.fa-chevron-circle-up:before {\n  content: \"\\F139\"; }\n\n.fa-chevron-circle-down:before {\n  content: \"\\F13A\"; }\n\n.fa-html5:before {\n  content: \"\\F13B\"; }\n\n.fa-css3:before {\n  content: \"\\F13C\"; }\n\n.fa-anchor:before {\n  content: \"\\F13D\"; }\n\n.fa-unlock-alt:before {\n  content: \"\\F13E\"; }\n\n.fa-bullseye:before {\n  content: \"\\F140\"; }\n\n.fa-ellipsis-h:before {\n  content: \"\\F141\"; }\n\n.fa-ellipsis-v:before {\n  content: \"\\F142\"; }\n\n.fa-rss-square:before {\n  content: \"\\F143\"; }\n\n.fa-play-circle:before {\n  content: \"\\F144\"; }\n\n.fa-ticket:before {\n  content: \"\\F145\"; }\n\n.fa-minus-square:before {\n  content: \"\\F146\"; }\n\n.fa-minus-square-o:before {\n  content: \"\\F147\"; }\n\n.fa-level-up:before {\n  content: \"\\F148\"; }\n\n.fa-level-down:before {\n  content: \"\\F149\"; }\n\n.fa-check-square:before {\n  content: \"\\F14A\"; }\n\n.fa-pencil-square:before {\n  content: \"\\F14B\"; }\n\n.fa-external-link-square:before {\n  content: \"\\F14C\"; }\n\n.fa-share-square:before {\n  content: \"\\F14D\"; }\n\n.fa-compass:before {\n  content: \"\\F14E\"; }\n\n.fa-toggle-down:before,\n.fa-caret-square-o-down:before {\n  content: \"\\F150\"; }\n\n.fa-toggle-up:before,\n.fa-caret-square-o-up:before {\n  content: \"\\F151\"; }\n\n.fa-toggle-right:before,\n.fa-caret-square-o-right:before {\n  content: \"\\F152\"; }\n\n.fa-euro:before,\n.fa-eur:before {\n  content: \"\\F153\"; }\n\n.fa-gbp:before {\n  content: \"\\F154\"; }\n\n.fa-dollar:before,\n.fa-usd:before {\n  content: \"\\F155\"; }\n\n.fa-rupee:before,\n.fa-inr:before {\n  content: \"\\F156\"; }\n\n.fa-cny:before,\n.fa-rmb:before,\n.fa-yen:before,\n.fa-jpy:before {\n  content: \"\\F157\"; }\n\n.fa-ruble:before,\n.fa-rouble:before,\n.fa-rub:before {\n  content: \"\\F158\"; }\n\n.fa-won:before,\n.fa-krw:before {\n  content: \"\\F159\"; }\n\n.fa-bitcoin:before,\n.fa-btc:before {\n  content: \"\\F15A\"; }\n\n.fa-file:before {\n  content: \"\\F15B\"; }\n\n.fa-file-text:before {\n  content: \"\\F15C\"; }\n\n.fa-sort-alpha-asc:before {\n  content: \"\\F15D\"; }\n\n.fa-sort-alpha-desc:before {\n  content: \"\\F15E\"; }\n\n.fa-sort-amount-asc:before {\n  content: \"\\F160\"; }\n\n.fa-sort-amount-desc:before {\n  content: \"\\F161\"; }\n\n.fa-sort-numeric-asc:before {\n  content: \"\\F162\"; }\n\n.fa-sort-numeric-desc:before {\n  content: \"\\F163\"; }\n\n.fa-thumbs-up:before {\n  content: \"\\F164\"; }\n\n.fa-thumbs-down:before {\n  content: \"\\F165\"; }\n\n.fa-youtube-square:before {\n  content: \"\\F166\"; }\n\n.fa-youtube:before {\n  content: \"\\F167\"; }\n\n.fa-xing:before {\n  content: \"\\F168\"; }\n\n.fa-xing-square:before {\n  content: \"\\F169\"; }\n\n.fa-youtube-play:before {\n  content: \"\\F16A\"; }\n\n.fa-dropbox:before {\n  content: \"\\F16B\"; }\n\n.fa-stack-overflow:before {\n  content: \"\\F16C\"; }\n\n.fa-instagram:before {\n  content: \"\\F16D\"; }\n\n.fa-flickr:before {\n  content: \"\\F16E\"; }\n\n.fa-adn:before {\n  content: \"\\F170\"; }\n\n.fa-bitbucket:before {\n  content: \"\\F171\"; }\n\n.fa-bitbucket-square:before {\n  content: \"\\F172\"; }\n\n.fa-tumblr:before {\n  content: \"\\F173\"; }\n\n.fa-tumblr-square:before {\n  content: \"\\F174\"; }\n\n.fa-long-arrow-down:before {\n  content: \"\\F175\"; }\n\n.fa-long-arrow-up:before {\n  content: \"\\F176\"; }\n\n.fa-long-arrow-left:before {\n  content: \"\\F177\"; }\n\n.fa-long-arrow-right:before {\n  content: \"\\F178\"; }\n\n.fa-apple:before {\n  content: \"\\F179\"; }\n\n.fa-windows:before {\n  content: \"\\F17A\"; }\n\n.fa-android:before {\n  content: \"\\F17B\"; }\n\n.fa-linux:before {\n  content: \"\\F17C\"; }\n\n.fa-dribbble:before {\n  content: \"\\F17D\"; }\n\n.fa-skype:before {\n  content: \"\\F17E\"; }\n\n.fa-foursquare:before {\n  content: \"\\F180\"; }\n\n.fa-trello:before {\n  content: \"\\F181\"; }\n\n.fa-female:before {\n  content: \"\\F182\"; }\n\n.fa-male:before {\n  content: \"\\F183\"; }\n\n.fa-gittip:before,\n.fa-gratipay:before {\n  content: \"\\F184\"; }\n\n.fa-sun-o:before {\n  content: \"\\F185\"; }\n\n.fa-moon-o:before {\n  content: \"\\F186\"; }\n\n.fa-archive:before {\n  content: \"\\F187\"; }\n\n.fa-bug:before {\n  content: \"\\F188\"; }\n\n.fa-vk:before {\n  content: \"\\F189\"; }\n\n.fa-weibo:before {\n  content: \"\\F18A\"; }\n\n.fa-renren:before {\n  content: \"\\F18B\"; }\n\n.fa-pagelines:before {\n  content: \"\\F18C\"; }\n\n.fa-stack-exchange:before {\n  content: \"\\F18D\"; }\n\n.fa-arrow-circle-o-right:before {\n  content: \"\\F18E\"; }\n\n.fa-arrow-circle-o-left:before {\n  content: \"\\F190\"; }\n\n.fa-toggle-left:before,\n.fa-caret-square-o-left:before {\n  content: \"\\F191\"; }\n\n.fa-dot-circle-o:before {\n  content: \"\\F192\"; }\n\n.fa-wheelchair:before {\n  content: \"\\F193\"; }\n\n.fa-vimeo-square:before {\n  content: \"\\F194\"; }\n\n.fa-turkish-lira:before,\n.fa-try:before {\n  content: \"\\F195\"; }\n\n.fa-plus-square-o:before {\n  content: \"\\F196\"; }\n\n.fa-space-shuttle:before {\n  content: \"\\F197\"; }\n\n.fa-slack:before {\n  content: \"\\F198\"; }\n\n.fa-envelope-square:before {\n  content: \"\\F199\"; }\n\n.fa-wordpress:before {\n  content: \"\\F19A\"; }\n\n.fa-openid:before {\n  content: \"\\F19B\"; }\n\n.fa-institution:before,\n.fa-bank:before,\n.fa-university:before {\n  content: \"\\F19C\"; }\n\n.fa-mortar-board:before,\n.fa-graduation-cap:before {\n  content: \"\\F19D\"; }\n\n.fa-yahoo:before {\n  content: \"\\F19E\"; }\n\n.fa-google:before {\n  content: \"\\F1A0\"; }\n\n.fa-reddit:before {\n  content: \"\\F1A1\"; }\n\n.fa-reddit-square:before {\n  content: \"\\F1A2\"; }\n\n.fa-stumbleupon-circle:before {\n  content: \"\\F1A3\"; }\n\n.fa-stumbleupon:before {\n  content: \"\\F1A4\"; }\n\n.fa-delicious:before {\n  content: \"\\F1A5\"; }\n\n.fa-digg:before {\n  content: \"\\F1A6\"; }\n\n.fa-pied-piper-pp:before {\n  content: \"\\F1A7\"; }\n\n.fa-pied-piper-alt:before {\n  content: \"\\F1A8\"; }\n\n.fa-drupal:before {\n  content: \"\\F1A9\"; }\n\n.fa-joomla:before {\n  content: \"\\F1AA\"; }\n\n.fa-language:before {\n  content: \"\\F1AB\"; }\n\n.fa-fax:before {\n  content: \"\\F1AC\"; }\n\n.fa-building:before {\n  content: \"\\F1AD\"; }\n\n.fa-child:before {\n  content: \"\\F1AE\"; }\n\n.fa-paw:before {\n  content: \"\\F1B0\"; }\n\n.fa-spoon:before {\n  content: \"\\F1B1\"; }\n\n.fa-cube:before {\n  content: \"\\F1B2\"; }\n\n.fa-cubes:before {\n  content: \"\\F1B3\"; }\n\n.fa-behance:before {\n  content: \"\\F1B4\"; }\n\n.fa-behance-square:before {\n  content: \"\\F1B5\"; }\n\n.fa-steam:before {\n  content: \"\\F1B6\"; }\n\n.fa-steam-square:before {\n  content: \"\\F1B7\"; }\n\n.fa-recycle:before {\n  content: \"\\F1B8\"; }\n\n.fa-automobile:before,\n.fa-car:before {\n  content: \"\\F1B9\"; }\n\n.fa-cab:before,\n.fa-taxi:before {\n  content: \"\\F1BA\"; }\n\n.fa-tree:before {\n  content: \"\\F1BB\"; }\n\n.fa-spotify:before {\n  content: \"\\F1BC\"; }\n\n.fa-deviantart:before {\n  content: \"\\F1BD\"; }\n\n.fa-soundcloud:before {\n  content: \"\\F1BE\"; }\n\n.fa-database:before {\n  content: \"\\F1C0\"; }\n\n.fa-file-pdf-o:before {\n  content: \"\\F1C1\"; }\n\n.fa-file-word-o:before {\n  content: \"\\F1C2\"; }\n\n.fa-file-excel-o:before {\n  content: \"\\F1C3\"; }\n\n.fa-file-powerpoint-o:before {\n  content: \"\\F1C4\"; }\n\n.fa-file-photo-o:before,\n.fa-file-picture-o:before,\n.fa-file-image-o:before {\n  content: \"\\F1C5\"; }\n\n.fa-file-zip-o:before,\n.fa-file-archive-o:before {\n  content: \"\\F1C6\"; }\n\n.fa-file-sound-o:before,\n.fa-file-audio-o:before {\n  content: \"\\F1C7\"; }\n\n.fa-file-movie-o:before,\n.fa-file-video-o:before {\n  content: \"\\F1C8\"; }\n\n.fa-file-code-o:before {\n  content: \"\\F1C9\"; }\n\n.fa-vine:before {\n  content: \"\\F1CA\"; }\n\n.fa-codepen:before {\n  content: \"\\F1CB\"; }\n\n.fa-jsfiddle:before {\n  content: \"\\F1CC\"; }\n\n.fa-life-bouy:before,\n.fa-life-buoy:before,\n.fa-life-saver:before,\n.fa-support:before,\n.fa-life-ring:before {\n  content: \"\\F1CD\"; }\n\n.fa-circle-o-notch:before {\n  content: \"\\F1CE\"; }\n\n.fa-ra:before,\n.fa-resistance:before,\n.fa-rebel:before {\n  content: \"\\F1D0\"; }\n\n.fa-ge:before,\n.fa-empire:before {\n  content: \"\\F1D1\"; }\n\n.fa-git-square:before {\n  content: \"\\F1D2\"; }\n\n.fa-git:before {\n  content: \"\\F1D3\"; }\n\n.fa-y-combinator-square:before,\n.fa-yc-square:before,\n.fa-hacker-news:before {\n  content: \"\\F1D4\"; }\n\n.fa-tencent-weibo:before {\n  content: \"\\F1D5\"; }\n\n.fa-qq:before {\n  content: \"\\F1D6\"; }\n\n.fa-wechat:before,\n.fa-weixin:before {\n  content: \"\\F1D7\"; }\n\n.fa-send:before,\n.fa-paper-plane:before {\n  content: \"\\F1D8\"; }\n\n.fa-send-o:before,\n.fa-paper-plane-o:before {\n  content: \"\\F1D9\"; }\n\n.fa-history:before {\n  content: \"\\F1DA\"; }\n\n.fa-circle-thin:before {\n  content: \"\\F1DB\"; }\n\n.fa-header:before {\n  content: \"\\F1DC\"; }\n\n.fa-paragraph:before {\n  content: \"\\F1DD\"; }\n\n.fa-sliders:before {\n  content: \"\\F1DE\"; }\n\n.fa-share-alt:before {\n  content: \"\\F1E0\"; }\n\n.fa-share-alt-square:before {\n  content: \"\\F1E1\"; }\n\n.fa-bomb:before {\n  content: \"\\F1E2\"; }\n\n.fa-soccer-ball-o:before,\n.fa-futbol-o:before {\n  content: \"\\F1E3\"; }\n\n.fa-tty:before {\n  content: \"\\F1E4\"; }\n\n.fa-binoculars:before {\n  content: \"\\F1E5\"; }\n\n.fa-plug:before {\n  content: \"\\F1E6\"; }\n\n.fa-slideshare:before {\n  content: \"\\F1E7\"; }\n\n.fa-twitch:before {\n  content: \"\\F1E8\"; }\n\n.fa-yelp:before {\n  content: \"\\F1E9\"; }\n\n.fa-newspaper-o:before {\n  content: \"\\F1EA\"; }\n\n.fa-wifi:before {\n  content: \"\\F1EB\"; }\n\n.fa-calculator:before {\n  content: \"\\F1EC\"; }\n\n.fa-paypal:before {\n  content: \"\\F1ED\"; }\n\n.fa-google-wallet:before {\n  content: \"\\F1EE\"; }\n\n.fa-cc-visa:before {\n  content: \"\\F1F0\"; }\n\n.fa-cc-mastercard:before {\n  content: \"\\F1F1\"; }\n\n.fa-cc-discover:before {\n  content: \"\\F1F2\"; }\n\n.fa-cc-amex:before {\n  content: \"\\F1F3\"; }\n\n.fa-cc-paypal:before {\n  content: \"\\F1F4\"; }\n\n.fa-cc-stripe:before {\n  content: \"\\F1F5\"; }\n\n.fa-bell-slash:before {\n  content: \"\\F1F6\"; }\n\n.fa-bell-slash-o:before {\n  content: \"\\F1F7\"; }\n\n.fa-trash:before {\n  content: \"\\F1F8\"; }\n\n.fa-copyright:before {\n  content: \"\\F1F9\"; }\n\n.fa-at:before {\n  content: \"\\F1FA\"; }\n\n.fa-eyedropper:before {\n  content: \"\\F1FB\"; }\n\n.fa-paint-brush:before {\n  content: \"\\F1FC\"; }\n\n.fa-birthday-cake:before {\n  content: \"\\F1FD\"; }\n\n.fa-area-chart:before {\n  content: \"\\F1FE\"; }\n\n.fa-pie-chart:before {\n  content: \"\\F200\"; }\n\n.fa-line-chart:before {\n  content: \"\\F201\"; }\n\n.fa-lastfm:before {\n  content: \"\\F202\"; }\n\n.fa-lastfm-square:before {\n  content: \"\\F203\"; }\n\n.fa-toggle-off:before {\n  content: \"\\F204\"; }\n\n.fa-toggle-on:before {\n  content: \"\\F205\"; }\n\n.fa-bicycle:before {\n  content: \"\\F206\"; }\n\n.fa-bus:before {\n  content: \"\\F207\"; }\n\n.fa-ioxhost:before {\n  content: \"\\F208\"; }\n\n.fa-angellist:before {\n  content: \"\\F209\"; }\n\n.fa-cc:before {\n  content: \"\\F20A\"; }\n\n.fa-shekel:before,\n.fa-sheqel:before,\n.fa-ils:before {\n  content: \"\\F20B\"; }\n\n.fa-meanpath:before {\n  content: \"\\F20C\"; }\n\n.fa-buysellads:before {\n  content: \"\\F20D\"; }\n\n.fa-connectdevelop:before {\n  content: \"\\F20E\"; }\n\n.fa-dashcube:before {\n  content: \"\\F210\"; }\n\n.fa-forumbee:before {\n  content: \"\\F211\"; }\n\n.fa-leanpub:before {\n  content: \"\\F212\"; }\n\n.fa-sellsy:before {\n  content: \"\\F213\"; }\n\n.fa-shirtsinbulk:before {\n  content: \"\\F214\"; }\n\n.fa-simplybuilt:before {\n  content: \"\\F215\"; }\n\n.fa-skyatlas:before {\n  content: \"\\F216\"; }\n\n.fa-cart-plus:before {\n  content: \"\\F217\"; }\n\n.fa-cart-arrow-down:before {\n  content: \"\\F218\"; }\n\n.fa-diamond:before {\n  content: \"\\F219\"; }\n\n.fa-ship:before {\n  content: \"\\F21A\"; }\n\n.fa-user-secret:before {\n  content: \"\\F21B\"; }\n\n.fa-motorcycle:before {\n  content: \"\\F21C\"; }\n\n.fa-street-view:before {\n  content: \"\\F21D\"; }\n\n.fa-heartbeat:before {\n  content: \"\\F21E\"; }\n\n.fa-venus:before {\n  content: \"\\F221\"; }\n\n.fa-mars:before {\n  content: \"\\F222\"; }\n\n.fa-mercury:before {\n  content: \"\\F223\"; }\n\n.fa-intersex:before,\n.fa-transgender:before {\n  content: \"\\F224\"; }\n\n.fa-transgender-alt:before {\n  content: \"\\F225\"; }\n\n.fa-venus-double:before {\n  content: \"\\F226\"; }\n\n.fa-mars-double:before {\n  content: \"\\F227\"; }\n\n.fa-venus-mars:before {\n  content: \"\\F228\"; }\n\n.fa-mars-stroke:before {\n  content: \"\\F229\"; }\n\n.fa-mars-stroke-v:before {\n  content: \"\\F22A\"; }\n\n.fa-mars-stroke-h:before {\n  content: \"\\F22B\"; }\n\n.fa-neuter:before {\n  content: \"\\F22C\"; }\n\n.fa-genderless:before {\n  content: \"\\F22D\"; }\n\n.fa-facebook-official:before {\n  content: \"\\F230\"; }\n\n.fa-pinterest-p:before {\n  content: \"\\F231\"; }\n\n.fa-whatsapp:before {\n  content: \"\\F232\"; }\n\n.fa-server:before {\n  content: \"\\F233\"; }\n\n.fa-user-plus:before {\n  content: \"\\F234\"; }\n\n.fa-user-times:before {\n  content: \"\\F235\"; }\n\n.fa-hotel:before,\n.fa-bed:before {\n  content: \"\\F236\"; }\n\n.fa-viacoin:before {\n  content: \"\\F237\"; }\n\n.fa-train:before {\n  content: \"\\F238\"; }\n\n.fa-subway:before {\n  content: \"\\F239\"; }\n\n.fa-medium:before {\n  content: \"\\F23A\"; }\n\n.fa-yc:before,\n.fa-y-combinator:before {\n  content: \"\\F23B\"; }\n\n.fa-optin-monster:before {\n  content: \"\\F23C\"; }\n\n.fa-opencart:before {\n  content: \"\\F23D\"; }\n\n.fa-expeditedssl:before {\n  content: \"\\F23E\"; }\n\n.fa-battery-4:before,\n.fa-battery-full:before {\n  content: \"\\F240\"; }\n\n.fa-battery-3:before,\n.fa-battery-three-quarters:before {\n  content: \"\\F241\"; }\n\n.fa-battery-2:before,\n.fa-battery-half:before {\n  content: \"\\F242\"; }\n\n.fa-battery-1:before,\n.fa-battery-quarter:before {\n  content: \"\\F243\"; }\n\n.fa-battery-0:before,\n.fa-battery-empty:before {\n  content: \"\\F244\"; }\n\n.fa-mouse-pointer:before {\n  content: \"\\F245\"; }\n\n.fa-i-cursor:before {\n  content: \"\\F246\"; }\n\n.fa-object-group:before {\n  content: \"\\F247\"; }\n\n.fa-object-ungroup:before {\n  content: \"\\F248\"; }\n\n.fa-sticky-note:before {\n  content: \"\\F249\"; }\n\n.fa-sticky-note-o:before {\n  content: \"\\F24A\"; }\n\n.fa-cc-jcb:before {\n  content: \"\\F24B\"; }\n\n.fa-cc-diners-club:before {\n  content: \"\\F24C\"; }\n\n.fa-clone:before {\n  content: \"\\F24D\"; }\n\n.fa-balance-scale:before {\n  content: \"\\F24E\"; }\n\n.fa-hourglass-o:before {\n  content: \"\\F250\"; }\n\n.fa-hourglass-1:before,\n.fa-hourglass-start:before {\n  content: \"\\F251\"; }\n\n.fa-hourglass-2:before,\n.fa-hourglass-half:before {\n  content: \"\\F252\"; }\n\n.fa-hourglass-3:before,\n.fa-hourglass-end:before {\n  content: \"\\F253\"; }\n\n.fa-hourglass:before {\n  content: \"\\F254\"; }\n\n.fa-hand-grab-o:before,\n.fa-hand-rock-o:before {\n  content: \"\\F255\"; }\n\n.fa-hand-stop-o:before,\n.fa-hand-paper-o:before {\n  content: \"\\F256\"; }\n\n.fa-hand-scissors-o:before {\n  content: \"\\F257\"; }\n\n.fa-hand-lizard-o:before {\n  content: \"\\F258\"; }\n\n.fa-hand-spock-o:before {\n  content: \"\\F259\"; }\n\n.fa-hand-pointer-o:before {\n  content: \"\\F25A\"; }\n\n.fa-hand-peace-o:before {\n  content: \"\\F25B\"; }\n\n.fa-trademark:before {\n  content: \"\\F25C\"; }\n\n.fa-registered:before {\n  content: \"\\F25D\"; }\n\n.fa-creative-commons:before {\n  content: \"\\F25E\"; }\n\n.fa-gg:before {\n  content: \"\\F260\"; }\n\n.fa-gg-circle:before {\n  content: \"\\F261\"; }\n\n.fa-tripadvisor:before {\n  content: \"\\F262\"; }\n\n.fa-odnoklassniki:before {\n  content: \"\\F263\"; }\n\n.fa-odnoklassniki-square:before {\n  content: \"\\F264\"; }\n\n.fa-get-pocket:before {\n  content: \"\\F265\"; }\n\n.fa-wikipedia-w:before {\n  content: \"\\F266\"; }\n\n.fa-safari:before {\n  content: \"\\F267\"; }\n\n.fa-chrome:before {\n  content: \"\\F268\"; }\n\n.fa-firefox:before {\n  content: \"\\F269\"; }\n\n.fa-opera:before {\n  content: \"\\F26A\"; }\n\n.fa-internet-explorer:before {\n  content: \"\\F26B\"; }\n\n.fa-tv:before,\n.fa-television:before {\n  content: \"\\F26C\"; }\n\n.fa-contao:before {\n  content: \"\\F26D\"; }\n\n.fa-500px:before {\n  content: \"\\F26E\"; }\n\n.fa-amazon:before {\n  content: \"\\F270\"; }\n\n.fa-calendar-plus-o:before {\n  content: \"\\F271\"; }\n\n.fa-calendar-minus-o:before {\n  content: \"\\F272\"; }\n\n.fa-calendar-times-o:before {\n  content: \"\\F273\"; }\n\n.fa-calendar-check-o:before {\n  content: \"\\F274\"; }\n\n.fa-industry:before {\n  content: \"\\F275\"; }\n\n.fa-map-pin:before {\n  content: \"\\F276\"; }\n\n.fa-map-signs:before {\n  content: \"\\F277\"; }\n\n.fa-map-o:before {\n  content: \"\\F278\"; }\n\n.fa-map:before {\n  content: \"\\F279\"; }\n\n.fa-commenting:before {\n  content: \"\\F27A\"; }\n\n.fa-commenting-o:before {\n  content: \"\\F27B\"; }\n\n.fa-houzz:before {\n  content: \"\\F27C\"; }\n\n.fa-vimeo:before {\n  content: \"\\F27D\"; }\n\n.fa-black-tie:before {\n  content: \"\\F27E\"; }\n\n.fa-fonticons:before {\n  content: \"\\F280\"; }\n\n.fa-reddit-alien:before {\n  content: \"\\F281\"; }\n\n.fa-edge:before {\n  content: \"\\F282\"; }\n\n.fa-credit-card-alt:before {\n  content: \"\\F283\"; }\n\n.fa-codiepie:before {\n  content: \"\\F284\"; }\n\n.fa-modx:before {\n  content: \"\\F285\"; }\n\n.fa-fort-awesome:before {\n  content: \"\\F286\"; }\n\n.fa-usb:before {\n  content: \"\\F287\"; }\n\n.fa-product-hunt:before {\n  content: \"\\F288\"; }\n\n.fa-mixcloud:before {\n  content: \"\\F289\"; }\n\n.fa-scribd:before {\n  content: \"\\F28A\"; }\n\n.fa-pause-circle:before {\n  content: \"\\F28B\"; }\n\n.fa-pause-circle-o:before {\n  content: \"\\F28C\"; }\n\n.fa-stop-circle:before {\n  content: \"\\F28D\"; }\n\n.fa-stop-circle-o:before {\n  content: \"\\F28E\"; }\n\n.fa-shopping-bag:before {\n  content: \"\\F290\"; }\n\n.fa-shopping-basket:before {\n  content: \"\\F291\"; }\n\n.fa-hashtag:before {\n  content: \"\\F292\"; }\n\n.fa-bluetooth:before {\n  content: \"\\F293\"; }\n\n.fa-bluetooth-b:before {\n  content: \"\\F294\"; }\n\n.fa-percent:before {\n  content: \"\\F295\"; }\n\n.fa-gitlab:before {\n  content: \"\\F296\"; }\n\n.fa-wpbeginner:before {\n  content: \"\\F297\"; }\n\n.fa-wpforms:before {\n  content: \"\\F298\"; }\n\n.fa-envira:before {\n  content: \"\\F299\"; }\n\n.fa-universal-access:before {\n  content: \"\\F29A\"; }\n\n.fa-wheelchair-alt:before {\n  content: \"\\F29B\"; }\n\n.fa-question-circle-o:before {\n  content: \"\\F29C\"; }\n\n.fa-blind:before {\n  content: \"\\F29D\"; }\n\n.fa-audio-description:before {\n  content: \"\\F29E\"; }\n\n.fa-volume-control-phone:before {\n  content: \"\\F2A0\"; }\n\n.fa-braille:before {\n  content: \"\\F2A1\"; }\n\n.fa-assistive-listening-systems:before {\n  content: \"\\F2A2\"; }\n\n.fa-asl-interpreting:before,\n.fa-american-sign-language-interpreting:before {\n  content: \"\\F2A3\"; }\n\n.fa-deafness:before,\n.fa-hard-of-hearing:before,\n.fa-deaf:before {\n  content: \"\\F2A4\"; }\n\n.fa-glide:before {\n  content: \"\\F2A5\"; }\n\n.fa-glide-g:before {\n  content: \"\\F2A6\"; }\n\n.fa-signing:before,\n.fa-sign-language:before {\n  content: \"\\F2A7\"; }\n\n.fa-low-vision:before {\n  content: \"\\F2A8\"; }\n\n.fa-viadeo:before {\n  content: \"\\F2A9\"; }\n\n.fa-viadeo-square:before {\n  content: \"\\F2AA\"; }\n\n.fa-snapchat:before {\n  content: \"\\F2AB\"; }\n\n.fa-snapchat-ghost:before {\n  content: \"\\F2AC\"; }\n\n.fa-snapchat-square:before {\n  content: \"\\F2AD\"; }\n\n.fa-pied-piper:before {\n  content: \"\\F2AE\"; }\n\n.fa-first-order:before {\n  content: \"\\F2B0\"; }\n\n.fa-yoast:before {\n  content: \"\\F2B1\"; }\n\n.fa-themeisle:before {\n  content: \"\\F2B2\"; }\n\n.fa-google-plus-circle:before,\n.fa-google-plus-official:before {\n  content: \"\\F2B3\"; }\n\n.fa-fa:before,\n.fa-font-awesome:before {\n  content: \"\\F2B4\"; }\n\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0; }\n\n.sr-only-focusable:active,\n.sr-only-focusable:focus {\n  position: static;\n  width: auto;\n  height: auto;\n  margin: 0;\n  overflow: visible;\n  clip: auto; }\n", ""]);
 	
 	// exports
 
 
 /***/ },
-/* 496 */
+/* 495 */
 /*!******************************************************!*\
   !*** ./public/fonts/fontawesome-webfont.eot?v=4.6.3 ***!
   \******************************************************/
@@ -106302,7 +106351,7 @@
 	module.exports = __webpack_require__.p + "25a32416abee198dd821b0b17a198a8f.eot";
 
 /***/ },
-/* 497 */
+/* 496 */
 /*!**********************************************!*\
   !*** ./public/fonts/fontawesome-webfont.eot ***!
   \**********************************************/
@@ -106311,7 +106360,7 @@
 	module.exports = __webpack_require__.p + "25a32416abee198dd821b0b17a198a8f.eot";
 
 /***/ },
-/* 498 */
+/* 497 */
 /*!********************************************************!*\
   !*** ./public/fonts/fontawesome-webfont.woff2?v=4.6.3 ***!
   \********************************************************/
@@ -106320,7 +106369,7 @@
 	module.exports = __webpack_require__.p + "e6cf7c6ec7c2d6f670ae9d762604cb0b.woff2";
 
 /***/ },
-/* 499 */
+/* 498 */
 /*!*******************************************************!*\
   !*** ./public/fonts/fontawesome-webfont.woff?v=4.6.3 ***!
   \*******************************************************/
@@ -106329,7 +106378,7 @@
 	module.exports = __webpack_require__.p + "c8ddf1e5e5bf3682bc7bebf30f394148.woff";
 
 /***/ },
-/* 500 */
+/* 499 */
 /*!******************************************************!*\
   !*** ./public/fonts/fontawesome-webfont.ttf?v=4.6.3 ***!
   \******************************************************/
@@ -106338,7 +106387,7 @@
 	module.exports = __webpack_require__.p + "1dc35d25e61d819a9c357074014867ab.ttf";
 
 /***/ },
-/* 501 */
+/* 500 */
 /*!******************************************************!*\
   !*** ./public/fonts/fontawesome-webfont.svg?v=4.6.3 ***!
   \******************************************************/
@@ -106347,7 +106396,7 @@
 	module.exports = __webpack_require__.p + "d7c639084f684d66a1bc66855d193ed8.svg";
 
 /***/ },
-/* 502 */
+/* 501 */
 /*!******************************!*\
   !*** ./public/css/slick.css ***!
   \******************************/
@@ -106356,10 +106405,10 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../../~/css-loader!./../../~/sass-loader!./slick.css */ 503);
+	var content = __webpack_require__(/*! !./../../~/css-loader!./../../~/sass-loader!./slick.css */ 502);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 493)(content, {});
+	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 492)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -106376,24 +106425,24 @@
 	}
 
 /***/ },
-/* 503 */
+/* 502 */
 /*!*************************************************************!*\
   !*** ./~/css-loader!./~/sass-loader!./public/css/slick.css ***!
   \*************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 491)();
+	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 490)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/* Slider */\n.slick-slider {\n  position: relative;\n  display: block;\n  box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  -ms-touch-action: pan-y;\n  touch-action: pan-y;\n  -webkit-tap-highlight-color: transparent; }\n\n.slick-list {\n  position: relative;\n  overflow: hidden;\n  display: block;\n  margin: 0;\n  padding: 0; }\n\n.slick-list:focus {\n  outline: none; }\n\n.slick-loading .slick-list {\n  background: #fff url(" + __webpack_require__(/*! ../img/ajax-loader.gif */ 504) + ") center center no-repeat; }\n\n.slick-list.dragging {\n  cursor: pointer;\n  cursor: hand; }\n\n.slick-slider .slick-track {\n  -webkit-transform: translate3d(0, 0, 0);\n  -moz-transform: translate3d(0, 0, 0);\n  -ms-transform: translate3d(0, 0, 0);\n  -o-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0); }\n\n.slick-track {\n  position: relative;\n  left: 0;\n  top: 0;\n  display: block; }\n\n.slick-track:before, .slick-track:after {\n  content: \"\";\n  display: table; }\n\n.slick-track:after {\n  clear: both; }\n\n.slick-loading .slick-track {\n  visibility: hidden; }\n\n.slick-slide {\n  float: left;\n  height: 100%;\n  min-height: 1px;\n  display: none; }\n\n[dir=\"rtl\"] .slick-slide {\n  float: right; }\n\n.slick-slide img {\n  display: block; }\n\n.slick-slide.slick-loading img {\n  display: none; }\n\n.slick-slide.dragging img {\n  pointer-events: none; }\n\n.slick-initialized .slick-slide {\n  display: block; }\n\n.slick-loading .slick-slide {\n  visibility: hidden; }\n\n.slick-vertical .slick-slide {\n  display: block;\n  height: auto;\n  border: 1px solid transparent; }\n\n/* Icons */\n@font-face {\n  font-family: \"slick\";\n  src: url(" + __webpack_require__(/*! ./fonts/slick.eot */ 505) + ");\n  src: url(" + __webpack_require__(/*! ./fonts/slick.eot */ 505) + "?#iefix) format(\"embedded-opentype\"), url(" + __webpack_require__(/*! ./fonts/slick.woff */ 506) + ") format(\"woff\"), url(" + __webpack_require__(/*! ./fonts/slick.ttf */ 507) + ") format(\"truetype\"), url(" + __webpack_require__(/*! ./fonts/slick.svg */ 508) + "#slick) format(\"svg\");\n  font-weight: normal;\n  font-style: normal; }\n\n/* Arrows */\n.slick-prev, .slick-next {\n  position: absolute;\n  display: block;\n  height: 20px;\n  width: 20px;\n  line-height: 0;\n  font-size: 0;\n  cursor: pointer;\n  background: transparent;\n  color: transparent;\n  top: 50%;\n  margin-top: -10px;\n  padding: 0;\n  border: none;\n  outline: none; }\n\n.slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {\n  outline: none;\n  background: transparent;\n  color: transparent; }\n\n.slick-prev:hover:before, .slick-prev:focus:before, .slick-next:hover:before, .slick-next:focus:before {\n  opacity: 1; }\n\n.slick-prev.slick-disabled:before, .slick-next.slick-disabled:before {\n  opacity: 0.25; }\n\n.slick-prev:before, .slick-next:before {\n  font-family: \"slick\";\n  font-size: 20px;\n  line-height: 1;\n  color: white;\n  opacity: 0.75;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\n.slick-prev {\n  left: -25px; }\n\n[dir=\"rtl\"] .slick-prev {\n  left: auto;\n  right: -25px; }\n\n.slick-prev:before {\n  content: \"\\2190\"; }\n\n[dir=\"rtl\"] .slick-prev:before {\n  content: \"\\2192\"; }\n\n.slick-next {\n  right: -25px; }\n\n[dir=\"rtl\"] .slick-next {\n  left: -25px;\n  right: auto; }\n\n.slick-next:before {\n  content: \"\\2192\"; }\n\n[dir=\"rtl\"] .slick-next:before {\n  content: \"\\2190\"; }\n\n/* Dots */\n.slick-slider {\n  margin-bottom: 30px; }\n\n.slick-dots {\n  position: absolute;\n  bottom: -45px;\n  list-style: none;\n  display: block;\n  text-align: center;\n  padding: 0;\n  width: 100%; }\n\n.slick-dots li {\n  position: relative;\n  display: inline-block;\n  height: 20px;\n  width: 20px;\n  margin: 0 5px;\n  padding: 0;\n  cursor: pointer; }\n\n.slick-dots li button {\n  border: 0;\n  background: transparent;\n  display: block;\n  height: 20px;\n  width: 20px;\n  outline: none;\n  line-height: 0;\n  font-size: 0;\n  color: transparent;\n  padding: 5px;\n  cursor: pointer; }\n\n.slick-dots li button:hover, .slick-dots li button:focus {\n  outline: none; }\n\n.slick-dots li button:hover:before, .slick-dots li button:focus:before {\n  opacity: 1; }\n\n.slick-dots li button:before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  content: \"\\2022\";\n  width: 20px;\n  height: 20px;\n  font-family: \"slick\";\n  font-size: 6px;\n  line-height: 20px;\n  text-align: center;\n  color: black;\n  opacity: 0.25;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\n.slick-dots li.slick-active button:before {\n  color: black;\n  opacity: 0.75; }\n\n/*# sourceMappingURL=slick.css.map */\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/* Slider */\n.slick-slider {\n  position: relative;\n  display: block;\n  box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  -ms-touch-action: pan-y;\n  touch-action: pan-y;\n  -webkit-tap-highlight-color: transparent; }\n\n.slick-list {\n  position: relative;\n  overflow: hidden;\n  display: block;\n  margin: 0;\n  padding: 0; }\n\n.slick-list:focus {\n  outline: none; }\n\n.slick-loading .slick-list {\n  background: #fff url(" + __webpack_require__(/*! ../img/ajax-loader.gif */ 503) + ") center center no-repeat; }\n\n.slick-list.dragging {\n  cursor: pointer;\n  cursor: hand; }\n\n.slick-slider .slick-track {\n  -webkit-transform: translate3d(0, 0, 0);\n  -moz-transform: translate3d(0, 0, 0);\n  -ms-transform: translate3d(0, 0, 0);\n  -o-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0); }\n\n.slick-track {\n  position: relative;\n  left: 0;\n  top: 0;\n  display: block; }\n\n.slick-track:before, .slick-track:after {\n  content: \"\";\n  display: table; }\n\n.slick-track:after {\n  clear: both; }\n\n.slick-loading .slick-track {\n  visibility: hidden; }\n\n.slick-slide {\n  float: left;\n  height: 100%;\n  min-height: 1px;\n  display: none; }\n\n[dir=\"rtl\"] .slick-slide {\n  float: right; }\n\n.slick-slide img {\n  display: block; }\n\n.slick-slide.slick-loading img {\n  display: none; }\n\n.slick-slide.dragging img {\n  pointer-events: none; }\n\n.slick-initialized .slick-slide {\n  display: block; }\n\n.slick-loading .slick-slide {\n  visibility: hidden; }\n\n.slick-vertical .slick-slide {\n  display: block;\n  height: auto;\n  border: 1px solid transparent; }\n\n/* Icons */\n@font-face {\n  font-family: \"slick\";\n  src: url(" + __webpack_require__(/*! ./fonts/slick.eot */ 504) + ");\n  src: url(" + __webpack_require__(/*! ./fonts/slick.eot */ 504) + "?#iefix) format(\"embedded-opentype\"), url(" + __webpack_require__(/*! ./fonts/slick.woff */ 505) + ") format(\"woff\"), url(" + __webpack_require__(/*! ./fonts/slick.ttf */ 506) + ") format(\"truetype\"), url(" + __webpack_require__(/*! ./fonts/slick.svg */ 507) + "#slick) format(\"svg\");\n  font-weight: normal;\n  font-style: normal; }\n\n/* Arrows */\n.slick-prev, .slick-next {\n  position: absolute;\n  display: block;\n  height: 20px;\n  width: 20px;\n  line-height: 0;\n  font-size: 0;\n  cursor: pointer;\n  background: transparent;\n  color: transparent;\n  top: 50%;\n  margin-top: -10px;\n  padding: 0;\n  border: none;\n  outline: none; }\n\n.slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {\n  outline: none;\n  background: transparent;\n  color: transparent; }\n\n.slick-prev:hover:before, .slick-prev:focus:before, .slick-next:hover:before, .slick-next:focus:before {\n  opacity: 1; }\n\n.slick-prev.slick-disabled:before, .slick-next.slick-disabled:before {\n  opacity: 0.25; }\n\n.slick-prev:before, .slick-next:before {\n  font-family: \"slick\";\n  font-size: 20px;\n  line-height: 1;\n  color: white;\n  opacity: 0.75;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\n.slick-prev {\n  left: -25px; }\n\n[dir=\"rtl\"] .slick-prev {\n  left: auto;\n  right: -25px; }\n\n.slick-prev:before {\n  content: \"\\2190\"; }\n\n[dir=\"rtl\"] .slick-prev:before {\n  content: \"\\2192\"; }\n\n.slick-next {\n  right: -25px; }\n\n[dir=\"rtl\"] .slick-next {\n  left: -25px;\n  right: auto; }\n\n.slick-next:before {\n  content: \"\\2192\"; }\n\n[dir=\"rtl\"] .slick-next:before {\n  content: \"\\2190\"; }\n\n/* Dots */\n.slick-slider {\n  margin-bottom: 30px; }\n\n.slick-dots {\n  position: absolute;\n  bottom: -45px;\n  list-style: none;\n  display: block;\n  text-align: center;\n  padding: 0;\n  width: 100%; }\n\n.slick-dots li {\n  position: relative;\n  display: inline-block;\n  height: 20px;\n  width: 20px;\n  margin: 0 5px;\n  padding: 0;\n  cursor: pointer; }\n\n.slick-dots li button {\n  border: 0;\n  background: transparent;\n  display: block;\n  height: 20px;\n  width: 20px;\n  outline: none;\n  line-height: 0;\n  font-size: 0;\n  color: transparent;\n  padding: 5px;\n  cursor: pointer; }\n\n.slick-dots li button:hover, .slick-dots li button:focus {\n  outline: none; }\n\n.slick-dots li button:hover:before, .slick-dots li button:focus:before {\n  opacity: 1; }\n\n.slick-dots li button:before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  content: \"\\2022\";\n  width: 20px;\n  height: 20px;\n  font-family: \"slick\";\n  font-size: 6px;\n  line-height: 20px;\n  text-align: center;\n  color: black;\n  opacity: 0.25;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\n.slick-dots li.slick-active button:before {\n  color: black;\n  opacity: 0.75; }\n\n/*# sourceMappingURL=slick.css.map */\n", ""]);
 	
 	// exports
 
 
 /***/ },
-/* 504 */
+/* 503 */
 /*!************************************!*\
   !*** ./public/img/ajax-loader.gif ***!
   \************************************/
@@ -106402,7 +106451,7 @@
 	module.exports = __webpack_require__.p + "c5cd7f5300576ab4c88202b42f6ded62.gif";
 
 /***/ },
-/* 505 */
+/* 504 */
 /*!************************************!*\
   !*** ./public/css/fonts/slick.eot ***!
   \************************************/
@@ -106411,7 +106460,7 @@
 	module.exports = __webpack_require__.p + "ced611daf7709cc778da928fec876475.eot";
 
 /***/ },
-/* 506 */
+/* 505 */
 /*!*************************************!*\
   !*** ./public/css/fonts/slick.woff ***!
   \*************************************/
@@ -106420,7 +106469,7 @@
 	module.exports = "data:application/font-woff;base64,d09GRk9UVE8AAAVkAAsAAAAAB1wAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAABCAAAAi4AAAKbH/pWDkZGVE0AAAM4AAAAGgAAABxt0civR0RFRgAAA1QAAAAcAAAAIAAyAARPUy8yAAADcAAAAFIAAABgUBj/rmNtYXAAAAPEAAAAUAAAAWIiC0SwaGVhZAAABBQAAAAuAAAANgABMftoaGVhAAAERAAAABwAAAAkA+UCA2htdHgAAARgAAAADgAAAA4ESgBKbWF4cAAABHAAAAAGAAAABgAFUABuYW1lAAAEeAAAANwAAAFuBSeBwnBvc3QAAAVUAAAAEAAAACAAAwABeJw9ks9vEkEUx2cpWyeUoFYgNkHi2Wt7N3rVm3cTs3UVLC4LxIWEQvi1P3i7O1tYLJDAmlgKGEhQrsajf0j7J3jYTXrQWUrMJG+++b55n5e8NwwKBhHDMLv5kxT3ATEBxKBn3qOAl9zxHgb1MAPhHQgHkyF08Gr/L8B/Eb6zWnmCJ7AJVLubQOheArXvJ1A4EXi6j4I+Zg9F0QFKvsnlBCmXeve+sFEnb/nCptdtQ4QYhVFRAT1HrF8UQK/RL/SbmUbclsvGVFXRZKDHUE38cc4qpkbAAsuwiImvro+ufcfaOIQ6szlrmjRJDaKZKnbjN3GWKIbiIzRFUfCffuxxKOL+3LDlDVvx2TdxN84qZEsnhNBa6pgm2dAsnzbLsETdsmRFxUeHV4e+I2/ptN8TyqV8T3Dt29t7EYOuajVIw2y1Wy3M86w0zg/Fz2IvawmQAUHOVrPVfLkoScVynsqsTG0MGUs4z55nh3mnOJa+li+rl9WpPIcFfDubDeaDC+fLBdYN3QADzLauGfj4B6sZmq6CCpqmtSvF0qlUl2qf5AJIUCSlTqlb7lUG+LRfGzZGzZEyBgccMu6MuqPecNDvD4Y9Kjtj4gD+DsvKVMTcMdtqtZtmkzQstQvYje7Syep0PDSAhSOeHYXYWThEF//A/0YvYV1fSQtpKU5STtrhbQ444OtpKSWJIg3pOg8cBs7maTY1EZf07aq+hjWs7IWzdCYTGhb2CtZ47x+Uhx28AAB4nGNgYGBkAIJz765vANHnCyvqYTQAWnkHswAAeJxjYGRgYOADYgkGEGBiYARCFjAG8RgABHYAN3icY2BmYmCcwMDKwMHow5jGwMDgDqW/MkgytDAwMDGwcjKAQQMDAyOQUmCAgoA01xQGB4ZExUmMD/4/YNBjvP3/NgNEDQPjbbBKBQZGADfLDgsAAHicY2BgYGaAYBkGRgYQiAHyGMF8FgYHIM3DwMHABGQzMCQqKClOUJz0/z9YHRLv/+L7D+8V3cuHmgAHjGwM6ELUByxUMIOZCmbgAAA5LQ8XeJxjYGRgYABiO68w73h+m68M3EwMIHC+sKIeTqsyqDLeZrwN5HIwgKUB/aYJUgAAeJxjYGRgYLzNwMCgx8QAAkA2IwMqYAIAMGIB7QIAAAACAAAlACUAJQAlAAAAAFAAAAUAAHicbY49asNAEIU/2ZJDfkiRIvXapUFCEqpcptABUrg3ZhEiQoKVfY9UqVLlGDlADpAT5e16IUWysMz3hjfzBrjjjQT/EjKpCy+4YhN5yZoxcirPe+SMWz4jr6S+5UzSa3VuwpTnBfc8RF7yxDZyKs9r5IxHPiKv1P9iZqDnyAvMQ39UecbScVb/gJO03Xk4CFom3XYK1clhMdQUlKo7/d9NF13RkIdfy+MV7TSe2sl11tRFaXYmJKpWTd7kdVnJ8veevZKc+n3I93t9Jnvr5n4aTVWU/0z9AI2qMkV4nGNgZkAGjAxoAAAAjgAF"
 
 /***/ },
-/* 507 */
+/* 506 */
 /*!************************************!*\
   !*** ./public/css/fonts/slick.ttf ***!
   \************************************/
@@ -106429,7 +106478,7 @@
 	module.exports = __webpack_require__.p + "d41f55a78e6f49a5512878df1737e58a.ttf";
 
 /***/ },
-/* 508 */
+/* 507 */
 /*!************************************!*\
   !*** ./public/css/fonts/slick.svg ***!
   \************************************/
@@ -106438,7 +106487,7 @@
 	module.exports = __webpack_require__.p + "7c8c9692a661b9bc8762716b19c77daf.svg";
 
 /***/ },
-/* 509 */
+/* 508 */
 /*!*************************************!*\
   !*** ./public/css/react-toggle.css ***!
   \*************************************/
@@ -106447,10 +106496,10 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../../~/css-loader!./../../~/sass-loader!./react-toggle.css */ 510);
+	var content = __webpack_require__(/*! !./../../~/css-loader!./../../~/sass-loader!./react-toggle.css */ 509);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 493)(content, {});
+	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 492)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -106467,13 +106516,13 @@
 	}
 
 /***/ },
-/* 510 */
+/* 509 */
 /*!********************************************************************!*\
   !*** ./~/css-loader!./~/sass-loader!./public/css/react-toggle.css ***!
   \********************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 491)();
+	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 490)();
 	// imports
 	
 	
@@ -106484,7 +106533,7 @@
 
 
 /***/ },
-/* 511 */
+/* 510 */
 /*!********************************!*\
   !*** ./public/css/balloon.css ***!
   \********************************/
@@ -106493,10 +106542,10 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../../~/css-loader!./../../~/sass-loader!./balloon.css */ 512);
+	var content = __webpack_require__(/*! !./../../~/css-loader!./../../~/sass-loader!./balloon.css */ 511);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 493)(content, {});
+	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 492)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -106513,13 +106562,13 @@
 	}
 
 /***/ },
-/* 512 */
+/* 511 */
 /*!***************************************************************!*\
   !*** ./~/css-loader!./~/sass-loader!./public/css/balloon.css ***!
   \***************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 491)();
+	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 490)();
 	// imports
 	
 	

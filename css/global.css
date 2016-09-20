@@ -222,9 +222,10 @@ label:before {
 .nav {
     padding-top: 3px;
     float: left;
+    margin-left: 10px;
 }
 .nav a {
-    padding: 6px;
+    padding: 6px 7px;
     border-radius: 26px;
     color: #fff;
     background-color: #5A5A5A;
@@ -280,7 +281,7 @@ label:before {
     border-left: none;
     border-right: none;
     border-top: none;
-    border-color: #cccccc;
+    border-color: #999999;
     color: #fff;
 }
 .login .loginBtn {
@@ -339,9 +340,44 @@ label:before {
     clear: both;
 }
 .secondFa {
-    width:100%;
-    padding: 0px 50px 20px;
-    clear: both;
+    width: 600px;
+    padding: 30px 50px 30px;
+    text-align: center;
+    background: #696969;
+    margin: 130px auto;
+    border-radius: 3px;
+}
+.secondFa .title {
+    font-size: 14px;
+    font-style: italic;
+    line-height: 30px;
+}
+.secondFa .title .disable {
+    color: #aaa;
+    text-decoration: none;
+    cursor: default;
+}
+.secondFa .input {
+    border-radius: 3px;
+    padding: 10px;
+}
+.secondFa .input:focus {
+    outline: none;
+}
+.secondFa .loginOtpBtn {
+    padding: 10px;
+    background-color: #44C8BA;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.secondFa .loginOtpBtn:hover {
+    background-color: #61d1c6;
+}
+.secondFa .loginOtpBtn:focus {
+    outline: none;
 }
 
 
